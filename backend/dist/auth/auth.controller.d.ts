@@ -2,5 +2,7 @@ export declare class AuthController {
     handleLogin(): {
         msg: string;
     };
-    : any;
+    handleRedirect(): {
+        msg: string;
+    };
 }

@@ -2,9 +2,9 @@ import { PaymentService } from './payment.service';
 export declare class PaymentController {
     private readonly paymentService;
     constructor(paymentService: PaymentService);
-    createPayment(paymentData: any): void;
-    getAllPayments(): void;
-    getPaymentById(id: string): void;
-    updatePayment(id: string, updateData: any): void;
-    deletePayment(id: string): void;
+    create(body: any): Promise<import("./payment.entity").Payment[]>;
+    findAll(): Promise<import("./payment.entity").Payment[]>;
+    findOne(id: string): Promise<import("./payment.entity").Payment>;
+    update(id: string, body: any): Promise<import("./payment.entity").Payment>;
+    remove(id: string): Promise<void>;
 }

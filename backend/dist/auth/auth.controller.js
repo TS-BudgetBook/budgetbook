@@ -15,6 +15,9 @@ let AuthController = class AuthController {
     handleLogin() {
         return { msg: 'Google Authentication' };
     }
+    handleRedirect() {
+        return { msg: 'ok' };
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -24,9 +27,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "handleLogin", null);
 __decorate([
-    (0, common_1.Get)('google/redirect'),
-    __metadata("design:type", Object)
-], AuthController.prototype, "", void 0);
+    (0, common_1.Get)('google/callback'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "handleRedirect", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth')
 ], AuthController);

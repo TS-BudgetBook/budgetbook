@@ -1,33 +1,35 @@
-import { Controller, Post, Get, Body, Res, HttpStatus, Delete, Put, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Res, HttpStatus, Delete, Put, Param, Injectable } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 
+
 @Controller('payment')
+@Injectable() 
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
+  
   @Post()
-  createPayment(@Body() paymentData) {
-      // Logik zum Erstellen einer neuen Zahlung
+  create(@Body() body: any) {
+    return this.paymentService.create(body);
   }
 
   @Get()
-  getAllPayments() {
-      // Logik zum Abrufen aller Zahlungen
+  findAll() {
+    return this.paymentService.findAll();
   }
 
   @Get(':id')
-  getPaymentById(@Param('id') id: string) {
-      // Logik zum Abrufen einer spezifischen Zahlung
+  findOne(@Param('id') id: string) {
+    return this.paymentService.findOne(+id);
   }
 
   @Put(':id')
-  updatePayment(@Param('id') id: string, @Body() updateData) {
-      // Logik zum Aktualisieren einer Zahlung
+  update(@Param('id') id: string, @Body() body: any) {
+    return this.paymentService.update(+id, body);
   }
 
   @Delete(':id')
-  deletePayment(@Param('id') id: string) {
-      // Logik zum Löschen einer Zahlung
+  remove(@Param('id') id: string) {
+    return this.paymentService.remove(+id);
   }
-
 }

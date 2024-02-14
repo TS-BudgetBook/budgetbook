@@ -19,15 +19,20 @@ let PaymentController = class PaymentController {
     constructor(paymentService) {
         this.paymentService = paymentService;
     }
-    createPayment(paymentData) {
+    create(body) {
+        return this.paymentService.create(body);
     }
-    getAllPayments() {
+    findAll() {
+        return this.paymentService.findAll();
     }
-    getPaymentById(id) {
+    findOne(id) {
+        return this.paymentService.findOne(+id);
     }
-    updatePayment(id, updateData) {
+    update(id, body) {
+        return this.paymentService.update(+id, body);
     }
-    deletePayment(id) {
+    remove(id) {
+        return this.paymentService.remove(+id);
     }
 };
 exports.PaymentController = PaymentController;
@@ -37,20 +42,20 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], PaymentController.prototype, "createPayment", null);
+], PaymentController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], PaymentController.prototype, "getAllPayments", null);
+], PaymentController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], PaymentController.prototype, "getPaymentById", null);
+], PaymentController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -58,16 +63,17 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
-], PaymentController.prototype, "updatePayment", null);
+], PaymentController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
-], PaymentController.prototype, "deletePayment", null);
+], PaymentController.prototype, "remove", null);
 exports.PaymentController = PaymentController = __decorate([
     (0, common_1.Controller)('payment'),
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [payment_service_1.PaymentService])
 ], PaymentController);
 //# sourceMappingURL=payment.controller.js.map
