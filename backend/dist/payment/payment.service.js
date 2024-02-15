@@ -25,7 +25,11 @@ let PaymentService = class PaymentService {
         return this.paymentRepository.find();
     }
     findOne(id) {
-        return this.paymentRepository.findOneBy({ id: id });
+        const payment = this.paymentRepository.findOneBy({ id: id });
+        if (!payment) {
+            throw new common_1.NotFoundException(`Payment with ID ${id} not found`);
+        }
+        return payment;
     }
     async create(body) {
         const payment = this.paymentRepository.create(body);

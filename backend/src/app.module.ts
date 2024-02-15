@@ -17,7 +17,7 @@ require('dotenv').config()
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: true, // wird auf false gesetzt, wenn wird das deployen werden
     }),
     AuthModule,
   ],

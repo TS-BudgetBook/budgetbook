@@ -1,20 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException  } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Payment } from './payment.entity';
+import { Payment } from '../entity/payment.entity';
 
 
 @Injectable()
 export class PaymentService {
 constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,) {}
 
-findAll(): Promise<Payment[]> {
+  findAll(): Promise<Payment[]> {
     return this.paymentRepository.find();
   }
         
   findOne(id: number): Promise<Payment> {
-    return this.paymentRepository.findOneBy({ id: id });
+    const payment = this.paymentRepository.findOneBy({ id: id });
+  
+  if (!payment) {
+    throw new NotFoundException(`Payment with ID ${id} not found`);
+    }
+    return payment;
   }
+
         
   async create(body: any): Promise<Payment[]> {
     const payment = this.paymentRepository.create(body);
