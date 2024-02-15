@@ -12,8 +12,9 @@ export class User {
   @Column()
   name: String
 
+  @Column({ nullable: true })
+  googleId: string; 
 
-  
   @OneToMany(() => Payment, payment => payment.user)
   payments: Payment[];
 }

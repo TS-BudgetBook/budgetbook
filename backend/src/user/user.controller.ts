@@ -6,13 +6,9 @@ import { User } from '../entity/user.entity';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  findAll(): User[] {
-    return this.userService.getAllUsers();
-  }
-
+  
   @Post()
-  createUser(@Body() userData: User): User {
-    return this.userService.createUser(userData);
+  async createUser(@Body() userData: User): Promise<User> {
+    return await this.userService.createUser(userData);
   }
 }

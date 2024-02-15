@@ -1,5 +1,5 @@
 
 export const jwtConstants = {
-    secret: '12324.',
+    secret: 'process.env.TOkEN_KEY',
   };
   

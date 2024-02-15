@@ -1,24 +1,41 @@
-// auth.service.ts
-
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../user/users.service';
+import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
+import { User } from '../entity/user.entity';
+
+
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    private userService: UserService,
     private jwtService: JwtService
   ) {}
 
-  async googleLogin(googleId: string): Promise<{ access_token: string }> {
-    // Überprüfen Sie, ob ein Benutzer mit der Google-ID bereits vorhanden ist
-    const user = await this.usersService.findByGoogleId(googleId);
+  async validateGoogleUser(googleId: string): Promise<any> {
+    
+    const user = await this.userService.findByGoogleId(googleId);
     if (!user) {
-      // Wenn der Benutzer nicht existiert, werfen Sie eine Ausnahme
+     
       throw new UnauthorizedException('Google user not found');
     }
-    createJwtToken(user: any) {
-        const payload = { googleId: user.googleId, email: user.email };
-        return this.jwtService.sign(payload); // Erzeugt den JWT-Token
-      }
+    return user;
+  }
+
+  generateToken(user: any): string {
+    const payload = { googleId: user.googleId, email: user.email };
+    return this.jwtService.sign(payload); 
+  }
+
+  async googleLogin(req: Request<any, any, User>) {
+    const user = req.user as User;
+    const validatedUser = await this.validateGoogleUser(user.googleId); //
+    if (!validatedUser) {
+      throw new UnauthorizedException();
+    }
+    return {
+      access_token: this.generateToken(validatedUser),
+    };
+  }
+}

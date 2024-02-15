@@ -1,16 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../entity/user.entity'
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from '../entity/user.entity';
+import { FindOneOptions } from 'typeorm';
+
 
 @Injectable()
 export class UserService {
-  async validateGoogleUser(googleUser: any): Promise<User> {
-    
-    const user: User = {
-      id: googleUser.sub,
-      email: googleUser.email,
-     
-    };
-   
-    return user;
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
+
+  async createUser(userData: User): Promise<User> {
+    const newUser = this.userRepository.create(userData);
+    return await this.userRepository.save(newUser);
+  }
+
+  async findByGoogleId(googleId: string): Promise<User | null> {
+    return await this.userRepository.findOne({ where: { googleId } } as FindOneOptions<User>);
   }
 }

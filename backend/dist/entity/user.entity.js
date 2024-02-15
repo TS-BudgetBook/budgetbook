@@ -9,36 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Payment = void 0;
+exports.User = void 0;
 const typeorm_1 = require("typeorm");
-let Payment = class Payment {
+const payment_entity_1 = require("./payment.entity");
+let User = class User {
 };
-exports.Payment = Payment;
+exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Payment.prototype, "id", void 0);
+], User.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 500 }),
+    (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
-], Payment.prototype, "description", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
-], Payment.prototype, "date", void 0);
-__decorate([
-    (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2 }),
-    __metadata("design:type", Number)
-], Payment.prototype, "amount", void 0);
+], User.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Payment.prototype, "type", void 0);
+], User.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Payment.prototype, "category", void 0);
-exports.Payment = Payment = __decorate([
+], User.prototype, "googleId", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => payment_entity_1.Payment, payment => payment.user),
+    __metadata("design:type", Array)
+], User.prototype, "payments", void 0);
+exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
-], Payment);
-//# sourceMappingURL=payment.entity.js.map
+], User);
+//# sourceMappingURL=user.entity.js.map

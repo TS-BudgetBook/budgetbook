@@ -8,14 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
+const auth_service_1 = require("./auth.service");
+const jwt_1 = require("@nestjs/jwt");
 const auth_controller_1 = require("./auth.controller");
+const contanst_1 = require("./contanst");
+const passport_1 = require("@nestjs/passport");
+const GoogleStrategy_1 = require("./auth-utils/GoogleStrategy");
+const user_model_1 = require("../user/user.model");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
+        imports: [
+            passport_1.PassportModule.register({ defaultStrategy: 'google' }),
+            jwt_1.JwtModule.register({
+                global: true,
+                secret: contanst_1.jwtConstants.secret,
+                signOptions: { expiresIn: '60s' },
+            }),
+            user_model_1.UserModule
+        ],
+        providers: [auth_service_1.AuthService, GoogleStrategy_1.GoogleStrategy],
         controllers: [auth_controller_1.AuthController],
-        providers: [],
+        exports: [auth_service_1.AuthService],
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

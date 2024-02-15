@@ -12,41 +12,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentService = void 0;
+exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const payment_entity_1 = require("../entity/payment.entity");
-let PaymentService = class PaymentService {
-    constructor(paymentRepository) {
-        this.paymentRepository = paymentRepository;
+const user_entity_1 = require("../entity/user.entity");
+let UserService = class UserService {
+    constructor(userRepository) {
+        this.userRepository = userRepository;
     }
-    findAll() {
-        return this.paymentRepository.find();
+    async createUser(userData) {
+        const newUser = this.userRepository.create(userData);
+        return await this.userRepository.save(newUser);
     }
-    findOne(id) {
-        const payment = this.paymentRepository.findOneBy({ id: id });
-        if (!payment) {
-            throw new common_1.NotFoundException(`Payment with ID ${id} not found`);
-        }
-        return payment;
-    }
-    async create(body) {
-        const payment = this.paymentRepository.create(body);
-        return this.paymentRepository.save(payment);
-    }
-    async update(id, body) {
-        await this.paymentRepository.update(id, body);
-        return this.paymentRepository.findOneBy({ id: id });
-    }
-    async remove(id) {
-        await this.paymentRepository.delete(id);
+    async findByGoogleId(googleId) {
+        return await this.userRepository.findOne({ where: { googleId } });
     }
 };
-exports.PaymentService = PaymentService;
-exports.PaymentService = PaymentService = __decorate([
+exports.UserService = UserService;
+exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(payment_entity_1.Payment)),
+    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], PaymentService);
-//# sourceMappingURL=payment.service.js.map
+], UserService);
+//# sourceMappingURL=user.service.js.map

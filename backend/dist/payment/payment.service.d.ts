@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { Payment } from './payment.entity';
+import { Payment } from '../entity/payment.entity';
 export declare class PaymentService {
     private paymentRepository;
     constructor(paymentRepository: Repository<Payment>);

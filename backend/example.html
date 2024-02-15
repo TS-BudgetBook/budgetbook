@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Login Test</title>
+</head>
+<body>
+
+<h1>Google Login Test</h1>
+
+<button onclick="handleGoogleLogin()">Google Login</button>
+
+<script>
+function handleGoogleLogin() {
+  // Konfigurieren Sie die Client-ID Ihrer Google OAuth-Anwendung
+ /*  const clientId = '1002649678135-4n4gd4kmjabua37u7v6jq2jni18e4s03.apps.googleusercontent.com'; */
+
+  // Konfigurieren Sie die Umleitungs-URL nach der Anmeldung
+  const redirectUri = 'http://localhost:3000/api/auth/google/callback'; // Ihre Anwendungs-URL
+
+  // Konfigurieren Sie die Google OAuth-URL für die Autorisierung
+  const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=email%20profile`;
+
+  // Umleitung zur Google-Anmeldeseite
+  window.location.href = authUrl;
+}
+</script>
+
+</body>
+</html>

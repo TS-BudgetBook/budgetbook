@@ -31,7 +31,7 @@ exports.AppModule = AppModule = __decorate([
                 autoLoadEntities: true,
                 synchronize: true,
             }),
-            auth_module_1.AuthModule,
+            auth_module_1.AuthModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
