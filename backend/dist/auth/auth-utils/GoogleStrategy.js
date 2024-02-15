@@ -18,8 +18,8 @@ const dotenv_1 = require("dotenv");
 let GoogleStrategy = class GoogleStrategy extends (0, passport_1.PassportStrategy)(passport_google_oauth20_1.Strategy, 'google') {
     constructor() {
         super({
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientID: "1002649678135-4n4gd4kmjabua37u7v6jq2jni18e4s03.apps.googleusercontent.com",
+            clientSecret: "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",
             callbackURL: 'http://localhost:3000/api/auth/google/callback',
             scope: ['email', 'profile'],
         });
