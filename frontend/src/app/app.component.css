@@ -25,9 +25,3 @@ body {
   display: flex;
   justify-content: space-between;
 }
-
-.add {
-  position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
-}

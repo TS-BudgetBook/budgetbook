@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Expense } from '../expense';
 import { ExpenseService } from '../expense-service.service';
 import { FormsModule } from '@angular/forms';
 
@@ -8,20 +8,28 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-expense-form',
   templateUrl: './expense-form.component.html',
   styleUrls: ['./expense-form.component.css'],
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
 })
 export class ExpenseFormComponent {
-  constructor(private expenseService: ExpenseService) {}
+  isVisible: boolean = false;
 
-  onSubmit(expenseForm) {
-    console.log(expenseForm.value);
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
   }
 
-  /* addExpense(expenseName) {
-    console.log('expense ', expenseName )
+  expenseName: string = '';
+  expenseAmount: number = 0;
+  expenseType: string = '';
+  expenseCategory: string = '';
+  expenseDate: Date;
 
-    const newExpense: Expense = {
-      name: ,
+  constructor(private expenseService: ExpenseService) {
+    this.expenseDate = new Date();
+  }
+
+  addExpense() {
+    const newExpense = {
+      name: this.expenseName,
       amount: this.expenseAmount,
       type: this.expenseType,
       category: this.expenseCategory,
@@ -37,5 +45,5 @@ export class ExpenseFormComponent {
     this.expenseType = '';
     this.expenseCategory = '';
     this.expenseDate = new Date();
-  } */
+  }
 }
