@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ExpenseService } from '../expense-service.service';
+import { ExpenseService } from '../../expense-service.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({

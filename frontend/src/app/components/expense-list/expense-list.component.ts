@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { ExpenseService } from '../expense-service.service';
+import { ExpenseFormComponent } from '../expense-form/expense-form.component';
+import { ExpenseService } from '../../expense-service.service';
 import { NgFor } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, ExpenseFormComponent],
   selector: 'app-expense-list',
   templateUrl: './expense-list.component.html',
   styleUrls: ['./expense-list.component.css'],
