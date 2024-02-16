@@ -2,8 +2,18 @@
   <h2>Expenses</h2>
   <ul>
     <li *ngFor="let expense of expensesList">
-      {{ expense.name }} - ${{ expense.amount }}
-      <button (click)="deleteExpense(expense.id)">Delete</button>
+      <div class="expense">
+        <div>
+          {{ expense.category }}
+        </div>
+        <div>
+          {{ expense.name }}<br />
+          {{ expense.date }}
+        </div>
+        <div>${{ expense.amount }}</div>
+      </div>
+
+      <!-- <button (click)="deleteExpense(expense.id)">Delete</button> -->
       <!--  <button routerLink="/edit/{{ expense.id }}">Edit</button> -->
     </li>
   </ul>

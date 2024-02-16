@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ExpenseService } from '../expense-service.service';
 import { FormsModule } from '@angular/forms';
@@ -7,9 +8,15 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-expense-form',
   templateUrl: './expense-form.component.html',
   styleUrls: ['./expense-form.component.css'],
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
 })
 export class ExpenseFormComponent {
+  isVisible: boolean = false;
+
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
+  }
+
   expenseName: string = '';
   expenseAmount: number = 0;
   expenseType: string = '';

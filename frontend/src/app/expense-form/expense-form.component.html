@@ -1,14 +1,14 @@
-<div>
+<div class="form" *ngIf="isVisible">
   <h2>Add Expense</h2>
-  <div>
-    <label for="expenseName">Name:</label>
+  <div class="form-name">
+    <label for="expenseName">Name:</label><br />
     <input type="text" id="expenseName" [(ngModel)]="expenseName" />
   </div>
   <div>
-    <label for="expenseAmount">Amount:</label>
+    <label for="expenseAmount">Amount:</label><br />
     <input type="number" id="expenseAmount" [(ngModel)]="expenseAmount" />
   </div>
-  <div>
+  <div class="form-type">
     <label>Type:</label><br />
     <input
       type="radio"
@@ -26,11 +26,11 @@
     Income
   </div>
   <div>
-    <label for="expenseDate">Date:</label>
+    <label for="expenseDate">Date:</label><br />
     <input type="date" id="expenseDate" [(ngModel)]="expenseDate" />
   </div>
   <div>
-    <label for="expenseCategory">Category:</label>
+    <label for="expenseCategory">Category:</label><br />
     <select id="expenseCategory" [(ngModel)]="expenseCategory">
       <option value="groceries">Groceries</option>
       <option value="utilities">Utilities</option>
@@ -39,4 +39,8 @@
     </select>
   </div>
   <button (click)="addExpense()">Add</button>
+</div>
+
+<div class="add" (click)="toggleVisibility()">
+  <img src="assets/images/add.png" alt="" />
 </div>
