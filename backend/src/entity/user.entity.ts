@@ -9,8 +9,8 @@ export class User {
   @Column({ unique: true })
   email: string; 
 
-  @Column()
-  name: String
+  @Column({ nullable: true })
+  name: string;
 
   @Column({ nullable: true })
   googleId: string; 

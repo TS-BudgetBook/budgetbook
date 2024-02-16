@@ -20,8 +20,17 @@ let AuthService = class AuthService {
     }
     async validateGoogleUser(googleId) {
         const user = await this.userService.findByGoogleId(googleId);
+        return user;
+    }
+    async createProfileIfNew(googleId, email) {
+        let user = await this.userService.findByGoogleId(googleId);
         if (!user) {
-            throw new common_1.UnauthorizedException('Google user not found');
+            user = await this.userService.createUser({
+                googleId, email,
+                id: 0,
+                name: undefined,
+                payments: []
+            });
         }
         return user;
     }
@@ -33,11 +42,13 @@ let AuthService = class AuthService {
         const user = req.user;
         const validatedUser = await this.validateGoogleUser(user.googleId);
         if (!validatedUser) {
-            throw new common_1.UnauthorizedException();
+            const newUser = await this.createProfileIfNew(user.googleId, user.email);
+            if (!newUser) {
+                throw new common_1.UnauthorizedException('Failed to create user profile');
+            }
+            return { access_token: this.generateToken(newUser) };
         }
-        return {
-            access_token: this.generateToken(validatedUser),
-        };
+        return { access_token: this.generateToken(validatedUser) };
     }
 };
 exports.AuthService = AuthService;

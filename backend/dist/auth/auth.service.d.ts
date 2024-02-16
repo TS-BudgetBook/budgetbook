@@ -6,9 +6,10 @@ export declare class AuthService {
     private userService;
     private jwtService;
     constructor(userService: UserService, jwtService: JwtService);
-    validateGoogleUser(googleId: string): Promise<any>;
-    generateToken(user: any): string;
-    googleLogin(req: Request<any, any, User>): Promise<{
+    validateGoogleUser(googleId: string): Promise<User>;
+    createProfileIfNew(googleId: string, email: string): Promise<User>;
+    generateToken(user: User): string;
+    googleLogin(req: Request): Promise<{
         access_token: string;
     }>;
 }

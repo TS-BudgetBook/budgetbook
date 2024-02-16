@@ -2,6 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.jwtConstants = void 0;
 exports.jwtConstants = {
-    secret: 'process.env.TOkEN_KEY',
+    secret: '1234',
 };
 //# sourceMappingURL=contanst.js.map

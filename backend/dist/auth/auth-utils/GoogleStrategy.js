@@ -13,25 +13,25 @@ exports.GoogleStrategy = void 0;
 const passport_1 = require("@nestjs/passport");
 const passport_google_oauth20_1 = require("passport-google-oauth20");
 const common_1 = require("@nestjs/common");
-const dotenv_1 = require("dotenv");
-(0, dotenv_1.config)();
 let GoogleStrategy = class GoogleStrategy extends (0, passport_1.PassportStrategy)(passport_google_oauth20_1.Strategy, 'google') {
     constructor() {
         super({
-            clientID: "1002649678135-4n4gd4kmjabua37u7v6jq2jni18e4s03.apps.googleusercontent.com",
-            clientSecret: "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",
-            callbackURL: 'http://localhost:3000/api/auth/google/callback',
+            clientID: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            callbackURL: 'http://localhost:3000/auth/google/redirect',
             scope: ['email', 'profile'],
         });
     }
     async validate(accessToken, refreshToken, profile, done) {
         const { name, emails, photos } = profile;
         const user = {
-            googleId: profile.id,
             email: emails[0].value,
+            googleId: profile.id,
             firstName: name.givenName,
             lastName: name.familyName,
-            accessToken
+            picture: photos[0].value,
+            accessToken,
+            refreshToken,
         };
         done(null, user);
     }

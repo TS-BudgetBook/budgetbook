@@ -5,7 +5,6 @@ const app_module_1 = require("./app.module");
 require('dotenv').config();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.setGlobalPrefix('api');
     await app.listen(3000);
 }
 bootstrap();

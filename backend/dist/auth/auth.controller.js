@@ -14,48 +14,37 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const passport_1 = require("@nestjs/passport");
 const auth_service_1 = require("./auth.service");
+const google_oauth_guard_1 = require("./auth-utils/google-oauth.guard");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    googleLogin() {
+    async googleAuth(req) {
     }
     async googleAuthRedirect(req, res) {
-        const jwtToken = this.authService.generateToken(req.user);
-        const redirectUrl = `http://3.72.72.216/=${jwtToken}`;
-        res.redirect(redirectUrl);
-    }
-    getProfile(req) {
-        return req.user;
+        const user = req.user;
+        const { access_token } = await this.authService.googleLogin(req);
     }
 };
 exports.AuthController = AuthController;
 __decorate([
-    (0, common_1.Get)('google'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('google')),
+    (0, common_1.Get)(),
+    (0, common_1.UseGuards)(google_oauth_guard_1.GoogleOAuthGuard),
+    __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "googleLogin", null);
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "googleAuth", null);
 __decorate([
-    (0, common_1.Get)('google/callback'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('google')),
+    (0, common_1.Get)('google/redirect'),
+    (0, common_1.UseGuards)(google_oauth_guard_1.GoogleOAuthGuard),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "googleAuthRedirect", null);
-__decorate([
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt')),
-    (0, common_1.Get)('profile'),
-    __param(0, (0, common_1.Req)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "getProfile", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
