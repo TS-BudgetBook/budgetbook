@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Expense } from '../expense';
 import { ExpenseService } from '../expense-service.service';
 import { FormsModule } from '@angular/forms';
 
@@ -10,19 +11,17 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
 })
 export class ExpenseFormComponent {
-  expenseName: string = '';
-  expenseAmount: number = 0;
-  expenseType: string = '';
-  expenseCategory: string = '';
-  expenseDate: Date;
+  constructor(private expenseService: ExpenseService) {}
 
-  constructor(private expenseService: ExpenseService) {
-    this.expenseDate = new Date();
+  onSubmit(expenseForm) {
+    console.log(expenseForm.value);
   }
 
-  addExpense() {
-    const newExpense = {
-      name: this.expenseName,
+  /* addExpense(expenseName) {
+    console.log('expense ', expenseName )
+
+    const newExpense: Expense = {
+      name: ,
       amount: this.expenseAmount,
       type: this.expenseType,
       category: this.expenseCategory,
@@ -38,5 +37,5 @@ export class ExpenseFormComponent {
     this.expenseType = '';
     this.expenseCategory = '';
     this.expenseDate = new Date();
-  }
+  } */
 }

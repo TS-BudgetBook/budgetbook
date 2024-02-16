@@ -1,42 +1,44 @@
-<div>
-  <h2>Add Expense</h2>
+<form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
   <div>
-    <label for="expenseName">Name:</label>
-    <input type="text" id="expenseName" [(ngModel)]="expenseName" />
+    <h2>Add Expense</h2>
+    <div>
+      <label for="expenseName">Name:</label>
+      <input type="text" id="expenseName" [(ngModel)]="expenseName" />
+    </div>
+    <div>
+      <label for="expenseAmount">Amount:</label>
+      <input type="number" id="expenseAmount" [(ngModel)]="expenseAmount" />
+    </div>
+    <div>
+      <label>Type:</label><br />
+      <input
+        type="radio"
+        name="expenseType"
+        value="expense"
+        [(ngModel)]="expenseType"
+      />
+      Expense<br />
+      <input
+        type="radio"
+        name="expenseType"
+        value="income"
+        [(ngModel)]="expenseType"
+      />
+      Income
+    </div>
+    <div>
+      <label for="expenseDate">Date:</label>
+      <input type="date" id="expenseDate" [(ngModel)]="expenseDate" />
+    </div>
+    <div>
+      <label for="expenseCategory">Category:</label>
+      <select id="expenseCategory" [(ngModel)]="expenseCategory">
+        <option value="groceries">Groceries</option>
+        <option value="utilities">Utilities</option>
+        <option value="rent">Rent</option>
+        <option value="entertainment">Others</option>
+      </select>
+    </div>
+    <button type="submit">Add</button>
   </div>
-  <div>
-    <label for="expenseAmount">Amount:</label>
-    <input type="number" id="expenseAmount" [(ngModel)]="expenseAmount" />
-  </div>
-  <div>
-    <label>Type:</label><br />
-    <input
-      type="radio"
-      name="expenseType"
-      value="expense"
-      [(ngModel)]="expenseType"
-    />
-    Expense<br />
-    <input
-      type="radio"
-      name="expenseType"
-      value="income"
-      [(ngModel)]="expenseType"
-    />
-    Income
-  </div>
-  <div>
-    <label for="expenseDate">Date:</label>
-    <input type="date" id="expenseDate" [(ngModel)]="expenseDate" />
-  </div>
-  <div>
-    <label for="expenseCategory">Category:</label>
-    <select id="expenseCategory" [(ngModel)]="expenseCategory">
-      <option value="groceries">Groceries</option>
-      <option value="utilities">Utilities</option>
-      <option value="rent">Rent</option>
-      <option value="entertainment">Others</option>
-    </select>
-  </div>
-  <button (click)="addExpense()">Add</button>
-</div>
+</form>
