@@ -6,7 +6,7 @@ import { jwtConstants } from './contanst';
 import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './auth-utils/GoogleStrategy'; 
 import { CustomerService } from 'src/customer/customer.service';
-import { CustomerModule } from 'src/customer/customer.model';
+import { CustomerModule } from 'src/customer/customer.module';
 
 
 @Module({

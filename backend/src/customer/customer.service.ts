@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from '../entity/customer.entity';
-import { FindOneOptions } from 'typeorm';
 
 @Injectable()
 export class CustomerService {
@@ -11,14 +10,13 @@ export class CustomerService {
     private readonly customerRepository: Repository<Customer>, 
   ) {}
 
-  async createCustomer(customerData: Customer): Promise<Customer> { 
-    const newCustomer = this.customerRepository.create(customerData); 
-    return await this.customerRepository.save(newCustomer); 
+  async createCustomer(customerData: Partial<Customer>): Promise<Customer> {
+    const newCustomer = this.customerRepository.create(customerData);
+    return await this.customerRepository.save(newCustomer);
   }
 
-  async findByEmail(email: string): Promise<Customer | null> { 
-    return await this.customerRepository.findOne({ where: { email } } as FindOneOptions<Customer>); 
+  async findByGoogleId(googleId: number): Promise<Customer | null> {
+    return await this.customerRepository.findOne({ where: { googleId } });
   }
-
-
 }
+

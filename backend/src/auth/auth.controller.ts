@@ -9,20 +9,17 @@ import { Customer } from "../entity/customer.entity";
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Get('google')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(GoogleOAuthGuard)
   async googleAuth() {}
+ 
+ 
   @Get('google/redirect')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(GoogleOAuthGuard)
   googleAuthRedirect(@Req() req, @Res() res) {
       return this.authService.googleLogin(req,res);
   }
 
 
-@Get('google')
-@UseGuards(AuthGuard('google'))
-googleLogin() {
-  
-}
 
 }
 
