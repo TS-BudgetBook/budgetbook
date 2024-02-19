@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, IntegerType } from 'typeorm';
 import { Payment } from './payment.entity'; 
 
 @Entity()

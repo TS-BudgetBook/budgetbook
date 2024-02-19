@@ -15,8 +15,7 @@ export class CustomerService {
     return await this.customerRepository.save(newCustomer);
   }
 
-  async findByGoogleId(googleId: number): Promise<Customer | null> {
-    return await this.customerRepository.findOne({ where: { googleId } });
+  async findByEmail(email: string): Promise<Customer | null> {
+    return await this.customerRepository.findOne({ where: { email } });
   }
 }
-

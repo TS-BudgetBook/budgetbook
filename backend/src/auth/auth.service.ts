@@ -3,7 +3,6 @@ import { CustomerService } from '../customer/customer.service';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
 import { Customer } from '../entity/customer.entity'; 
-import { request } from 'http';
 
 @Injectable()
 export class AuthService {
@@ -12,38 +11,35 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async validateCustomerByGoogleId(googleId: number): Promise<Customer> { 
-    const customer = await this.customerService.findByGoogleId(googleId); 
+/*   async validateCustomerByEmail(email: string): Promise<Customer> { 
+    const customer = await this.customerService.findByEmail(email); 
     return customer;
-  }
+  } */
 
   async googleLogin(req: Request, res: Response): Promise<void> {
-    
     const customer = req.user as Customer;
-    const googleId = customer.id;
     const email = customer.email;
-    console.log("customer",customer );
+    const name = customer.name;
 
+    console.log("customer", customer);
 
-    const existingCustomer = await this.customerService.findByGoogleId(googleId);
-    if (existingCustomer) {
+    const existingCustomerByEmail = await this.customerService.findByEmail(email);
+
+    if (existingCustomerByEmail) {
       
       res.redirect('http://localhost:4200');
       return;
-    }
-
-    
-    const newCustomer = await this.customerService.createCustomer({
-      email: customer.email,
-      googleId: customer.id,
+    } else {
+      
+      await this.customerService.createCustomer({
+        email: email,
+        name: customer.name
+      });
 
      
-    });
-
-    
-    res.redirect('http://localhost:4200');
+      res.redirect('http://localhost:4200');
+    }
   }
 }
-  
 
 
