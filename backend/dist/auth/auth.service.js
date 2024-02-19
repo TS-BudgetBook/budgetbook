@@ -22,6 +22,13 @@ let AuthService = class AuthService {
         const customer = await this.customerService.findByEmail(email);
         return customer;
     }
+    googleLogin(req, res) {
+        console.log(req.user);
+    }
+    generateToken(user) {
+        const payload = { googleId: user.googleId, email: user.email };
+        return this.jwtService.sign(payload);
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

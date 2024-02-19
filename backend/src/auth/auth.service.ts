@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException  } from '@nestjs/common';
 import { CustomerService } from '../customer/customer.service'; 
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
@@ -15,7 +15,25 @@ export class AuthService {
     const customer = await this.customerService.findByEmail(email); 
     return customer;
   }
+  googleLogin(req: Request, res: Response){
+    console.log(req.user);
+}
+generateToken(user: any): string {
+  const payload = { googleId: user.googleId, email: user.email };
+  return this.jwtService.sign(payload); 
+}
 
+  
+  // googleLogin(req, res) {
+  //   if (!req.user) {
+  //     return 'No user from google';
+  //   }
+
+  //   return {
+  //     message: 'User information from google',
+  //     user: req.user,
+  //   };
+  // }
 
 }
   
