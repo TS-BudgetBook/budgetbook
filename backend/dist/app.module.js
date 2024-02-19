@@ -13,6 +13,7 @@ const app_service_1 = require("./app.service");
 const auth_module_1 = require("./auth/auth.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const payment_model_1 = require("./payment/payment.model");
+const customer_model_1 = require("./customer/customer.model");
 require('dotenv').config();
 let AppModule = class AppModule {
 };
@@ -20,7 +21,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            payment_model_1.paymentModule,
+            payment_model_1.PaymentModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
                 host: process.env.DB_HOST,
@@ -31,7 +32,7 @@ exports.AppModule = AppModule = __decorate([
                 autoLoadEntities: true,
                 synchronize: true,
             }),
-            auth_module_1.AuthModule
+            auth_module_1.AuthModule, customer_model_1.CustomerModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

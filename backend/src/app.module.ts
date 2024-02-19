@@ -3,13 +3,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { paymentModule}  from './payment/payment.model'
+import { PaymentModule}  from './payment/payment.model'
 import { CustomerModule } from './customer/customer.model';
 require('dotenv').config()
 
 @Module({
   imports: [
-    paymentModule,
+    PaymentModule,
     TypeOrmModule.forRoot({ 
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -20,7 +20,7 @@ require('dotenv').config()
       autoLoadEntities: true,
       synchronize: true, // wird auf false gesetzt, wenn wird das deployen werden
     }),
-    AuthModule
+    AuthModule, CustomerModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -23,7 +23,7 @@ import {CanActivate,ExecutionContext,Injectable,UnauthorizedException,} from '@n
         );
        
         
-        request['user'] = payload;
+        request['customer'] = payload;
       } catch {
         throw new UnauthorizedException();
       }
