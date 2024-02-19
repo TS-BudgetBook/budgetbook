@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { paymentModule}  from './payment/payment.model'
-import { UserModule } from './user/user.model';
+import { CustomerModule } from './customer/customer.model';
 require('dotenv').config()
 
 @Module({

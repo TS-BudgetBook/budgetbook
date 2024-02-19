@@ -5,8 +5,8 @@ import { AuthController } from './auth.controller';
 import { jwtConstants } from './contanst';
 import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './auth-utils/GoogleStrategy'; 
-import { UserService } from 'src/user/user.service';
-import { UserModule } from 'src/user/user.model';
+import { CustomerService } from 'src/customer/customer.service';
+import { CustomerModule } from 'src/customer/customer.model';
 
 
 @Module({
@@ -17,7 +17,7 @@ import { UserModule } from 'src/user/user.model';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
     }),
-    UserModule
+    CustomerModule
 
   ],
   providers: [AuthService, GoogleStrategy], 

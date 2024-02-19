@@ -12,28 +12,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
+exports.CustomerService = void 0;
 const common_1 = require("@nestjs/common");
-const user_service_1 = require("./user.service");
-const user_entity_1 = require("../entity/user.entity");
-let UserController = class UserController {
-    constructor(userService) {
-        this.userService = userService;
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const customer_entity_1 = require("../entity/customer.entity");
+let CustomerService = class CustomerService {
+    constructor(customerRepository) {
+        this.customerRepository = customerRepository;
     }
-    async createUser(userData) {
-        return await this.userService.createUser(userData);
+    async createCustomer(customerData) {
+        const newCustomer = this.customerRepository.create(customerData);
+        return await this.customerRepository.save(newCustomer);
+    }
+    async findByEmail(email) {
+        return await this.customerRepository.findOne({ where: { email } });
     }
 };
-exports.UserController = UserController;
-__decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.User]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "createUser", null);
-exports.UserController = UserController = __decorate([
-    (0, common_1.Controller)('users'),
-    __metadata("design:paramtypes", [user_service_1.UserService])
-], UserController);
-//# sourceMappingURL=user.controller.js.map
+exports.CustomerService = CustomerService;
+exports.CustomerService = CustomerService = __decorate([
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(customer_entity_1.Customer)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
+], CustomerService);
+//# sourceMappingURL=customer.service.js.map

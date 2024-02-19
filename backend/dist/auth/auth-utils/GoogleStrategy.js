@@ -23,10 +23,10 @@ let GoogleStrategy = class GoogleStrategy extends (0, passport_1.PassportStrateg
         });
     }
     async validate(accessToken, refreshToken, profile, done) {
-        const { name, emails, photos } = profile;
+        const { id, name, emails, photos } = profile;
         const user = {
+            id: id,
             email: emails[0].value,
-            googleId: profile.id,
             firstName: name.givenName,
             lastName: name.familyName,
             picture: photos[0].value,

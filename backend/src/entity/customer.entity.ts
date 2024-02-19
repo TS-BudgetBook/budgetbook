@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Payment } from './payment.entity'; 
 
 @Entity()
-export class User {
+export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,6 +15,6 @@ export class User {
   @Column({ nullable: true })
   googleId: string; 
 
-  @OneToMany(() => Payment, payment => payment.user)
+  @OneToMany(() => Payment, payment => payment.customer)
   payments: Payment[];
 }

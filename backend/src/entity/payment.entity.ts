@@ -1,11 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToOne } from 'typeorm';
-import { User } from './user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinTable } from 'typeorm';
+import { Customer  } from './customer.entity'; 
 
 @Entity()
 export class Payment {
   @PrimaryGeneratedColumn()
   id: number;
-
 
   @Column({ length: 500 })
   description: string;
@@ -20,20 +19,19 @@ export class Payment {
   type: 'income' | 'expense';
 
   @Column()
-  category: string; 
+  category: string;
 
+  @ManyToOne(() => Customer, customer => customer.payments) 
+  @JoinTable() 
+  customer: Customer;
 
-  
-
-   @ManyToOne(() => User, user => user.payments) 
-  user: User; 
-  
   @Column({ nullable: true })
   userId: number;
-  
+}
+
   
   /* @JoinTable()
   @ManyToOne(type=> user, user => user.Entity, {cascade:true})
   user:user[];
  */
-}
+

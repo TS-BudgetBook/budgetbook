@@ -1,5 +1,5 @@
 import { Payment } from './payment.entity';
-export declare class User {
+export declare class Customer {
     id: number;
     email: string;
     name: string;

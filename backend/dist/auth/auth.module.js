@@ -14,7 +14,7 @@ const auth_controller_1 = require("./auth.controller");
 const contanst_1 = require("./contanst");
 const passport_1 = require("@nestjs/passport");
 const GoogleStrategy_1 = require("./auth-utils/GoogleStrategy");
-const user_model_1 = require("../user/user.model");
+const customer_model_1 = require("../customer/customer.model");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -27,7 +27,7 @@ exports.AuthModule = AuthModule = __decorate([
                 secret: contanst_1.jwtConstants.secret,
                 signOptions: { expiresIn: '60s' },
             }),
-            user_model_1.UserModule
+            customer_model_1.CustomerModule
         ],
         providers: [auth_service_1.AuthService, GoogleStrategy_1.GoogleStrategy],
         controllers: [auth_controller_1.AuthController],

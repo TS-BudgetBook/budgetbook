@@ -1,4 +1,4 @@
-import { User } from './user.entity';
+import { Customer } from './customer.entity';
 export declare class Payment {
     id: number;
     description: string;
@@ -6,6 +6,6 @@ export declare class Payment {
     amount: number;
     type: 'income' | 'expense';
     category: string;
-    user: User;
+    customer: Customer;
     userId: number;
 }

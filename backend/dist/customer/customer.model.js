@@ -6,23 +6,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModule = void 0;
+exports.CustomerModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const user_entity_1 = require("../entity/user.entity");
-const user_service_1 = require("./user.service");
-const user_controller_1 = require("./user.controller");
-let UserModule = class UserModule {
+const customer_entity_1 = require("../entity/customer.entity");
+const customer_service_1 = require("./customer.service");
+const customer_controller_1 = require("./customer.controller");
+let CustomerModule = class CustomerModule {
 };
-exports.UserModule = UserModule;
-exports.UserModule = UserModule = __decorate([
+exports.CustomerModule = CustomerModule;
+exports.CustomerModule = CustomerModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User]),
+            typeorm_1.TypeOrmModule.forFeature([customer_entity_1.Customer]),
         ],
-        controllers: [user_controller_1.UserController],
-        providers: [user_service_1.UserService],
-        exports: [user_service_1.UserService],
+        controllers: [customer_controller_1.CustomerController],
+        providers: [customer_service_1.CustomerService],
+        exports: [customer_service_1.CustomerService],
     })
-], UserModule);
-//# sourceMappingURL=user.model.js.map
+], CustomerModule);
+//# sourceMappingURL=customer.model.js.map

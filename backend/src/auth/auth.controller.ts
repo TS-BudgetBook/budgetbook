@@ -3,7 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
 import { GoogleOAuthGuard } from './auth-utils/google-oauth.guard'
-import { User } from "../entity/user.entity";
+import { Customer } from "../entity/customer.entity";
 
 @Controller('auth')
 export class AuthController {
@@ -15,16 +15,24 @@ export class AuthController {
   
   }
 
-  @Get('google/redirect')
+ /*  @Get('google/redirect')
   @UseGuards(GoogleOAuthGuard)
   async googleAuthRedirect(@Req() req, @Res() res: Response) {
     const user = req.user;
     const { access_token } = await this.authService.googleLogin(req);
     
-    /* return res.redirect(`http://localhost:3000/auth/success?token=${access_token}`); */
+     return res.redirect(`http://localhost:3000/auth/success?token=${access_token}`); 
   }
+} */
+
+/* @Get('google/redirect')
+@UseGuards(AuthGuard('google'))
+async callback(@Req() req, @Res() res) {
+  const jwt = await this.authService.login(req.user);
+  res.set('Authorization', jwt.access_token);
+  res.json(req.user);
 }
-  
+ */
   
   
   
@@ -81,3 +89,5 @@ export class AuthController {
     res.json({ success: true });
   }
 } */
+
+}

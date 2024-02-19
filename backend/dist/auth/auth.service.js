@@ -11,50 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const user_service_1 = require("../user/user.service");
+const customer_service_1 = require("../customer/customer.service");
 const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
-    constructor(userService, jwtService) {
-        this.userService = userService;
+    constructor(customerService, jwtService) {
+        this.customerService = customerService;
         this.jwtService = jwtService;
     }
-    async validateGoogleUser(googleId) {
-        const user = await this.userService.findByGoogleId(googleId);
-        return user;
-    }
-    async createProfileIfNew(googleId, email) {
-        let user = await this.userService.findByGoogleId(googleId);
-        if (!user) {
-            user = await this.userService.createUser({
-                googleId, email,
-                id: 0,
-                name: undefined,
-                payments: []
-            });
-        }
-        return user;
-    }
-    generateToken(user) {
-        const payload = { googleId: user.googleId, email: user.email };
-        return this.jwtService.sign(payload);
-    }
-    async googleLogin(req) {
-        const user = req.user;
-        const validatedUser = await this.validateGoogleUser(user.googleId);
-        if (!validatedUser) {
-            const newUser = await this.createProfileIfNew(user.googleId, user.email);
-            if (!newUser) {
-                throw new common_1.UnauthorizedException('Failed to create user profile');
-            }
-            return { access_token: this.generateToken(newUser) };
-        }
-        return { access_token: this.generateToken(validatedUser) };
+    async validateCustomerByEmail(email) {
+        const customer = await this.customerService.findByEmail(email);
+        return customer;
     }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [user_service_1.UserService,
+    __metadata("design:paramtypes", [customer_service_1.CustomerService,
         jwt_1.JwtService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

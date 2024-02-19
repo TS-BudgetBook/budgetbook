@@ -1,55 +1,56 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from '../user/user.service';
+import { CustomerService } from '../customer/customer.service'; 
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { User } from '../entity/user.entity';
+import { Customer } from '../entity/customer.entity'; 
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
+    private customerService: CustomerService, 
     private jwtService: JwtService
   ) {}
 
-  async validateGoogleUser(googleId: string): Promise<User> {
-    const user = await this.userService.findByGoogleId(googleId);
-    return user;
+  async validateCustomerByEmail(email: string): Promise<Customer> { 
+    const customer = await this.customerService.findByEmail(email); 
+    return customer;
   }
 
-  async createProfileIfNew(googleId: string, email: string): Promise<User> {
-    let user = await this.userService.findByGoogleId(googleId);
-    if (!user) {
-      
-      user = await this.userService.createUser({
-          googleId, email,
-          id: 0,
-          name: undefined,
-          payments: []
+
+}
+  
+/*   async createProfileIfNew(email: string): Promise<Customer> { 
+    let customer = await this.customerService.findByEmail(email); 
+    if (!customer) {
+      customer = await this.customerService.createCustomer({ 
+        email,
+        id: 0,
+        name: undefined,
+        payments: []
       });
     }
-    return user;
+    return customer;
   }
-
-  generateToken(user: User): string {
-    const payload = { googleId: user.googleId, email: user.email };
+  
+  generateToken(customer: Customer): string { 
+    const payload = { email: customer.email }; 
     return this.jwtService.sign(payload); 
-  }
-
-  async googleLogin(req: Request): Promise<{ access_token: string }> {
-    const user = req.user as User;
-    const validatedUser = await this.validateGoogleUser(user.googleId);
-    if (!validatedUser) {
-      const newUser = await this.createProfileIfNew(user.googleId, user.email);
-      if (!newUser) {
-        throw new UnauthorizedException('Failed to create user profile');
+  } */
+  
+/*   async googleLogin(req: Request): Promise<{ access_token: string }> {
+    const customer = req.customer as Customer; 
+    const validatedCustomer = await this.validateCustomerByEmail(customer.email); 
+    if (!validatedCustomer) {
+      const newCustomer = await this.createProfileIfNew(customer.email); 
+      if (!newCustomer) {
+        throw new UnauthorizedException('Failed to create customer profile'); 
       }
-      return { access_token: this.generateToken(newUser) };
+      return { access_token: this.generateToken(newCustomer) }; 
     }
-    return { access_token: this.generateToken(validatedUser) };
+    return { access_token: this.generateToken(validatedCustomer) }; 
   }
 }
-
- 
+ */
     /* googleLogin(req) {
       if (!req.user) {
         return 'No user from google';
