@@ -21,7 +21,6 @@ import {CanActivate,ExecutionContext,Injectable,UnauthorizedException,} from '@n
             secret: jwtConstants.secret
           }
         );
-       
         
         request['customer'] = payload;
       } catch {

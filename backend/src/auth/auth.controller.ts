@@ -7,22 +7,38 @@ import { Customer } from "../entity/customer.entity";
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
-
-  @Get()
-  @UseGuards(GoogleOAuthGuard)
-  async googleAuth(@Request() req) {
-  
-  }
-
+  constructor(private readonly authService: AuthService) {}
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  googleLogin() {
-   
+  async googleAuth() {}
+  @Get('google/redirect')
+  @UseGuards(AuthGuard('google'))
+  googleAuthRedirect(@Req() req, @Res() res) {
+      return this.authService.googleLogin(req,res);
   }
+
+
+@Get('google')
+@UseGuards(AuthGuard('google'))
+googleLogin() {
+  
 }
 
- /*  @Get('google/redirect')
+}
+
+  // @Get()
+  // @UseGuards(GoogleOAuthGuard)
+  // async googleAuth(@Req() req) {
+  
+  // }
+  // @Get('redirect')
+  // @UseGuards(AuthGuard('google'))
+  // googleAuthRedirect(@Req() req) {
+  //   return this.authService.googleLogin(req)
+
+  // }
+
+/*  @Get('google/redirect')
   @UseGuards(GoogleOAuthGuard)
   async googleAuthRedirect(@Req() req, @Res() res: Response) {
     const user = req.user;
