@@ -1,0 +1,12 @@
+.expense {
+  display: flex;
+  justify-content: space-between;
+}
+
+ul {
+  padding: 1em;
+}
+
+li {
+  list-style-type: none;
+}
