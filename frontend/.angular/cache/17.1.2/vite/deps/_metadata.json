@@ -1,62 +1,36 @@
 {
-<<<<<<< HEAD
-  "hash": "ce64caa0",
-  "configHash": "e11a906b",
-  "lockfileHash": "6cdc0404",
-  "browserHash": "5bb5a500",
-=======
   "hash": "e6d190c0",
   "configHash": "127d3eeb",
   "lockfileHash": "6cdc0404",
   "browserHash": "e810ffdf",
->>>>>>> 66ca43b68e5bbbc4b928096cd92a50f584552ae0
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-<<<<<<< HEAD
-      "fileHash": "a4b8f55d",
-=======
       "fileHash": "b74a09a5",
->>>>>>> 66ca43b68e5bbbc4b928096cd92a50f584552ae0
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-<<<<<<< HEAD
-      "fileHash": "b47dd33e",
-=======
       "fileHash": "f3d9f263",
->>>>>>> 66ca43b68e5bbbc4b928096cd92a50f584552ae0
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-<<<<<<< HEAD
-      "fileHash": "3fd946d1",
-=======
       "fileHash": "df5b8edc",
->>>>>>> 66ca43b68e5bbbc4b928096cd92a50f584552ae0
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-<<<<<<< HEAD
-      "fileHash": "fd21dfcf",
-=======
       "fileHash": "116f3520",
->>>>>>> 66ca43b68e5bbbc4b928096cd92a50f584552ae0
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-<<<<<<< HEAD
-      "fileHash": "15c1095b",
-=======
       "fileHash": "3e0359a3",
       "needsInterop": false
     },
@@ -64,7 +38,6 @@
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
       "fileHash": "25cd535c",
->>>>>>> 66ca43b68e5bbbc4b928096cd92a50f584552ae0
       "needsInterop": false
     }
   },

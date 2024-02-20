@@ -8,18 +8,47 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 27em;
+  top: 18em;
   bottom: 7em;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .form-type {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .add {
   position: absolute;
   bottom: 0.5em;
   right: 0.5em;
+}
+
+.form-name input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-amount input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-date input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-category select {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.add-button {
+  margin-top: 2em;
+  width: 80%;
 }

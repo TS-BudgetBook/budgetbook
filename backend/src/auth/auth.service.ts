@@ -21,7 +21,6 @@ export class AuthService {
     const email = customer.email;
     const firstName = customer.firstName ;
     const lastName = customer.lastName ;
-    const googleId = customer.id;
 
     console.log("customer", customer);
 
@@ -37,7 +36,6 @@ export class AuthService {
         email: email,
         firstName: firstName,
         lastName: lastName,
-        googleId: googleId
       });
 
     

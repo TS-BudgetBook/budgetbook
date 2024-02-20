@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,18 +18,31 @@ export class ExpenseService {
     this.http.post('http://localhost:3000/payment', expense).subscribe(
       (response) => {
         console.log('POST request successful:', response);
-        // Handle the response data as needed
+        window.location.reload();
       },
       (error) => {
         console.error('Error making POST request:', error);
-        // Handle errors
       }
     );
   }
 
   deleteExpense(id: number): void {
-    this.expensesList = this.expensesList.filter(
-      (expense) => expense.id !== id
+    this.http.delete(`http://localhost:3000/payment/${id}`).subscribe(
+      (response) => {
+        console.log('DELETE request successful:', response);
+
+        this.expensesList = this.expensesList.filter(
+          (expense) => expense.id !== id
+        );
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error making DELETE request:', error);
+      }
     );
+  }
+
+  editExpense(id: number, updatedExpense: any): Observable<any> {
+    return this.http.put(`http://localhost:3000/payment/${id}`, updatedExpense);
   }
 }
