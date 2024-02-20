@@ -33,7 +33,7 @@ export class AuthService {
       
       await this.customerService.createCustomer({
         email: email,
-        name: customer.name
+        name: name
       });
 
      
