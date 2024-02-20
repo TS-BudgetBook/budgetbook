@@ -1,0 +1,16 @@
+.form {
+  padding: 0.8em;
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.form-type {
+  display: flex;
+  flex-direction: row;
+}
+
+.add {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+}
