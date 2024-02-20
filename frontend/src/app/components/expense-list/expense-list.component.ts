@@ -2,7 +2,7 @@ import { CommonModule, NgFor } from '@angular/common';
 
 import { Component } from '@angular/core';
 import { ExpenseFormComponent } from '../expense-form/expense-form.component';
-import { ExpenseService } from '../../expense-service.service';
+import { ExpenseService } from '../../services/expense-service.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -23,10 +23,7 @@ export class ExpenseListComponent {
   ) {}
 
   ngOnInit(): void {
-    /* this.getExpensesList(); */
-    this.http.get('http://localhost:3000/payment').subscribe((data: any) => {
-      this.expensesData = data;
-    });
+    this.expensesData = this.expenseService.getExpenses();
   }
 
   deleteExpense(id: number): void {
