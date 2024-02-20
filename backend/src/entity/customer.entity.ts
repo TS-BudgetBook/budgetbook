@@ -9,13 +9,13 @@ export class Customer {
   @Column({ unique: true })
   email: string; 
 
-  @Column({ nullable: true })
-  firstname: string;
+  @Column({ nullable: false })
+  firstName: string;
 
-  @Column({ nullable: true })
-  lastname: string;
+  @Column({ nullable: false })
+  lastName: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   googleId: number; 
 
   @OneToMany(() => Payment, payment => payment.customer)
