@@ -1,7 +1,16 @@
 .form {
+  margin: 0 auto;
+  width: 80%;
+  top: 0;
   padding: 0.8em;
   background-color: #1e1e1e;
   color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 27em;
+  bottom: 7em;
+  margin: auto;
 }
 
 .form-type {

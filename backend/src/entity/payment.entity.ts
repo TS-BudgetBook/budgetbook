@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinTable } from 'typeorm';
-import { Customer  } from './customer.entity'; 
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import { Customer } from './customer.entity';
 
 @Entity()
 export class Payment {
@@ -7,7 +14,7 @@ export class Payment {
   id: number;
 
   @Column({ length: 500 })
-  description: string;
+  name: string;
 
   @Column()
   date: Date;
@@ -21,17 +28,15 @@ export class Payment {
   @Column()
   category: string;
 
-  @ManyToOne(() => Customer, customer => customer.payments) 
-  @JoinTable() 
+  @ManyToOne(() => Customer, (customer) => customer.payments)
+  @JoinTable()
   customer: Customer;
 
   @Column({ nullable: true })
   userId: number;
 }
 
-  
-  /* @JoinTable()
+/* @JoinTable()
   @ManyToOne(type=> user, user => user.Entity, {cascade:true})
   user:user[];
  */
-
