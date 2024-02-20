@@ -4,9 +4,13 @@
 }
 
 ul {
-  padding: 1em;
+  padding: 0 1em;
+  margin: 0;
 }
 
 li {
   list-style-type: none;
+  margin-top: 2em;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 1em;
 }
