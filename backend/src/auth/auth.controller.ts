@@ -9,19 +9,18 @@ import { Customer } from "../entity/customer.entity";
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Get('google')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(GoogleOAuthGuard)
   async googleAuth() {}
+ 
+ 
   @Get('google/redirect')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(GoogleOAuthGuard)
   googleAuthRedirect(@Req() req, @Res() res) {
       return this.authService.googleLogin(req,res);
   }
 
 
-@Get('google')
-@UseGuards(AuthGuard('google'))
-googleLogin() {
-  
+
 }
 
   // @Get()
@@ -62,12 +61,8 @@ async callback(@Req() req, @Res() res) {
   
   
   
-  /* @Get('google')
-  @UseGuards(AuthGuard('google'))
-  googleLogin() {
-   
-  }
 
+/* 
   @Get('/google/redirect')
   @UseGuards(AuthGuard('google'))
   async googleAuthRedirect(@Req() req, @Res() res: Response) {
@@ -78,7 +73,7 @@ async callback(@Req() req, @Res() res) {
     //const redirectUrl = `http://localhost:3000=${jwtToken}`;
     //res.redirect(redirectUrl);
   
-
+ 
 
 
 /*   @UseGuards(AuthGuard('jwt')) 
@@ -111,4 +106,3 @@ async callback(@Req() req, @Res() res) {
   }
 } */
 
-}

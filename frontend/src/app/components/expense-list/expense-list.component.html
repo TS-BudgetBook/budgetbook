@@ -1,13 +1,14 @@
 <div>
   <ul>
-    <li *ngFor="let expense of expensesList">
+    <li *ngFor="let expense of expensesData">
       <div class="expense">
         <div>
           {{ expense.category }}
         </div>
         <div>
           {{ expense.name }}<br />
-          {{ expense.date }}
+          {{ expense.date | date : "mediumDate" }}
+          {{ expense.id }}
         </div>
         <div>${{ expense.amount }}</div>
       </div>

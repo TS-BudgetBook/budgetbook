@@ -1,4 +1,4 @@
-
+/* 
 import {CanActivate,ExecutionContext,Injectable,UnauthorizedException,} from '@nestjs/common';
   import { JwtService } from '@nestjs/jwt';
   import { jwtConstants } from './contanst';
@@ -22,7 +22,7 @@ import {CanActivate,ExecutionContext,Injectable,UnauthorizedException,} from '@n
           }
         );
         
-        request['user'] = payload;
+        request['customer'] = payload;
       } catch {
         throw new UnauthorizedException();
       }
@@ -33,4 +33,4 @@ import {CanActivate,ExecutionContext,Injectable,UnauthorizedException,} from '@n
       const [type, token] = request.headers.authorization?.split(' ') ?? [];
       return type === 'Bearer' ? token : undefined;
     }
-  }
+  } */

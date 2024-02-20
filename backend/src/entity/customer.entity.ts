@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, IntegerType } from 'typeorm';
 import { Payment } from './payment.entity'; 
 
 @Entity()
@@ -13,7 +13,7 @@ export class Customer {
   name: string;
 
   @Column({ nullable: true })
-  googleId: string; 
+  googleId: number; 
 
   @OneToMany(() => Payment, payment => payment.customer)
   payments: Payment[];
