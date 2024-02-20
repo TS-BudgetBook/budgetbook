@@ -22,7 +22,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ length: 500 }),
     __metadata("design:type", String)
-], Payment.prototype, "description", void 0);
+], Payment.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
@@ -40,7 +40,7 @@ __decorate([
     __metadata("design:type", String)
 ], Payment.prototype, "category", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => customer_entity_1.Customer, customer => customer.payments),
+    (0, typeorm_1.ManyToOne)(() => customer_entity_1.Customer, (customer) => customer.payments),
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", customer_entity_1.Customer)
 ], Payment.prototype, "customer", void 0);

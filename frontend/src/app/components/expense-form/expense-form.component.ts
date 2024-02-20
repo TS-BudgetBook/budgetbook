@@ -28,12 +28,22 @@ export class ExpenseFormComponent {
   }
 
   addExpense() {
+    const date = new Date(this.expenseDate);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+
+    console.log('formattedDate', formattedDate);
+
     const newExpense = {
       name: this.expenseName,
       amount: this.expenseAmount,
       type: this.expenseType,
       category: this.expenseCategory,
-      date: this.expenseDate,
+      date: formattedDate,
     };
 
     console.log(newExpense);
