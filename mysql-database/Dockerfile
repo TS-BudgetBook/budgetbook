@@ -1,3 +1,2 @@
 FROM mysql:latest
-ENV MYSQL_ROOT_PASSWORD=admin
-ENV MYSQL_DATABASE=budgetbook
+EXPOSE 3306
