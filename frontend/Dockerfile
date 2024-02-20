@@ -1,9 +1,15 @@
-FROM node:lts-alpine
+FROM node:lts-alpine AS buildstage
 RUN npm install -g @angular/cli
 WORKDIR /app
-COPY package*.json ./
+COPY *.json ./
 RUN npm ci
 COPY . .
 RUN ng build 
 
 EXPOSE  4200
+
+FROM nginx:latest AS productionstage
+COPY --from=buildstage /app/dist/frontend/browser /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx","-g","daemon off;"]
