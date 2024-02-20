@@ -10,7 +10,10 @@ export class Customer {
   email: string; 
 
   @Column({ nullable: true })
-  name: string;
+  firstname: string;
+
+  @Column({ nullable: true })
+  lastname: string;
 
   @Column({ nullable: true })
   googleId: number; 

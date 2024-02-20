@@ -19,7 +19,8 @@ export class AuthService {
   async googleLogin(req: Request, res: Response): Promise<void> {
     const customer = req.user as Customer;
     const email = customer.email;
-    const name = customer.name;
+    const firstName = customer.firstname;
+    const lastName = customer.lastname;
 
     console.log("customer", customer);
 
@@ -33,7 +34,8 @@ export class AuthService {
       
       await this.customerService.createCustomer({
         email: email,
-        name: name
+        firstname: firstName,
+        lastname: lastName
       });
 
      
