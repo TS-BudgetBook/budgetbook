@@ -5,8 +5,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
-  { path: '', component: ExpensesComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
+  { path: 'expenses', component: ExpensesComponent },
 ];
 
 @NgModule({

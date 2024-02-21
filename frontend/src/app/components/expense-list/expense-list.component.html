@@ -11,10 +11,66 @@
           {{ expense.id }}
         </div>
         <div>${{ expense.amount }}</div>
-      </div>
+        <img
+          src="../../../assets/images/edit.png"
+          alt=""
+          (click)="openEditForm(expense)"
+        />
 
-      <!-- <button (click)="deleteExpense(expense.id)">Delete</button> -->
-      <!--  <button routerLink="/edit/{{ expense.id }}">Edit</button> -->
+        <img
+          src="../../../assets/images/delete.png"
+          alt=""
+          (click)="deleteExpense(expense.id)"
+        />
+      </div>
     </li>
   </ul>
+</div>
+
+<div *ngIf="editingExpense">
+  <h2>Edit Expense</h2>
+  <form (submit)="submitEditForm()">
+    <div>
+      <label for="category">Category:</label>
+      <input
+        type="text"
+        id="category"
+        name="category"
+        [(ngModel)]="editingExpense.category"
+        required
+      />
+    </div>
+    <div>
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="editingExpense.name"
+        required
+      />
+    </div>
+    <div>
+      <label for="date">Date:</label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        [(ngModel)]="editingExpense.date"
+        required
+      />
+    </div>
+    <div>
+      <label for="amount">Amount:</label>
+      <input
+        type="number"
+        id="amount"
+        name="amount"
+        [(ngModel)]="editingExpense.amount"
+        required
+      />
+    </div>
+    <button type="submit">Save</button>
+    <!--  <button type="button" (click)="cancelEdit()">Cancel</button> -->
+  </form>
 </div>

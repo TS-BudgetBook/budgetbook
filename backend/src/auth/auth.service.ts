@@ -19,7 +19,8 @@ export class AuthService {
   async googleLogin(req: Request, res: Response): Promise<void> {
     const customer = req.user as Customer;
     const email = customer.email;
-    const name = customer.name;
+    const firstName = customer.firstName ;
+    const lastName = customer.lastName ;
 
     console.log("customer", customer);
 
@@ -33,10 +34,11 @@ export class AuthService {
       
       await this.customerService.createCustomer({
         email: email,
-        name: name
+        firstName: firstName,
+        lastName: lastName,
       });
 
-     
+    
       res.redirect('http://localhost:4200');
     }
   }
