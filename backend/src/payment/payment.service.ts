@@ -31,6 +31,11 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
     await this.paymentRepository.update(id, body);
     return this.findOne(id); 
   }
+
+
+
+ 
+
         
   async remove(id: number): Promise<void> {
     await this.paymentRepository.delete(id);

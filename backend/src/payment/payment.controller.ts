@@ -3,15 +3,13 @@ import { PaymentService } from './payment.service';
 
 
 @Controller('payment')
-@Injectable() 
+@Injectable()
 export class PaymentController {
-  constructor(private readonly paymentService: PaymentService) {}
+  constructor(private readonly paymentService: PaymentService) { }
 
-  
-  @Post()
-  create(@Body() body: any) {
-    return this.paymentService.create(body);
-  }
+
+
+
 
   @Get()
   findAll() {
@@ -23,12 +21,20 @@ export class PaymentController {
     return this.paymentService.findOne(+id);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    return this.paymentService.update(+id, body);
+  @Put()
+  update(@Body() body: any) {
+
+    console.log(body);
+    if (body.id) {
+      return this.paymentService.update(body.id, body);
+    } else {
+      return this.paymentService.create(body);
+    }
+
+
   }
 
-  @Delete(':id')
+   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.paymentService.remove(+id);
   }
