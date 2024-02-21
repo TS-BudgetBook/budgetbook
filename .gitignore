@@ -1,4 +1,5 @@
 # compiled output
+.angular/
 /backend/dist
 /frontend/dist
 frontend/.angular
