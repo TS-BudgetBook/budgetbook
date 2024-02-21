@@ -3,6 +3,8 @@ version: '3'
 services:
   frontend:
     build: ./frontend
+    volumes:
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "80:80"
     depends_on:
@@ -32,3 +34,15 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     ports:
       - ${DB_PORT}:3306
+ 
+
+  proxy:
+    image: nginx:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./proxy/cert:/etc/nginx/certs
+    depends_on:
+      - frontend 
