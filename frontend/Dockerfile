@@ -11,5 +11,5 @@ EXPOSE  4200
 FROM nginx:latest AS productionstage
 COPY --from=buildstage /app/dist/frontend/browser /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8000
 CMD ["nginx","-g","daemon off;"]
