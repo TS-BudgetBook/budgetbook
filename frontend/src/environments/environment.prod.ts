@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://backend:3000/payment',
+  apiUrl: 'http://backend:3000/api/payment',
 };
