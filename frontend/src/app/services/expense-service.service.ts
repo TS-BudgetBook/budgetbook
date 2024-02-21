@@ -1,21 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExpenseService {
   private expensesList: any[] = [];
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getExpensesList(): any[] {
-    return this.expensesList;
+  getExpenses() {
+    return this.http.get(`${this.apiUrl}`);
   }
 
   addExpense(expense: any): void {
-    this.http.post('http://localhost:3000/payment', expense).subscribe(
+    this.http.post(`${this.apiUrl}`, expense).subscribe(
       (response) => {
         console.log('POST request successful:', response);
         window.location.reload();
@@ -27,7 +29,7 @@ export class ExpenseService {
   }
 
   deleteExpense(id: number): void {
-    this.http.delete(`http://localhost:3000/payment/${id}`).subscribe(
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe(
       (response) => {
         console.log('DELETE request successful:', response);
 
@@ -43,6 +45,6 @@ export class ExpenseService {
   }
 
   editExpense(id: number, updatedExpense: any): Observable<any> {
-    return this.http.put(`http://localhost:3000/payment/${id}`, updatedExpense);
+    return this.http.put(`${this.apiUrl}/${id}`, updatedExpense);
   }
 }
