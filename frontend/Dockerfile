@@ -4,7 +4,7 @@ WORKDIR /app
 COPY *.json ./
 RUN npm ci
 COPY . .
-RUN ng build 
+RUN ng build --configuration=production
 
 EXPOSE  4200
 
