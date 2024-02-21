@@ -1,9 +1,9 @@
 FROM node:lts-alpine
 WORKDIR /usr/src/app
-COPY *.json .
-RUN npm install
-RUN npm run build
+COPY package*.json .
+RUN npm ci
 COPY . . 
+RUN npm run build
 EXPOSE 3000
 CMD [ "node", "dist/main.js" ]
 
