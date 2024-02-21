@@ -18,10 +18,16 @@ export class AuthController {
   googleAuthRedirect(@Req() req, @Res() res) {
       return this.authService.googleLogin(req,res);
   }
+   
+    @Get('logout')
+    logout(@Req() req, @Res() res: Response) {
+      return this.authService.logout(req, res);
+    }
+  }
 
 
 
-}
+
 
   // @Get()
   // @UseGuards(GoogleOAuthGuard)

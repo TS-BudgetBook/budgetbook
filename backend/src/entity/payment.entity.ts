@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import {Column,Entity,JoinTable,ManyToOne,PrimaryGeneratedColumn} from 'typeorm';
 
 import { Customer } from './customer.entity';
 
@@ -13,13 +7,13 @@ export class Payment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 500 })
+  @Column({ length: 500, default: 'Default Name' })
   name: string;
 
-  @Column()
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2})
   amount: number;
 
   @Column()
