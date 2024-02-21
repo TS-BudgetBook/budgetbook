@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ExpenseService } from '../../expense-service.service';
+import { ExpenseService } from '../../services/expense-service.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -17,6 +17,7 @@ export class ExpenseFormComponent {
     this.isVisible = !this.isVisible;
   }
 
+  expenseId: number = 0;
   expenseName: string = '';
   expenseAmount: number = 0;
   expenseType: string = '';
@@ -39,6 +40,7 @@ export class ExpenseFormComponent {
     console.log('formattedDate', formattedDate);
 
     const newExpense = {
+      expenseId: this.expenseId,
       name: this.expenseName,
       amount: this.expenseAmount,
       type: this.expenseType,
@@ -50,6 +52,7 @@ export class ExpenseFormComponent {
 
     this.expenseService.addExpense(newExpense);
 
+    this.expenseId = 0;
     this.expenseName = '';
     this.expenseAmount = 0;
     this.expenseType = '';
