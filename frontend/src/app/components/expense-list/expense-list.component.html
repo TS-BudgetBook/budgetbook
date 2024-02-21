@@ -1,6 +1,6 @@
 <div>
   <ul>
-    <li *ngFor="let expense of expensesData">
+    <li *ngFor="let expense of expensesList">
       <div class="expense">
         <div>
           {{ expense.category }}
@@ -16,7 +16,6 @@
           alt=""
           (click)="openEditForm(expense)"
         />
-
         <img
           src="../../../assets/images/delete.png"
           alt=""

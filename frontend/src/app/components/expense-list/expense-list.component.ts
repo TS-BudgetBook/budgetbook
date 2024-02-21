@@ -2,9 +2,8 @@ import { CommonModule, NgFor } from '@angular/common';
 
 import { Component } from '@angular/core';
 import { ExpenseFormComponent } from '../expense-form/expense-form.component';
-import { ExpenseService } from '../../services/expense-service.service';
+import { ExpenseService } from '../../expense-service.service';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -14,16 +13,19 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./expense-list.component.css'],
 })
 export class ExpenseListComponent {
-  expensesData: any;
+  expensesList: any = [];
   editingExpense: any;
 
-  constructor(
-    private expenseService: ExpenseService,
-    private http: HttpClient
-  ) {}
+  constructor(private expenseService: ExpenseService) {}
 
   ngOnInit(): void {
-    this.expensesData = this.expenseService.getExpenses();
+    this.getExpensesList();
+  }
+
+  getExpensesList(): void {
+    /* this.expensesList.concat(this.expenseService.getExpenses()); */
+    this.expensesList = this.expenseService.getExpenses();
+    this.expensesList = JSON.parse(this.expensesList);
   }
 
   deleteExpense(id: number): void {
