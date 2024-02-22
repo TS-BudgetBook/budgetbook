@@ -1,12 +1,14 @@
-import { Injectable, NotFoundException, Req  } from '@nestjs/common';
+import { Injectable,ExecutionContext, NotFoundException, Req  } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Payment } from '../entity/payment.entity';
-
+// import { AuthService } from 'src/auth/auth.service';
+// import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class PaymentService {
-constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,) {}
+constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>) {}
+// constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
   findAll(): Promise<Payment[]> {
     return this.paymentRepository.find();
@@ -23,9 +25,14 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
 
         
   async create(body: any): Promise<Payment[]> {
+    
+    //const token = this.extractTokenFromHeader(request);
     // const customerId = req.user.customerId;
-    // body.customerid = customerId;
-    body.customerid=1;
+    body.customerid = 1;
+    
+    // body.customerid=this.authService.getActiv();
+    // console.log(this.authService.getActiv());
+    // const decodedToken: any = jwt.verify(token, secretKey);
     const payment = this.paymentRepository.create(body);
     return this.paymentRepository.save(payment);
   }
