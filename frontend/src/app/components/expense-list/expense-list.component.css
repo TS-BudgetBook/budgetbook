@@ -6,7 +6,7 @@
 .expense img {
   width: 30px;
   height: 30px;
-  padding-right: 1em;
+  padding-right: 1.5em;
 }
 
 ul {
@@ -51,4 +51,59 @@ li {
 
 .additional-content.show {
   right: 0;
+}
+
+.form {
+  margin: 0 auto;
+  width: 80%;
+  top: 0;
+  padding: 0.8em;
+  background-color: #1e1e1e;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 18em;
+  bottom: 7em;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.form-type {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.add {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+}
+
+.form-name input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-amount input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-date input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-category select {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.add-button {
+  margin-top: 2em;
+  width: 80%;
 }

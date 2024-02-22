@@ -44,7 +44,7 @@ export class ExpenseService {
     );
   }
 
-  editExpense(id: number, updatedExpense: any): Observable<any> {
+  updateExpense(id: number, updatedExpense: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, updatedExpense);
   }
 }

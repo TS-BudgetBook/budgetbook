@@ -20,6 +20,25 @@ export class ExpenseListComponent {
 
   constructor(private expenseService: ExpenseService) {}
 
+  isVisible: boolean = false;
+
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
+  }
+
+  expenseId: number = 0;
+  expenseName: string = '';
+  expenseAmount: number = 0;
+  expenseType: string = '';
+  expenseCategory: string = '';
+
+  updateExpense(expense: any): void {
+    this.toggleVisibility();
+
+    this.editingExpense = { ...expense };
+    console.log('this.editingExpense', this.editingExpense);
+  }
+
   onTouchStart(event: TouchEvent, index: number): void {
     this.touchStartX = event.touches[0].clientX;
     this.swipedItemIndex = index;
@@ -51,8 +70,16 @@ export class ExpenseListComponent {
   }
 
   submitEditForm(): void {
+    const updatedExpense = {
+      name: this.editingExpense.name,
+      amount: this.editingExpense.amount,
+      type: this.editingExpense.type,
+      category: this.editingExpense.category,
+      date: this.editingExpense.date,
+    };
+
     this.expenseService
-      .editExpense(this.editingExpense.id, this.editingExpense)
+      .updateExpense(this.editingExpense.id, updatedExpense)
       .subscribe(
         (response) => {
           console.log('PUT request successful:', response);
