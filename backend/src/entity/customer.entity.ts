@@ -15,8 +15,6 @@ export class Customer {
   @Column({ nullable: false })
   lastName: string;
 
-  @Column({ nullable: false })
-  googleId: string; 
 
   @OneToMany(() => Payment, payment => payment.customer)
   payments: Payment[];
