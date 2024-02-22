@@ -38,10 +38,12 @@
   <div class="form-category">
     <label for="expenseCategory">Category:</label><br />
     <select id="expenseCategory" [(ngModel)]="expenseCategory">
+      <option value="gift">Gift</option>
       <option value="groceries">Groceries</option>
-      <option value="utilities">Utilities</option>
       <option value="rent">Rent</option>
-      <option value="entertainment">Others</option>
+      <option value="salary">Salary</option>
+      <option value="utilities">Utilities</option>
+      <option value="others">Others</option>
     </select>
   </div>
   <button class="add-button" (click)="addExpense()">Add</button>

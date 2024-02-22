@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build --configuration=production
+RUN npm run build
 
 FROM nginx:latest AS productionstage
 COPY --from=buildstage /app/dist/frontend/browser /etc/nginx/html
