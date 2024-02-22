@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   JoinTable,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -28,15 +29,11 @@ export class Payment {
   @Column()
   category: string;
 
+  @Column()
+  customerid: number;
+
+
   @ManyToOne(() => Customer, (customer) => customer.payments)
-  @JoinTable()
+  @JoinColumn({name :'customerid'})
   customer: Customer;
-
-  @Column({ nullable: true })
-  userId: number;
 }
-
-/* @JoinTable()
-  @ManyToOne(type=> user, user => user.Entity, {cascade:true})
-  user:user[];
- */
