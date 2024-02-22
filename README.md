@@ -17,4 +17,4 @@ docker.compose.local+3-key.pem
 docker.compose.local+3-key.pem
 
 ## Nun im Ordner budget-book wechseln:
-docker-compose up
+docker-compose up --build
