@@ -29,7 +29,7 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
         
   async update(id: number, body: any): Promise<Payment> {
     await this.paymentRepository.update(id, body);
-    return this.paymentRepository.findOneBy({ id: id });
+    return this.findOne(id); 
   }
         
   async remove(id: number): Promise<void> {

@@ -1,4 +1,5 @@
+
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:3000/payment',
+  production: true,
+  apiUrl: 'https://docker.compose.local/api/payment',
 };
