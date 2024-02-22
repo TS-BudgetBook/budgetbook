@@ -9,8 +9,23 @@
       <div class="expense" [class.swiped]="swipedItemIndex === i">
         <div>
           <img
+            *ngIf="expense.category === 'gift'"
+            src="../../../assets/images/gift.png"
+            alt=""
+          />
+          <img
             *ngIf="expense.category === 'groceries'"
             src="../../../assets/images/cart.png"
+            alt=""
+          />
+          <img
+            *ngIf="expense.category === 'rent'"
+            src="../../../assets/images/rent.png"
+            alt=""
+          />
+          <img
+            *ngIf="expense.category === 'salary'"
+            src="../../../assets/images/salary.png"
             alt=""
           />
           <img
@@ -19,8 +34,8 @@
             alt=""
           />
           <img
-            *ngIf="expense.category === 'rent'"
-            src="../../../assets/images/rent.png"
+            *ngIf="expense.category === 'others'"
+            src="../../../assets/images/others.png"
             alt=""
           />
         </div>
@@ -96,9 +111,11 @@
   <div class="form-category">
     <label for="expenseCategory">Category:</label><br />
     <select id="expenseCategory" [(ngModel)]="editingExpense.category">
+      <option value="rent">Gift</option>
       <option value="groceries">Groceries</option>
-      <option value="utilities">Utilities</option>
       <option value="rent">Rent</option>
+      <option value="rent">Salary</option>
+      <option value="utilities">Utilities</option>
       <option value="entertainment">Others</option>
     </select>
   </div>
