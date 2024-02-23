@@ -53,8 +53,8 @@ export class Payment {
     }
     // const decodedToken =jwtDecode(this.jwtToken);
     const decodedToken = this.jwtService.decode(this.jwtToken) as any;
-    if (decodedToken && decodedToken.customerId) {
-      this.customerid = decodedToken.customerId;
+    if (decodedToken && decodedToken.customerid) {
+      this.customerid = decodedToken.customerid;
     } else {
       throw new Error('Unable to decode JWT token or customerId missing');
     }

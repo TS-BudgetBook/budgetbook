@@ -42,6 +42,7 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
     // body.customerid=this.authService.getActiv();
     // console.log(this.authService.getActiv());
     // const decodedToken: any = jwt.verify(token, secretKey);
+    console.log(body.customerid);
     const payment = this.paymentRepository.create(body);
     return this.paymentRepository.save(payment);
   }
