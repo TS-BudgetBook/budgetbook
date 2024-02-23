@@ -32,7 +32,7 @@ export class AuthService {
       const token = this.generateToken(existingCustomerByEmail);
       res.cookie('jwt', token);
       
-      res.redirect('http://localhost:4200');
+      res.redirect('http://localhost:4200/expenses?token=' + token);
       return;
     } else {
       
@@ -47,7 +47,7 @@ export class AuthService {
       res.cookie('jwt', token);
 
     
-      res.redirect('http://localhost:4200');
+      res.redirect('http://localhost:4200/expenses?token=' + token);
     }
   }
   async logout(req: Request, res: Response): Promise<void> {
@@ -59,7 +59,10 @@ export class AuthService {
     const payload = { sub: customer.id, email: customer.email };
     return this.jwtService.sign(payload);
   }
-
+  
+  // decodeToken(token: string): any {
+  //   return this.jwtService.verify(token);
+  // }
   // setActiv(activ: any): void {
   //   this.activ = activ;
   // }

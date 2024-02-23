@@ -16,6 +16,6 @@ export class Customer {
   lastName: string;
 
 
-  @OneToMany(() => Payment, payment => payment.customer)
-  payments: Payment[];
+  // @OneToMany(() => Payment, payment => payment.customer)
+  // payments: Payment[];
 }

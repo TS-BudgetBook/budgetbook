@@ -2,7 +2,8 @@ import { Injectable,ExecutionContext, NotFoundException, Req  } from '@nestjs/co
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Payment } from '../entity/payment.entity';
-// import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from 'src/auth/auth.service';
+//import { AuthService } from 'src/auth/auth.service';
 // import { AuthService } from '../auth/auth.service';
 
 @Injectable()
@@ -24,11 +25,19 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
   }
 
         
-  async create(body: any): Promise<Payment[]> {
-    
+  async create(body): Promise<Payment[]> {
+    // const decodedToken = this.AuthService.decodeJWT(jwtToken);
+    // const payment = this.paymentRepository.create({
+    //   customerid: decodedToken.customerId,
+    //   name: body.name,
+    //   date: body.date,
+    //   amount: body.amount,
+    //   type: body.type,
+    //   category: body.category,
+    // });
     //const token = this.extractTokenFromHeader(request);
     // const customerId = req.user.customerId;
-    body.customerid = 1;
+    // body.customerid = 1;
     
     // body.customerid=this.authService.getActiv();
     // console.log(this.authService.getActiv());

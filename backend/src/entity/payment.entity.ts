@@ -5,9 +5,17 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+  BeforeInsert,
+}from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
+import { AuthService } from 'src/auth/auth.service';
+// import { jwtDecode } from "jwt-decode";
+
+;
+
 
 import { Customer } from './customer.entity';
+import { jwtDecode } from 'jwt-decode';
 
 @Entity()
 export class Payment {
@@ -30,10 +38,30 @@ export class Payment {
   category: string;
 
   @Column()
+  jwtToken: string;
+
+  @Column()
   customerid: number;
+  constructor(
+    private authService: AuthService,
+    private jwtService: JwtService, 
+  ) {}
+  @BeforeInsert()
+  async assignCustomerId() {
+    if (!this.jwtService) {
+      throw new Error('JwtService not provided');
+    }
+    // const decodedToken =jwtDecode(this.jwtToken);
+    const decodedToken = this.jwtService.decode(this.jwtToken) as any;
+    if (decodedToken && decodedToken.customerId) {
+      this.customerid = decodedToken.customerId;
+    } else {
+      throw new Error('Unable to decode JWT token or customerId missing');
+    }
+    }
+  }
 
 
-  @ManyToOne(() => Customer, (customer) => customer.payments)
-  @JoinColumn({name :'customerid'})
-  customer: Customer;
-}
+  // @ManyToOne(() => Customer, (customer) => customer.payments)
+  // @JoinColumn({name :'customerid'})
+  // customer: Customer;
