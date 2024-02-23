@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule, CommonModule],
 })
 export class ExpenseFormComponent {
+  constructor(private expenseService: ExpenseService) {
+    this.expenseDate = new Date();
+  }
   isVisible: boolean = false;
 
   toggleVisibility() {
@@ -23,10 +26,6 @@ export class ExpenseFormComponent {
   expenseType: string = '';
   expenseCategory: string = '';
   expenseDate: Date;
-
-  constructor(private expenseService: ExpenseService) {
-    this.expenseDate = new Date();
-  }
 
   addExpense() {
     const date = new Date(this.expenseDate);
