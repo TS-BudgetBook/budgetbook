@@ -1,5 +1,9 @@
 <div class="form" *ngIf="isVisible">
   <h2>New Expense</h2>
+  <div class="form-id" style="display: none">
+    <label for="expenseId">ID:</label><br />
+    <input type="text" id="expenseId" [(ngModel)]="expenseId" />
+  </div>
   <div class="form-name">
     <label for="expenseName">Name:</label><br />
     <input type="text" id="expenseName" [(ngModel)]="expenseName" />
@@ -34,15 +38,21 @@
   <div class="form-category">
     <label for="expenseCategory">Category:</label><br />
     <select id="expenseCategory" [(ngModel)]="expenseCategory">
+      <option value="gift">Gift</option>
       <option value="groceries">Groceries</option>
-      <option value="utilities">Utilities</option>
       <option value="rent">Rent</option>
-      <option value="entertainment">Others</option>
+      <option value="salary">Salary</option>
+      <option value="utilities">Utilities</option>
+      <option value="others">Others</option>
     </select>
   </div>
   <button class="add-button" (click)="addExpense()">Add</button>
 </div>
 
-<div class="add" (click)="toggleVisibility()">
-  <img src="assets/images/add.png" alt="" />
+<div class="add">
+  <img
+    src="../../../assets/images/add.png"
+    alt=""
+    (click)="toggleVisibility()"
+  />
 </div>

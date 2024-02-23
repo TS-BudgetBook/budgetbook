@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-googleLogin',
   standalone: true,
@@ -7,4 +8,4 @@ import { Component } from '@angular/core';
   templateUrl: './googleLogin.component.html',
   styleUrl: './googleLogin.component.css',
 })
-export class googleLoginComponent {}
+export class googleLoginComponent { }

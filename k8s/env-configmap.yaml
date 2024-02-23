@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  CallbackUrl: ""
+  DB_HOST: db
+  DB_NAME: budgetbook
+  DB_PASSWORD: admin
+  DB_PORT: "3306"
+  DB_USER: root
+  GOOGLE_CLIENT_ID: 132404688097-uo5f8qildj6090pph5asq52v7ffhmslp.apps.googleusercontent.com
+  GOOGLE_CLIENT_SECRET: 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
+  Token_Key: "12345"
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: backend-env
+  name: env
