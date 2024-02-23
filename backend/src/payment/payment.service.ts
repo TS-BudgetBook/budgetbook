@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException  } from '@nestjs/common';
+import { Injectable, NotFoundException, Req  } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Payment } from '../entity/payment.entity';
@@ -23,17 +23,19 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
 
         
   async create(body: any): Promise<Payment[]> {
+    // const customerId = req.user.customerId;
+    // body.customerid = customerId;
+    body.customerid=1;
     const payment = this.paymentRepository.create(body);
     return this.paymentRepository.save(payment);
   }
         
   async update(id: number, body: any): Promise<Payment> {
     await this.paymentRepository.update(id, body);
-    return this.paymentRepository.findOneBy({ id: id });
+    return this.findOne(id); 
   }
         
   async remove(id: number): Promise<void> {
     await this.paymentRepository.delete(id);
   }
 }
- 

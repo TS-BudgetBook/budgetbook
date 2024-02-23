@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   JoinTable,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -13,13 +14,13 @@ export class Payment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 500 })
+  @Column({ length: 500, default: 'Default Name' })
   name: string;
 
-  @Column()
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2})
   amount: number;
 
   @Column()
@@ -28,15 +29,11 @@ export class Payment {
   @Column()
   category: string;
 
+  @Column()
+  customerid: number;
+
+
   @ManyToOne(() => Customer, (customer) => customer.payments)
-  @JoinTable()
+  @JoinColumn({name :'customerid'})
   customer: Customer;
-
-  @Column({ nullable: true })
-  userId: number;
 }
-
-/* @JoinTable()
-  @ManyToOne(type=> user, user => user.Entity, {cascade:true})
-  user:user[];
- */

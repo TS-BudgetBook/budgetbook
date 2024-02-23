@@ -1,12 +1,14 @@
 # compiled output
+.angular/
 /backend/dist
 /frontend/dist
-/frontend/.angular
+frontend/.angular
 /backend/node_modules
 /frontend/node_modules
 /build
 /backend/dist/
 /proxy/cert
+
 
 # Logs
 logs

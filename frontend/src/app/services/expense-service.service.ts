@@ -13,7 +13,7 @@ export class ExpenseService {
   constructor(private http: HttpClient) {}
 
   getExpenses() {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get<any[]>(this.apiUrl, { responseType: 'json' });
   }
 
   addExpense(expense: any): void {
@@ -44,7 +44,7 @@ export class ExpenseService {
     );
   }
 
-  editExpense(id: number, updatedExpense: any): Observable<any> {
+  updateExpense(id: number, updatedExpense: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, updatedExpense);
   }
 }

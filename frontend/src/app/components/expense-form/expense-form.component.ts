@@ -11,21 +11,21 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule, CommonModule],
 })
 export class ExpenseFormComponent {
+  constructor(private expenseService: ExpenseService) {
+    this.expenseDate = new Date();
+  }
   isVisible: boolean = false;
 
   toggleVisibility() {
     this.isVisible = !this.isVisible;
   }
 
+  expenseId: number = 0;
   expenseName: string = '';
   expenseAmount: number = 0;
   expenseType: string = '';
   expenseCategory: string = '';
   expenseDate: Date;
-
-  constructor(private expenseService: ExpenseService) {
-    this.expenseDate = new Date();
-  }
 
   addExpense() {
     const date = new Date(this.expenseDate);
@@ -39,6 +39,7 @@ export class ExpenseFormComponent {
     console.log('formattedDate', formattedDate);
 
     const newExpense = {
+      expenseId: this.expenseId,
       name: this.expenseName,
       amount: this.expenseAmount,
       type: this.expenseType,
@@ -50,6 +51,7 @@ export class ExpenseFormComponent {
 
     this.expenseService.addExpense(newExpense);
 
+    this.expenseId = 0;
     this.expenseName = '';
     this.expenseAmount = 0;
     this.expenseType = '';
