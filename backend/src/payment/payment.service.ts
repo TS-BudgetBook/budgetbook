@@ -2,13 +2,14 @@ import { Injectable,ExecutionContext, NotFoundException, Req  } from '@nestjs/co
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Payment } from '../entity/payment.entity';
-import { AuthService } from 'src/auth/auth.service';
-//import { AuthService } from 'src/auth/auth.service';
-// import { AuthService } from '../auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
+import { jwtConstants } from 'src/auth/contanst';
 
 @Injectable()
 export class PaymentService {
-constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>) {}
+constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private jwtService: JwtService) {
+}
 // constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
   findAll(): Promise<Payment[]> {
@@ -25,24 +26,14 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
   }
 
         
-  async create(body): Promise<Payment[]> {
-    // const decodedToken = this.AuthService.decodeJWT(jwtToken);
-    // const payment = this.paymentRepository.create({
-    //   customerid: decodedToken.customerId,
-    //   name: body.name,
-    //   date: body.date,
-    //   amount: body.amount,
-    //   type: body.type,
-    //   category: body.category,
-    // });
-    //const token = this.extractTokenFromHeader(request);
-    // const customerId = req.user.customerId;
-    // body.customerid = 1;
-    
-    // body.customerid=this.authService.getActiv();
-    // console.log(this.authService.getActiv());
-    // const decodedToken: any = jwt.verify(token, secretKey);
-    console.log(body.customerid);
+  async create(body:any, req:Request): Promise<Payment[]> {
+    //const token = req.headers.authorization?.split(' ')[1];
+    //const token = req.cookies.jwt;
+  
+    const token = jwtConstants.token;
+    const customer= this.jwtService.verify(token);
+  
+    body.customerid=customer.sub
     const payment = this.paymentRepository.create(body);
     return this.paymentRepository.save(payment);
   }

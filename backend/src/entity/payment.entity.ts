@@ -38,27 +38,24 @@ export class Payment {
   category: string;
 
   @Column()
-  jwtToken: string;
-
-  @Column()
   customerid: number;
-  constructor(
-    private authService: AuthService,
-    private jwtService: JwtService, 
-  ) {}
-  @BeforeInsert()
-  async assignCustomerId() {
-    if (!this.jwtService) {
-      throw new Error('JwtService not provided');
-    }
+  // constructor(
+  //   private authService: AuthService,
+  //   private jwtService: JwtService, 
+  // ) {}
+  // @BeforeInsert()
+  // async assignCustomerId() {
+  //   if (!this.jwtService) {
+  //     throw new Error('JwtService not provided');
+  //   }
     // const decodedToken =jwtDecode(this.jwtToken);
-    const decodedToken = this.jwtService.decode(this.jwtToken) as any;
-    if (decodedToken && decodedToken.customerid) {
-      this.customerid = decodedToken.customerid;
-    } else {
-      throw new Error('Unable to decode JWT token or customerId missing');
-    }
-    }
+    // const decodedToken = this.jwtService.decode(this.jwtToken) as any;
+    // if (decodedToken && decodedToken.sub) {
+    //   this.customerid = decodedToken.sub;
+    // } else {
+    //   throw new Error('Unable to decode JWT token or customerId missing');
+    // }
+    // }
   }
 
 

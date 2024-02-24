@@ -3,15 +3,15 @@ import { CustomerService } from '../customer/customer.service';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
 import { Customer } from '../entity/customer.entity'; 
+import { jwtConstants } from './contanst';
 
 @Injectable()
 export class AuthService {
-  private activ:any;
   constructor(
     private customerService: CustomerService, 
     private jwtService: JwtService
   ) {}
-    
+
   
 /*   async validateCustomerByEmail(email: string): Promise<Customer> { 
     const customer = await this.customerService.findByEmail(email); 
@@ -31,7 +31,8 @@ export class AuthService {
     if (existingCustomerByEmail) {
       const token = this.generateToken(existingCustomerByEmail);
       res.cookie('jwt', token);
-      
+      jwtConstants.token = token;
+    
       res.redirect('http://localhost:4200/expenses?token=' + token);
       return;
     } else {
@@ -41,11 +42,11 @@ export class AuthService {
         firstName: firstName,
         lastName: lastName,
       });
-      // this.setActiv(newCustomer.id);
       const token = this.generateToken(newCustomer);
     
       res.cookie('jwt', token);
-
+      jwtConstants.token = token;
+      
     
       res.redirect('http://localhost:4200/expenses?token=' + token);
     }

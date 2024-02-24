@@ -1,6 +1,6 @@
-import { Controller,ExecutionContext, Post, Get, Body, Res, HttpStatus, Delete, Put, Param, Injectable } from '@nestjs/common';
+import { Controller,ExecutionContext, Post, Get, Body, Res, HttpStatus, Delete, Put, Param, Injectable, Req } from '@nestjs/common';
 import { PaymentService } from './payment.service';
-
+import { Request } from 'express';
 
 @Controller('payment')
 @Injectable() 
@@ -9,8 +9,8 @@ export class PaymentController {
 
   
   @Post()
-  create(@Body() body: any) {
-    return this.paymentService.create(body);
+  create(@Body() body: any,@Req() req: Request) {
+    return this.paymentService.create(body,req);
   }
 
   @Get()
