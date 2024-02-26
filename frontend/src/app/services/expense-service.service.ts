@@ -28,7 +28,7 @@ export class ExpenseService {
     );
   }
 
-  deleteExpense(id: number): void {
+  deleteExpense(id: string): void {
     this.http.delete(`${this.apiUrl}/${id}`).subscribe(
       (response) => {
         console.log('DELETE request successful:', response);
@@ -44,7 +44,7 @@ export class ExpenseService {
     );
   }
 
-  updateExpense(id: number, updatedExpense: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, updatedExpense);
+  updateExpense(updatedExpense: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}`, updatedExpense);
   }
 }

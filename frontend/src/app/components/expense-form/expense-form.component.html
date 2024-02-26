@@ -46,7 +46,11 @@
       <option value="others">Others</option>
     </select>
   </div>
-  <button class="add-button" (click)="addExpense()">Add</button>
+  <div *ngIf="isVisible">
+    <button id="scrollButton" class="add-button" (click)="addExpense()">
+      Add
+    </button>
+  </div>
 </div>
 
 <div class="add">

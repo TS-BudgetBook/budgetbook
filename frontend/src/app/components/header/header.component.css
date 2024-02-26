@@ -1,11 +1,14 @@
-.info-banner {
+.header {
   background-color: #1e1e1e;
   color: #fff;
   height: 220px;
   padding: 0.8em;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.info-banner img {
+.header img {
   width: 25px;
   height: 25px;
 }
@@ -20,4 +23,84 @@
 .amount {
   display: flex;
   justify-content: space-between;
+}
+
+.menu {
+  position: relative;
+  top: -2em;
+  left: 0;
+  width: 40%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.menu ul {
+  padding: 0;
+}
+
+.menu li {
+  list-style-type: none;
+
+  padding: 0.5em;
+  margin-bottom: 0.3em;
+}
+.menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.form {
+  margin: 0 auto;
+  width: 80%;
+  top: 0;
+  padding: 0.8em;
+  background-color: #1e1e1e;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 18em;
+  bottom: 7em;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  z-index: 9000;
+}
+
+.form-type {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.add {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+}
+
+.form-name input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-amount input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-date input {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.form-category select {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.add-button {
+  margin-top: 2em;
+  width: 80%;
 }
