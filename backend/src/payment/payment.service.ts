@@ -26,7 +26,7 @@ constructor(@InjectRepository(Payment)private paymentRepository: Repository<Paym
   }
 
         
-  async create(body:any, req:Request): Promise<Payment[]> {
+  async create(body:any): Promise<Payment[]> {
     //const token = req.headers.authorization?.split(' ')[1];
     //const token = req.cookies.jwt;
   

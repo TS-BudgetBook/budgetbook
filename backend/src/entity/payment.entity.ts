@@ -13,9 +13,9 @@ import { AuthService } from 'src/auth/auth.service';
 
 ;
 
-
+/* 
 import { Customer } from './customer.entity';
-import { jwtDecode } from 'jwt-decode';
+/* import { jwtDecode } from 'jwt-decode'; */ 
 
 @Entity()
 export class Payment {

@@ -10,10 +10,10 @@ export class PaymentController {
 
 
   
-  @Post()
+/*   @Post()
   create(@Body() body: any,@Req() req: Request) {
     return this.paymentService.create(body,req);
-  }
+  } */
 
   @Get()
   findAll() {
