@@ -1,18 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  BeforeInsert,
-} from 'typeorm';
-import { JwtService } from '@nestjs/jwt';
-import { AuthService } from 'src/auth/auth.service';
-// import { jwtDecode } from "jwt-decode";
-
-import { Customer } from './customer.entity';
-import { jwtDecode } from 'jwt-decode';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Payment {
