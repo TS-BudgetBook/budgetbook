@@ -9,6 +9,7 @@ frontend/.angular
 /backend/dist/
 /proxy/cert
 
+
 # Logs
 logs
 *.log

@@ -1,4 +1,3 @@
-# budget-book
 
 ## Zertifikate für lokale Entwicklungszwecke erstellt
 Gehe in den proxy Ordner und erstelle einen neuen Ordner mit dem Namen "cert".
@@ -17,4 +16,4 @@ docker.compose.local+3-key.pem
 docker.compose.local+3-key.pem
 
 ## Nun im Ordner budget-book wechseln:
-docker-compose up --build
+docker-compose up

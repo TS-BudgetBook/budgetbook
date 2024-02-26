@@ -22,13 +22,13 @@ export class Payment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 500 })
+  @Column({ length: 500, default: 'Default Name' })
   name: string;
 
-  @Column()
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2})
   amount: number;
 
   @Column()

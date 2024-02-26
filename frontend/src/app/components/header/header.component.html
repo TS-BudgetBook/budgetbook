@@ -2,21 +2,23 @@
   <div class="head-line">
     <img src="assets/images/burger.png" />
     <h2>Budget Book</h2>
-    <img src="assets/images/chart.png" />
+    <a href="/statistics">
+      <img src="assets/images/chart.png" />
+    </a>
   </div>
   <div>MONTH</div>
   <div class="amount">
     <div>
       <h3>Total</h3>
-      <span>amount</span>
+      <span>{{ calcTotalAmount(expensesList) }}</span>
     </div>
     <div>
-      <h3>Incomes</h3>
-      <span>amount</span>
+      <h3>Income</h3>
+      <span>{{ calcTotalIncome(expensesList) }}</span>
     </div>
     <div>
       <h3>Expenses</h3>
-      <span>amount</span>
+      <span>{{ calcTotalExpense(expensesList) }}</span>
     </div>
   </div>
 </div>

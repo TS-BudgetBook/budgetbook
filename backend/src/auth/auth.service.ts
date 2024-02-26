@@ -8,7 +8,7 @@ import { jwtConstants } from './contanst';
 @Injectable()
 export class AuthService {
   constructor(
-    private customerService: CustomerService, 
+    private customerService: CustomerService,
     private jwtService: JwtService
   ) {}
 
@@ -21,10 +21,9 @@ export class AuthService {
   async googleLogin(req: Request, res: Response): Promise<void> {
     const customer = req.user as Customer;
     const email = customer.email;
-    const firstName = customer.firstName ;
-    const lastName = customer.lastName ;
-
-    console.log("customer", customer);
+    const firstName = customer.firstName;
+    const lastName = customer.lastName;
+    const googleId = customer.id;
 
     const existingCustomerByEmail = await this.customerService.findByEmail(email);
 
@@ -41,6 +40,7 @@ export class AuthService {
         email: email,
         firstName: firstName,
         lastName: lastName,
+        
       });
       const token = this.generateToken(newCustomer);
     
@@ -72,5 +72,6 @@ export class AuthService {
   // }
   
   }
+
 
 
