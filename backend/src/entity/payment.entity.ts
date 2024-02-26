@@ -5,9 +5,17 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+  BeforeInsert,
+}from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
+import { AuthService } from 'src/auth/auth.service';
+// import { jwtDecode } from "jwt-decode";
+
+;
+
 
 import { Customer } from './customer.entity';
+import { jwtDecode } from 'jwt-decode';
 
 @Entity()
 export class Payment {
@@ -31,9 +39,6 @@ export class Payment {
 
   @Column()
   customerid: number;
+  
+  }
 
-
-  @ManyToOne(() => Customer, (customer) => customer.payments)
-  @JoinColumn({name :'customerid'})
-  customer: Customer;
-}
