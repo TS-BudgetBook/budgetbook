@@ -6,13 +6,10 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   BeforeInsert,
-}from 'typeorm';
+} from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from 'src/auth/auth.service';
 // import { jwtDecode } from "jwt-decode";
-
-;
-
 
 import { Customer } from './customer.entity';
 import { jwtDecode } from 'jwt-decode';
@@ -28,7 +25,7 @@ export class Payment {
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 
-  @Column('decimal', { precision: 10, scale: 2})
+  @Column('decimal', { precision: 10, scale: 2 })
   amount: number;
 
   @Column()
@@ -39,6 +36,4 @@ export class Payment {
 
   @Column()
   customerid: number;
-  
-  }
-
+}
