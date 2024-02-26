@@ -39,26 +39,6 @@ export class Payment {
 
   @Column()
   customerid: number;
-  // constructor(
-  //   private authService: AuthService,
-  //   private jwtService: JwtService, 
-  // ) {}
-  // @BeforeInsert()
-  // async assignCustomerId() {
-  //   if (!this.jwtService) {
-  //     throw new Error('JwtService not provided');
-  //   }
-    // const decodedToken =jwtDecode(this.jwtToken);
-    // const decodedToken = this.jwtService.decode(this.jwtToken) as any;
-    // if (decodedToken && decodedToken.sub) {
-    //   this.customerid = decodedToken.sub;
-    // } else {
-    //   throw new Error('Unable to decode JWT token or customerId missing');
-    // }
-    // }
+  
   }
 
-
-  // @ManyToOne(() => Customer, (customer) => customer.payments)
-  // @JoinColumn({name :'customerid'})
-  // customer: Customer;
