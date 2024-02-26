@@ -1,24 +1,91 @@
-<div class="info-banner">
+<div class="header">
   <div class="head-line">
-    <img src="assets/images/burger.png" />
+    <img src="assets/images/burger.png" (click)="openMenu()" />
     <h2>Budget Book</h2>
     <a href="/statistics">
       <img src="assets/images/chart.png" />
     </a>
   </div>
-  <div>MONTH</div>
+  <div class="menu" *ngIf="isShow">
+    <ul>
+      <li>
+        <span (click)="toggleForm()">add</span>
+      </li>
+      <li>
+        <a href="">logout</a>
+      </li>
+    </ul>
+  </div>
   <div class="amount">
     <div>
       <h3>Total</h3>
-      <span>{{ calcTotalAmount(expensesList) }}</span>
+      <span>${{ calcTotalAmount(expensesList) }}</span>
     </div>
     <div>
       <h3>Income</h3>
-      <span>{{ calcTotalIncome(expensesList) }}</span>
+      <span>${{ calcTotalIncome(expensesList) }}</span>
     </div>
     <div>
       <h3>Expenses</h3>
-      <span>{{ calcTotalExpense(expensesList) }}</span>
+      <span>${{ calcTotalExpense(expensesList) }}</span>
     </div>
   </div>
+</div>
+
+<div class="form" *ngIf="isVisible">
+  <h2>New Expense</h2>
+  <div class="form-id" style="display: none">
+    <label for="expenseId">ID:</label><br />
+    <input type="text" id="expenseId" [(ngModel)]="expenseId" />
+  </div>
+  <div class="form-name">
+    <label for="expenseName">Name:</label><br />
+    <input type="text" id="expenseName" [(ngModel)]="expenseName" />
+  </div>
+  <div class="form-amount">
+    <label for="expenseAmount">Amount:</label><br />
+    <input type="number" id="expenseAmount" [(ngModel)]="expenseAmount" />
+  </div>
+  <div class="form-type">
+    <div><label>Type:</label><br /></div>
+    <div>
+      <input
+        type="radio"
+        name="expenseType"
+        value="expense"
+        [(ngModel)]="expenseType"
+      />
+      Expense
+      <input
+        type="radio"
+        name="expenseType"
+        value="income"
+        [(ngModel)]="expenseType"
+      />
+      Income
+    </div>
+  </div>
+  <div class="form-date">
+    <label for="expenseDate">Date:</label><br />
+    <input type="date" id="expenseDate" [(ngModel)]="expenseDate" />
+  </div>
+  <div class="form-category">
+    <label for="expenseCategory">Category:</label><br />
+    <select id="expenseCategory" [(ngModel)]="expenseCategory">
+      <option value="gift">Gift</option>
+      <option value="groceries">Groceries</option>
+      <option value="rent">Rent</option>
+      <option value="salary">Salary</option>
+      <option value="utilities">Utilities</option>
+      <option value="others">Others</option>
+    </select>
+  </div>
+
+  <button id="scrollButton" class="add-button" (click)="addExpense()">
+    Add
+  </button>
+</div>
+
+<div class="add">
+  <img src="../../../assets/images/add.png" alt="" (click)="toggleForm()" />
 </div>
