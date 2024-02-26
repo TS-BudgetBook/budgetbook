@@ -1,19 +1,19 @@
-import { Global, Injectable, UnauthorizedException, } from '@nestjs/common';
-import { CustomerService } from '../customer/customer.service'; 
-import { JwtService } from '@nestjs/jwt';
+import { Global, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { Customer } from '../entity/customer.entity'; 
+
+import { Customer } from '../entity/customer.entity';
+import { CustomerService } from '../customer/customer.service';
+import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './contanst';
 
 @Injectable()
 export class AuthService {
   constructor(
     private customerService: CustomerService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
-  
-/*   async validateCustomerByEmail(email: string): Promise<Customer> { 
+  /*   async validateCustomerByEmail(email: string): Promise<Customer> { 
     const customer = await this.customerService.findByEmail(email); 
     return customer;
   } */
@@ -25,29 +25,27 @@ export class AuthService {
     const lastName = customer.lastName;
     const googleId = customer.id;
 
-    const existingCustomerByEmail = await this.customerService.findByEmail(email);
+    const existingCustomerByEmail =
+      await this.customerService.findByEmail(email);
 
     if (existingCustomerByEmail) {
       const token = this.generateToken(existingCustomerByEmail);
       res.cookie('jwt', token);
       jwtConstants.token = token;
-    
+
       res.redirect('http://localhost:4200/expenses?token=' + token);
       return;
     } else {
-      
       const newCustomer = await this.customerService.createCustomer({
         email: email,
         firstName: firstName,
         lastName: lastName,
-        
       });
       const token = this.generateToken(newCustomer);
-    
+
       res.cookie('jwt', token);
       jwtConstants.token = token;
-      
-    
+
       res.redirect('http://localhost:4200/expenses?token=' + token);
     }
   }
@@ -55,12 +53,12 @@ export class AuthService {
     res.clearCookie('jwt');
     res.redirect('/auth/google');
   }
-  
+
   generateToken(customer: Customer): string {
     const payload = { sub: customer.id, email: customer.email };
     return this.jwtService.sign(payload);
   }
-  
+
   // decodeToken(token: string): any {
   //   return this.jwtService.verify(token);
   // }
@@ -70,8 +68,4 @@ export class AuthService {
   // getActiv(){
   //   return this.activ;
   // }
-  
-  }
-
-
-
+}

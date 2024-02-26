@@ -17,13 +17,13 @@ export class ExpenseService {
   }
 
   addExpense(expense: any): void {
-    this.http.post(`${this.apiUrl}`, expense).subscribe(
+    this.http.put(`${this.apiUrl}`, expense).subscribe(
       (response) => {
-        console.log('POST request successful:', response);
+        console.log('PUT request successful:', response);
         window.location.reload();
       },
       (error) => {
-        console.error('Error making POST request:', error);
+        console.error('Error making PUT request:', error);
       }
     );
   }
