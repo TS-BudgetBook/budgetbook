@@ -18,6 +18,7 @@ export class ExpenseService {
   }
 
   addExpense(expense: any): void {
+
     this.http.put(`${this.apiUrl}`, expense).subscribe(
       (response) => {
         console.log('PUT request successful:', response);

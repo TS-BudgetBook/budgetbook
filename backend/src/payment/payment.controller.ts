@@ -36,12 +36,12 @@ export class PaymentController {
   }
 
   @Put()
-  update(@Body() body: any) {
+  update(@Req() req,@Body() body: any) {
     console.log(body.id);
     if (body.id) {
       return this.paymentService.update(body.id, body);
     } else {
-      return this.paymentService.create(body);
+      return this.paymentService.create(req,body);
     }
   }
 
