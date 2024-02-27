@@ -1,6 +1,6 @@
 import { CommonModule, NgFor } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
-import { Component } from '@angular/core';
 import { ExpenseFormComponent } from '../expense-form/expense-form.component';
 import { ExpenseService } from '../../services/expense-service.service';
 import { FormsModule } from '@angular/forms';
@@ -12,8 +12,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './expense-list.component.html',
   styleUrls: ['./expense-list.component.css'],
 })
-export class ExpenseListComponent {
+export class ExpenseListComponent implements OnInit {
   expensesList: any = [];
+  savedToken: string = '';
   swipedItemIndex: number = -1;
   touchStartX: number = 0;
   isVisible: boolean = false;
