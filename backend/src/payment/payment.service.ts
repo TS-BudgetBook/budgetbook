@@ -33,8 +33,7 @@ export class PaymentService {
   }
 
   async create(req: Request, body: any): Promise<Payment[]> {
-    console.log("++++++++++++++++++++++++++++++++")
-    console.log(req.headers)
+  
     const token = req.headers.authorization?.split(' ')[1];
     //const token = req.cookies.jwt;
 
