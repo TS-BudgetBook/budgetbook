@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -10,17 +11,25 @@ import { environment } from '../../environments/environment';
 export class ExpenseService {
   private expensesList: any[] = [];
   apiUrl = environment.apiUrl;
+  jwtToken: string | null = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+    this.jwtToken = this.getToken();
+  }
 
   getExpenses() {
     return this.http.get<any[]>(this.apiUrl, { responseType: 'json' });
   }
 
   addExpense(expense: any): void {
-    this.http.put(`${this.apiUrl}`, expense).subscribe(
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.jwtToken}`,
+      'Content-Type': 'application/json',
+    });
+    this.http.put(`${this.apiUrl}`, expense, { headers }).subscribe(
       (response) => {
         console.log('PUT request successful:', response);
+        console.log('headers', headers);
         window.location.reload();
       },
       (error) => {
@@ -47,5 +56,9 @@ export class ExpenseService {
 
   updateExpense(updatedExpense: any): Observable<any> {
     return this.http.put(`${this.apiUrl}`, updatedExpense);
+  }
+
+  getToken() {
+    return this.route.snapshot.queryParamMap.get('token');
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { ActivatedRoute } from '@angular/router';
 import { ExpenseFormComponent } from '../../components/expense-form/expense-form.component';
 import { ExpenseListComponent } from '../../components/expense-list/expense-list.component';
+import { ExpenseService } from '../../services/expense-service.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Observable } from 'rxjs';
 
@@ -16,10 +16,13 @@ import { Observable } from 'rxjs';
 })
 export class ExpensesComponent implements OnInit {
   jwtToken: string | null = '';
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(
+    private http: HttpClient,
+    private expenseService: ExpenseService
+  ) {}
 
   ngOnInit(): void {
-    this.jwtToken = this.route.snapshot.queryParamMap.get('token');
+    this.jwtToken = this.expenseService.getToken();
     console.log('Token', this.jwtToken);
 
     if (this.jwtToken) {
@@ -43,7 +46,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   getData(headers: HttpHeaders): Observable<any> {
-    return this.http.get('http://localhost:3000/api/expenses', {
+    return this.http.get('http://localhost:3000/api/payment', {
       headers,
     });
   }
