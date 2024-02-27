@@ -19,8 +19,21 @@ export class PaymentService {
   ) {}
   // constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
-  findAll(): Promise<Payment[]> {
-    return this.paymentRepository.find();
+  async findAll(req: Request): Promise<Payment[]> {
+    // const token = req.headers.authorization?.split(' ')[1];
+    const token = jwtConstants.token;
+    const customer = this.jwtService.verify(token);
+    const customerid = customer.sub; 
+
+    try {
+      const payments = await this.paymentRepository.find({ where: { customerid: customerid } });
+      console.log(payments); 
+      return payments; 
+    } catch (error) {
+      console.error(error); 
+      throw error; 
+    }
+
   }
 
   findOne(id: number): Promise<Payment> {
