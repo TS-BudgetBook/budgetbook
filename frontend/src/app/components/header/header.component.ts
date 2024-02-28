@@ -34,6 +34,7 @@ export class HeaderComponent {
 
   toggleForm() {
     this.isVisible = !this.isVisible;
+    this.isShow = false;
   }
 
   openMenu() {

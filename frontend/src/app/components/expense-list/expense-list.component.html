@@ -40,7 +40,7 @@
           />
         </div>
         <div>
-          <p>{{ expense.name }}<br /></p>
+          <p>{{ expense.name }}</p>
           <span>{{ expense.date | date : "mediumDate" }}</span>
         </div>
         <div [style.color]="expense.type === 'expense' ? 'red' : 'green'">
@@ -68,6 +68,7 @@
 </div>
 
 <div class="form" *ngIf="isVisibleForm">
+  <button class="close-button" (click)="toggleForm()">X</button>
   <h2>Edit Expense</h2>
   <div class="form-id" style="display: none">
     <label for="expenseId">ID:</label><br />
@@ -86,7 +87,7 @@
     />
   </div>
   <div class="form-type">
-    <div><label>Type:</label><br /></div>
+    <div><label>Type:</label></div>
     <div>
       <input
         type="radio"
@@ -111,10 +112,10 @@
   <div class="form-category">
     <label for="expenseCategory">Category:</label><br />
     <select id="expenseCategory" [(ngModel)]="editingExpense.category">
-      <option value="rent">Gift</option>
+      <option value="gift">Gift</option>
       <option value="groceries">Groceries</option>
       <option value="rent">Rent</option>
-      <option value="rent">Salary</option>
+      <option value="salary">Salary</option>
       <option value="utilities">Utilities</option>
       <option value="entertainment">Others</option>
     </select>

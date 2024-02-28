@@ -1,13 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
-import { jwtConstants } from './contanst';
-import { PassportModule } from '@nestjs/passport';
-import { GoogleStrategy } from './auth-utils/GoogleStrategy'; 
-import { CustomerService } from 'src/customer/customer.service';
+import { AuthService } from './auth.service';
 import { CustomerModule } from '../customer/customer.module';
-
+import { CustomerService } from 'src/customer/customer.service';
+import { GoogleStrategy } from './auth-utils/GoogleStrategy';
+import { JwtModule } from '@nestjs/jwt';
+import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
+import { jwtConstants } from './contanst';
 
 @Module({
   imports: [
@@ -15,12 +14,11 @@ import { CustomerModule } from '../customer/customer.module';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '3600s' },
     }),
-    CustomerModule
-
+    CustomerModule,
   ],
-  providers: [AuthService, GoogleStrategy], 
+  providers: [AuthService, GoogleStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

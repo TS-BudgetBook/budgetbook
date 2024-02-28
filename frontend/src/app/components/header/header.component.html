@@ -1,9 +1,9 @@
 <div class="header">
   <div class="head-line">
-    <img src="assets/images/burger.png" (click)="openMenu()" />
+    <img src="assets/images/burger.png" alt="Menu" (click)="openMenu()" />
     <h2>Budget Book</h2>
     <a href="/statistics">
-      <img src="assets/images/chart.png" />
+      <img src="assets/images/chart.png" alt="Statistics" />
     </a>
   </div>
   <div class="menu" *ngIf="isShow">
@@ -33,6 +33,7 @@
 </div>
 
 <div class="form" *ngIf="isVisible">
+  <button class="close-button" (click)="toggleForm()">X</button>
   <h2>New Expense</h2>
   <div class="form-id" style="display: none">
     <label for="expenseId">ID:</label><br />
@@ -47,7 +48,8 @@
     <input type="number" id="expenseAmount" [(ngModel)]="expenseAmount" />
   </div>
   <div class="form-type">
-    <div><label>Type:</label><br /></div>
+    <div><label>Type:</label></div>
+
     <div>
       <input
         type="radio"
@@ -82,8 +84,4 @@
   </div>
 
   <button class="add-button" (click)="addExpense()">Add</button>
-</div>
-
-<div class="add">
-  <img src="../../../assets/images/add.png" alt="" (click)="toggleForm()" />
 </div>
