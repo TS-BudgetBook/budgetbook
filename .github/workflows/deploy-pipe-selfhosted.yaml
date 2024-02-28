@@ -17,7 +17,7 @@ jobs:
           ref: deployment
         
       - name: go to project root and get certs from s3
-        run: cd budget-book
+        run: cd ~/actions-runner/_work/budget-book/budget-book
       - name: copy certs
         run: aws s3 cp s3://jumpbucket-dev-1612/secrets/cert.pem proxy/cert
       - name: copy key
