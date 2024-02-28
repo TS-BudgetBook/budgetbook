@@ -33,15 +33,15 @@ export class PaymentService {
   }
 
   async create(req: Request, body: any): Promise<Payment[]> {
-    console.log("++++++++++++++++++++++++++++++++")
-    console.log(req.headers)
+    /*   */
     const token = req.headers.authorization?.split(' ')[1];
+    console.log('token', req.headers);
     //const token = req.cookies.jwt;
 
     // JWT TOKEN VERYFICATION //
     //const token = jwtConstants.token;
     const customer = this.jwtService.verify(token);
-    body.customerid = customer.sub; 
+    body.customerid = customer.sub;
     // body.customerid = 1;
     const payment = this.paymentRepository.create(body);
     return this.paymentRepository.save(payment);
