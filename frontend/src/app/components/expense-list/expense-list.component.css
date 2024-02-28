@@ -5,18 +5,18 @@
 
 .expense {
   display: grid;
-  grid-template-columns: 1fr 1.5fr 0.7fr;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
 }
 
 .expense img {
-  width: 30px;
-  height: 30px;
-  padding-right: 1.5em;
-  padding-left: 0.8em;
+  width: 100%;
+  max-width: 30px;
+  height: auto;
 }
 
 ul {
-  padding: 0 1em;
+  padding: 0;
   margin: 0;
 }
 
@@ -37,6 +37,10 @@ li {
   padding-bottom: 1em;
 }
 
+li img {
+  padding-left: 16px;
+}
+
 .container {
   position: relative;
   overflow-x: hidden;
@@ -44,7 +48,7 @@ li {
 
 .additional-content {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   position: absolute;
   top: 0;
@@ -55,6 +59,10 @@ li {
   transition: right 0.3s ease;
 }
 
+.additional-content img {
+  padding-right: 16px;
+}
+
 .additional-content.show {
   right: 0;
 }
@@ -62,54 +70,82 @@ li {
 .form {
   margin: 0 auto;
   width: 80%;
-  top: 0;
-  padding: 0.8em;
-  background-color: #1e1e1e;
-  color: #fff;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 5px;
   position: absolute;
-  left: 0;
-  right: 0;
   top: 18em;
   bottom: 7em;
+  left: 0;
+  right: 0;
   margin: auto;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  z-index: 9000;
+  color: #fff;
+  height: 500px;
 }
 
-.form-type {
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="date"],
+.form select,
+.form input[type="radio"] {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: calc(100% - 18px);
+}
+
+.form-type div {
   display: flex;
-  flex-direction: column;
-  gap: 0.5em;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.add {
-  position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
-}
-
-.form-name input {
-  margin-top: 0.5em;
-  width: 80%;
-}
-
-.form-amount input {
-  margin-top: 0.5em;
-  width: 80%;
-}
-
-.form-date input {
-  margin-top: 0.5em;
-  width: 80%;
-}
-
-.form-category select {
-  margin-top: 0.5em;
-  width: 80%;
+.form-type div input[type="radio"] {
+  margin-right: 5px;
 }
 
 .edit-button {
-  margin-top: 2em;
-  width: 80%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.add img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.add img:hover {
+  opacity: 0.7;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ccc;
 }

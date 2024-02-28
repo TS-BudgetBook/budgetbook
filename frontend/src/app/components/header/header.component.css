@@ -1,20 +1,23 @@
+body {
+  background-color: #222;
+  color: #fff;
+}
+
 .header {
   background-color: #1e1e1e;
   color: #fff;
-  height: 220px;
-  padding: 0.8em;
+  padding: 10px;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .header img {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 }
 
 .head-line {
-  padding-top: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,81 +29,114 @@
 }
 
 .menu {
-  position: relative;
-  top: -2em;
-  left: 0;
-  width: 40%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  position: absolute;
+  top: 25;
+  left: 8;
+  width: 200px;
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .menu ul {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .menu li {
-  list-style-type: none;
-
-  padding: 0.5em;
-  margin-bottom: 0.3em;
+  padding: 10px;
 }
+
+.menu li:hover {
+  background-color: #444;
+}
+
 .menu a {
-  color: #fff;
   text-decoration: none;
+  color: #fff;
 }
 
 .form {
   margin: 0 auto;
   width: 80%;
-  top: 0;
-  padding: 0.8em;
-  background-color: #1e1e1e;
-  color: #fff;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 5px;
   position: absolute;
-  left: 0;
-  right: 0;
   top: 18em;
   bottom: 7em;
+  left: 0;
+  right: 0;
   margin: auto;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
   z-index: 9000;
+  color: #fff;
+  height: 500px;
 }
 
-.form-type {
+.form input[type="text"],
+.form input[type="number"],
+.form input[type="date"],
+.form select,
+.form input[type="radio"] {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: calc(100% - 18px);
+}
+
+.form-type div {
   display: flex;
-  flex-direction: column;
-  gap: 0.5em;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.add {
-  position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
-}
-
-.form-name input {
-  margin-top: 0.5em;
-  width: 80%;
-}
-
-.form-amount input {
-  margin-top: 0.5em;
-  width: 80%;
-}
-
-.form-date input {
-  margin-top: 0.5em;
-  width: 80%;
-}
-
-.form-category select {
-  margin-top: 0.5em;
-  width: 80%;
+.form-type div input[type="radio"] {
+  margin-right: 5px;
 }
 
 .add-button {
-  margin-top: 2em;
-  width: 80%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.add img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.add img:hover {
+  opacity: 0.7;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ccc;
 }

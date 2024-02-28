@@ -48,6 +48,7 @@ export class PaymentService {
 
   async create(req: Request, body: any): Promise<Payment[]> {
     const token = req.headers.authorization?.split(' ')[1];
+    console.log('token', req.headers);
     //const token = req.cookies.jwt;
 
     // JWT TOKEN VERYFICATION //

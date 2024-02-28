@@ -37,7 +37,7 @@ export class PaymentController {
 
   @Put()
   update(@Req() req, @Body() body: any) {
-    console.log(body.id);
+    console.log('body.id', body.id);
     if (body.id) {
       return this.paymentService.update(body.id, body);
     } else {
