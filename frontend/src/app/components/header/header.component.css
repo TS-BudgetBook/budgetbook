@@ -76,6 +76,7 @@ body {
   z-index: 9000;
   color: #fff;
   height: 500px;
+  max-width: 500px;
 }
 
 .form input[type="text"],

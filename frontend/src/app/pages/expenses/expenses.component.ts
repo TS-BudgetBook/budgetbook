@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
   styleUrl: './expenses.component.css',
 })
 export class ExpensesComponent implements OnInit {
+  apiUrl: string = this.expenseService.apiUrl;
   jwtToken: string | null = '';
   constructor(
     private http: HttpClient,
@@ -22,6 +23,7 @@ export class ExpensesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('this apiUrl', this.apiUrl);
     this.jwtToken = this.expenseService.getToken();
     console.log('Token', this.jwtToken);
 
@@ -46,7 +48,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   getData(headers: HttpHeaders): Observable<any> {
-    return this.http.get('http://localhost:3000/api/payment', {
+    return this.http.get(`${this.apiUrl}`, {
       headers,
     });
   }
