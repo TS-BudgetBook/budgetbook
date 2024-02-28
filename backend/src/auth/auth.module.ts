@@ -14,7 +14,7 @@ import { jwtConstants } from './contanst';
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '3600s' },
+      signOptions: { expiresIn: '3d' },
     }),
     CustomerModule,
   ],
