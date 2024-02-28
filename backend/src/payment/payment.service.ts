@@ -20,8 +20,8 @@ export class PaymentService {
   // constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
   async findAll(req: Request): Promise<Payment[]> {
-    // const token = req.headers.authorization?.split(' ')[1];
-    const token = jwtConstants.token;
+    const token = req.headers.authorization?.split(' ')[1];
+    /* const token = jwtConstants.token; */
     const customer = this.jwtService.verify(token);
     const customerid = customer.sub; 
 
