@@ -18,7 +18,12 @@ export class ExpenseService {
   }
 
   getExpenses() {
-    return this.http.get<any[]>(this.apiUrl, { responseType: 'json' });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.jwtToken}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.get<any[]>(this.apiUrl, { headers, responseType: 'json' });
+    // return this.http.get<any[]>(this.apiUrl, { responseType: 'json' });
   }
 
   addExpense(expense: any): void {
@@ -39,7 +44,11 @@ export class ExpenseService {
   }
 
   deleteExpense(id: string): void {
-    this.http.delete(`${this.apiUrl}/${id}`).subscribe(
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.jwtToken}`,
+      'Content-Type': 'application/json',
+    });
+    this.http.delete(`${this.apiUrl}/${id}`, { headers }).subscribe(
       (response) => {
         console.log('DELETE request successful:', response);
 
