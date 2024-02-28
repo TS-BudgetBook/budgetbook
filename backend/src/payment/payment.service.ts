@@ -23,17 +23,18 @@ export class PaymentService {
     const token = req.headers.authorization?.split(' ')[1];
     /* const token = jwtConstants.token; */
     const customer = this.jwtService.verify(token);
-    const customerid = customer.sub; 
+    const customerid = customer.sub;
 
     try {
-      const payments = await this.paymentRepository.find({ where: { customerid: customerid } });
-      console.log(payments); 
-      return payments; 
+      const payments = await this.paymentRepository.find({
+        where: { customerid: customerid },
+      });
+      console.log(payments);
+      return payments;
     } catch (error) {
-      console.error(error); 
-      throw error; 
+      console.error(error);
+      throw error;
     }
-
   }
 
   findOne(id: number): Promise<Payment> {
@@ -46,14 +47,13 @@ export class PaymentService {
   }
 
   async create(req: Request, body: any): Promise<Payment[]> {
-  
     const token = req.headers.authorization?.split(' ')[1];
     //const token = req.cookies.jwt;
 
     // JWT TOKEN VERYFICATION //
     //const token = jwtConstants.token;
     const customer = this.jwtService.verify(token);
-    body.customerid = customer.sub; 
+    body.customerid = customer.sub;
     // body.customerid = 1;
     const payment = this.paymentRepository.create(body);
     return this.paymentRepository.save(payment);
