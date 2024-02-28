@@ -1,13 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-
-import { Customer } from './customer.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Payment {
@@ -20,7 +11,7 @@ export class Payment {
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 
-  @Column('decimal', { precision: 10, scale: 2})
+  @Column('decimal', { precision: 10, scale: 2 })
   amount: number;
 
   @Column()
@@ -31,9 +22,4 @@ export class Payment {
 
   @Column()
   customerid: number;
-
-
-  @ManyToOne(() => Customer, (customer) => customer.payments)
-  @JoinColumn({name :'customerid'})
-  customer: Customer;
 }

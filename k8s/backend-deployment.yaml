@@ -68,10 +68,10 @@ spec:
                 configMapKeyRef:
                   key: Token_Key
                   name: env
-          image: backend
+          image: backend:latest
+          imagePullPolicy: Never
           name: backend
           ports:
             - containerPort: 3000
-              hostPort: 3000
               protocol: TCP
       restartPolicy: Always

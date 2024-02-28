@@ -17,18 +17,18 @@ export class ExpenseService {
   }
 
   addExpense(expense: any): void {
-    this.http.post(`${this.apiUrl}`, expense).subscribe(
+    this.http.put(`${this.apiUrl}`, expense).subscribe(
       (response) => {
-        console.log('POST request successful:', response);
+        console.log('PUT request successful:', response);
         window.location.reload();
       },
       (error) => {
-        console.error('Error making POST request:', error);
+        console.error('Error making PUT request:', error);
       }
     );
   }
 
-  deleteExpense(id: number): void {
+  deleteExpense(id: string): void {
     this.http.delete(`${this.apiUrl}/${id}`).subscribe(
       (response) => {
         console.log('DELETE request successful:', response);
@@ -44,7 +44,7 @@ export class ExpenseService {
     );
   }
 
-  updateExpense(id: number, updatedExpense: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, updatedExpense);
+  updateExpense(updatedExpense: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}`, updatedExpense);
   }
 }

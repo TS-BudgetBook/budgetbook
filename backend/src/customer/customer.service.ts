@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from '../entity/customer.entity';
+import { Payment } from 'src/entity/payment.entity';
 
 @Injectable()
 export class CustomerService {
@@ -18,4 +19,5 @@ export class CustomerService {
   async findByEmail(email: string): Promise<Customer | null> {
     return await this.customerRepository.findOne({ where: { email } });
   }
+  
 }

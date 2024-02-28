@@ -14,30 +14,19 @@ import { FormsModule } from '@angular/forms';
 })
 export class ExpenseListComponent {
   expensesList: any = [];
-  editingExpense: any;
   swipedItemIndex: number = -1;
   touchStartX: number = 0;
-
-  constructor(private expenseService: ExpenseService) {}
-
   isVisible: boolean = false;
+  editingExpense: any;
+  isVisibleForm: boolean = false;
 
-  toggleVisibility() {
-    this.isVisible = !this.isVisible;
-  }
-
-  expenseId: number = 0;
+  expenseId: string = '';
   expenseName: string = '';
   expenseAmount: number = 0;
   expenseType: string = '';
   expenseCategory: string = '';
 
-  updateExpense(expense: any): void {
-    this.toggleVisibility();
-
-    this.editingExpense = { ...expense };
-    console.log('this.editingExpense', this.editingExpense);
-  }
+  constructor(private expenseService: ExpenseService) {}
 
   onTouchStart(event: TouchEvent, index: number): void {
     this.touchStartX = event.touches[0].clientX;
@@ -54,6 +43,19 @@ export class ExpenseListComponent {
     }
   }
 
+  toggleForm() {
+    this.isVisibleForm = !this.isVisibleForm;
+  }
+
+  updateExpense(expense: any): void {
+    this.toggleForm();
+    this.editingExpense = { ...expense };
+  }
+
+  deleteExpense(id: string): void {
+    this.expenseService.deleteExpense(id);
+  }
+
   ngOnInit(): void {
     this.expensesList = this.expenseService.getExpenses().subscribe(
       (expensesList: any[]) => {
@@ -65,12 +67,9 @@ export class ExpenseListComponent {
     );
   }
 
-  deleteExpense(id: number): void {
-    this.expenseService.deleteExpense(id);
-  }
-
   submitEditForm(): void {
     const updatedExpense = {
+      id: this.editingExpense.id,
       name: this.editingExpense.name,
       amount: this.editingExpense.amount,
       type: this.editingExpense.type,
@@ -78,16 +77,15 @@ export class ExpenseListComponent {
       date: this.editingExpense.date,
     };
 
-    this.expenseService
-      .updateExpense(this.editingExpense.id, updatedExpense)
-      .subscribe(
-        (response) => {
-          console.log('PUT request successful:', response);
-          window.location.reload();
-        },
-        (error) => {
-          console.error('Error making PUT request:', error);
-        }
-      );
+    console.log('hier', this.editingExpense.id);
+    this.expenseService.updateExpense(updatedExpense).subscribe(
+      (response) => {
+        console.log('PUT request successful:', response);
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error making PUT request:', error);
+      }
+    );
   }
 }

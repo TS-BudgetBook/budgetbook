@@ -1,5 +1,5 @@
 <div>
-  <ul>
+  <ul class="list">
     <li
       *ngFor="let expense of expensesList; let i = index"
       class="container"
@@ -67,8 +67,8 @@
   </ul>
 </div>
 
-<div class="form" *ngIf="isVisible">
-  <h2>New Expense</h2>
+<div class="form" *ngIf="isVisibleForm">
+  <h2>Edit Expense</h2>
   <div class="form-id" style="display: none">
     <label for="expenseId">ID:</label><br />
     <input type="text" id="expenseId" [(ngModel)]="expenseId" />
@@ -119,5 +119,5 @@
       <option value="entertainment">Others</option>
     </select>
   </div>
-  <button class="add-button" (click)="submitEditForm()">Add</button>
+  <button class="edit-button" (click)="submitEditForm()">Edit</button>
 </div>
