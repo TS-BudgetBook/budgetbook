@@ -6,7 +6,7 @@ import request from 'supertest';
 
 describe('Payments', () => {
 let app: INestApplication;
-let paymentRepository;
+let expenseRepository;
 
 beforeAll(async () => {
 const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -24,7 +24,7 @@ const moduleFixture: TestingModule = await Test.createTestingModule({
 app = moduleFixture.createNestApplication();
 await app.init();
 
-paymentRepository = moduleFixture.get('PaymentRepository');
+expenseRepository = moduleFixture.get('ExpenseRepository');
 });
 
 afterAll(async () => {
