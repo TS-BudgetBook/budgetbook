@@ -25,12 +25,18 @@ export class PieChartComponent implements OnInit {
     const pieChart = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Groceries', 'Transport', 'Insurance'],
+        labels: [
+          'Groceries',
+          'Transport',
+          'Insurance',
+          'Insurance',
+          'Insurance',
+        ],
         datasets: [
           {
             label: 'Example Dataset',
-            data: [50, 20, 30],
-            backgroundColor: ['black', 'gray', 'darkgray'],
+            data: [50, 40, 20, 30, 20],
+            backgroundColor: ['black', 'darkgray', 'gray', 'black', 'darkgray'],
           },
         ],
       },

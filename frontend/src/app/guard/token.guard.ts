@@ -5,18 +5,22 @@ import {
 } from '@angular/router';
 
 import { Injectable } from '@angular/core';
+import { TokenstorageService } from '../services/tokenstorage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenGuard {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private tokenstorageService: TokenstorageService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const token = route.queryParamMap.get('token');
+    const token: string | null = this.tokenstorageService.get('jwt');
     if (token) {
       return true;
     } else {

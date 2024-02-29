@@ -6,6 +6,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { Observable } from 'rxjs';
 import { PieChartComponent } from '../../components/piechart/piechart.component';
 import { StatisticsListComponent } from '../../components/statistics-list/statistics-list.component';
+import { TokenstorageService } from '../../services/tokenstorage.service';
 
 @Component({
   standalone: true,
@@ -21,16 +22,18 @@ export class StatisticsComponent {
 
   constructor(
     private http: HttpClient,
+    private tokenstorageService: TokenstorageService,
     private expenseService: ExpenseService
   ) {}
 
   ngOnInit(): void {
-    this.jwtToken = this.expenseService.getToken();
-    console.log('Token', this.jwtToken);
+    this.tokenstorageService.getTokenFromUrl();
+    const token: string | null = this.tokenstorageService.get('jwt');
+    console.log('hier token', token);
 
-    if (this.jwtToken) {
+    if (token) {
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${this.jwtToken}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       });
       console.log('Headers', headers);
@@ -47,6 +50,7 @@ export class StatisticsComponent {
       console.error('No token found in the URL parameters');
     }
   }
+
   getData(headers: HttpHeaders): Observable<any> {
     return this.http.get('http://localhost:3000/api/payment', {
       headers,

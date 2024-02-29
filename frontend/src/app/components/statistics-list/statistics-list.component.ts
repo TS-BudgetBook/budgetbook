@@ -11,15 +11,16 @@ import { ExpenseService } from '../../services/expense-service.service';
   imports: [CommonModule],
 })
 export class StatisticsListComponent implements OnInit {
-  categoriesData: { name: string; percentage: number }[] = [
-    { name: 'Category 1', percentage: 25 },
-    { name: 'Category 2', percentage: 50 },
-    { name: 'Category 3', percentage: 25 },
-  ];
-  @Input() statisticsData: any[] = [];
-  expensesList: any[] = [];
   pieChartData: any = {};
   @Input() chartData: any = {};
+  expensesList: any[] = [];
+
+  expensesList: { name: string; percentage: number }[] = [
+    { name: 'Category 1', expense: 25 },
+    { name: 'Category 2', percentage: 25 },
+    { name: 'Category 3', percentage: 25 },
+    { name: 'Category 3', percentage: 25 },
+  ];
 
   constructor(private expenseService: ExpenseService) {}
 
@@ -33,9 +34,7 @@ export class StatisticsListComponent implements OnInit {
 
   prepareChartData(): void {
     const labels = this.expensesList.map((expense) => expense.category);
-    console.log('labels', labels);
     const data = this.expensesList.map((expense) => expense.amount);
-
     this.pieChartData.data.labels = labels;
     this.pieChartData.data.datasets[0].data = data;
   }

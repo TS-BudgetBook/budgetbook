@@ -6,6 +6,7 @@ import { ExpenseListComponent } from '../../components/expense-list/expense-list
 import { ExpenseService } from '../../services/expense-service.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Observable } from 'rxjs';
+import { TokenstorageService } from '../../services/tokenstorage.service';
 
 @Component({
   selector: 'app-expenses',
@@ -15,19 +16,19 @@ import { Observable } from 'rxjs';
   styleUrl: './expenses.component.css',
 })
 export class ExpensesComponent implements OnInit {
-  jwtToken: string | null = '';
   constructor(
     private http: HttpClient,
-    private expenseService: ExpenseService
+    private tokenstorageService: TokenstorageService
   ) {}
 
   ngOnInit(): void {
-    this.jwtToken = this.expenseService.getToken();
-    console.log('Token', this.jwtToken);
+    this.tokenstorageService.getTokenFromUrl();
+    const token: string | null = this.tokenstorageService.get('jwt');
+    console.log('hier token', token);
 
-    if (this.jwtToken) {
+    if (token) {
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${this.jwtToken}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       });
       console.log('Headers', headers);
