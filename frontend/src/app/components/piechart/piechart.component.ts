@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { Chart } from 'chart.js/auto';
 import { ExpenseListComponent } from '../expense-list/expense-list.component';
 
@@ -6,15 +7,14 @@ import { ExpenseListComponent } from '../expense-list/expense-list.component';
   standalone: true,
   selector: 'app-piechart',
   templateUrl: './piechart.component.html',
-  styleUrls: ['./piechart.component.css']
-  
+  styleUrls: ['./piechart.component.css'],
 })
 export class PieChartComponent implements OnInit {
   @Input() statisticsData: any[] = [];
   @Input() chartData: any = {};
   @Input() expenses: ExpenseListComponent[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.createPieChart();
@@ -26,11 +26,13 @@ export class PieChartComponent implements OnInit {
       type: 'pie',
       data: {
         labels: ['Groceries', 'Transport', 'Insurance'],
-        datasets: [{
-          label: 'Example Dataset',
-          data: [50, 20, 30],
-          backgroundColor: ['black', 'gray', 'darkgray']
-        }]
+        datasets: [
+          {
+            label: 'Example Dataset',
+            data: [50, 20, 30],
+            backgroundColor: ['black', 'gray', 'darkgray'],
+          },
+        ],
       },
       options: {
         responsive: false,
@@ -38,12 +40,11 @@ export class PieChartComponent implements OnInit {
           legend: {
             display: false,
             labels: {
-              color: 'white'
-            }
-          }
-        }
-      }
+              color: 'white',
+            },
+          },
+        },
+      },
     });
   }
-}  
-
+}
