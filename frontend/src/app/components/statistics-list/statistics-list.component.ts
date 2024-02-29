@@ -15,12 +15,12 @@ export class StatisticsListComponent implements OnInit {
   @Input() chartData: any = {};
   expensesList: any[] = [];
 
-  expensesList: { name: string; percentage: number }[] = [
-    { name: 'Category 1', expense: 25 },
-    { name: 'Category 2', percentage: 25 },
-    { name: 'Category 3', percentage: 25 },
-    { name: 'Category 3', percentage: 25 },
-  ];
+  // expensesList: { name: string; percentage: number }[] = [
+  //   { name: 'Category 1', expense: 25 },
+  //   { name: 'Category 2', percentage: 25 },
+  //   { name: 'Category 3', percentage: 25 },
+  //   { name: 'Category 3', percentage: 25 },
+  // ];
 
   constructor(private expenseService: ExpenseService) {}
 

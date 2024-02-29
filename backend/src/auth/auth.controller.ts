@@ -19,8 +19,8 @@ export class AuthController {
       return this.authService.googleLogin(req,res);
   }
   
-    @Get('logout')
-    logout(@Req() req, @Res() res: Response) {
+  @Get('logout')
+  logout(@Req() req, @Res() res: Response) {
       return this.authService.logout(req, res);
     }
   }

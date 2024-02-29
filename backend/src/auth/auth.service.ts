@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private customerService: CustomerService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   /*   async validateCustomerByEmail(email: string): Promise<Customer> { 
     const customer = await this.customerService.findByEmail(email); 
@@ -23,7 +23,6 @@ export class AuthService {
     const email = customer.email;
     const firstName = customer.firstName;
     const lastName = customer.lastName;
-    const googleId = customer.id;
 
     const existingCustomerByEmail =
       await this.customerService.findByEmail(email);
@@ -33,7 +32,7 @@ export class AuthService {
       res.cookie('jwt', token);
       jwtConstants.token = token;
 
-      res.redirect('http://localhost:4200/expenses?token=' + token);
+      res.redirect('http://localhost:4200/login?token=' + token);
       return;
     } else {
       const newCustomer = await this.customerService.createCustomer({
@@ -46,7 +45,7 @@ export class AuthService {
       res.cookie('jwt', token);
       jwtConstants.token = token;
 
-      res.redirect('http://localhost:4200/expenses?token=' + token);
+      res.redirect('http://localhost:4200/login?token=' + token);
     }
   }
   async logout(req: Request, res: Response): Promise<void> {
@@ -59,13 +58,4 @@ export class AuthService {
     return this.jwtService.sign(payload);
   }
 
-  // decodeToken(token: string): any {
-  //   return this.jwtService.verify(token);
-  // }
-  // setActiv(activ: any): void {
-  //   this.activ = activ;
-  // }
-  // getActiv(){
-  //   return this.activ;
-  // }
 }

@@ -1,43 +1,15 @@
 <div>
   <ul class="list">
-    <li
-      *ngFor="let expense of expensesList; let i = index"
-      class="container"
-      (touchstart)="onTouchStart($event, i)"
-      (touchend)="onTouchEnd($event)"
-    >
+    <li *ngFor="let expense of expensesList; let i = index" class="container" (touchstart)="onTouchStart($event, i)"
+      (touchend)="onTouchEnd($event)">
       <div class="expense" [class.swiped]="swipedItemIndex === i">
         <div>
-          <img
-            *ngIf="expense.category === 'gift'"
-            src="../../../assets/images/gift.png"
-            alt=""
-          />
-          <img
-            *ngIf="expense.category === 'groceries'"
-            src="../../../assets/images/cart.png"
-            alt=""
-          />
-          <img
-            *ngIf="expense.category === 'rent'"
-            src="../../../assets/images/rent.png"
-            alt=""
-          />
-          <img
-            *ngIf="expense.category === 'salary'"
-            src="../../../assets/images/salary.png"
-            alt=""
-          />
-          <img
-            *ngIf="expense.category === 'utilities'"
-            src="../../../assets/images/utilities.png"
-            alt=""
-          />
-          <img
-            *ngIf="expense.category === 'others'"
-            src="../../../assets/images/others.png"
-            alt=""
-          />
+          <img *ngIf="expense.category === 'gift'" src="../../../assets/images/gift.png" alt="" />
+          <img *ngIf="expense.category === 'groceries'" src="../../../assets/images/cart.png" alt="" />
+          <img *ngIf="expense.category === 'rent'" src="../../../assets/images/rent.png" alt="" />
+          <img *ngIf="expense.category === 'salary'" src="../../../assets/images/salary.png" alt="" />
+          <img *ngIf="expense.category === 'utilities'" src="../../../assets/images/utilities.png" alt="" />
+          <img *ngIf="expense.category === 'others'" src="../../../assets/images/others.png" alt="" />
         </div>
         <div>
           <p>{{ expense.name }}</p>
@@ -46,21 +18,9 @@
         <div [style.color]="expense.type === 'expense' ? 'red' : 'green'">
           ${{ expense.amount }}
         </div>
-        <div
-          class="additional-content"
-          [class.show]="swipedItemIndex === i"
-          chatVisiblity="this.myService.showCat"
-        >
-          <img
-            src="../../../assets/images/edit.png"
-            alt=""
-            (click)="updateExpense(expense)"
-          />
-          <img
-            src="../../../assets/images/delete.png"
-            alt=""
-            (click)="deleteExpense(expense.id)"
-          />
+        <div class="additional-content" [class.show]="swipedItemIndex === i" chatVisiblity="this.myService.showCat">
+          <img src="../../../assets/images/edit.png" alt="" (click)="updateExpense(expense)" />
+          <img src="../../../assets/images/delete.png" alt="" (click)="deleteExpense(expense.id)" />
         </div>
       </div>
     </li>
@@ -80,28 +40,14 @@
   </div>
   <div class="form-amount">
     <label for="expenseAmount">Amount:</label><br />
-    <input
-      type="number"
-      id="expenseAmount"
-      [(ngModel)]="editingExpense.amount"
-    />
+    <input type="number" id="expenseAmount" [(ngModel)]="editingExpense.amount" />
   </div>
   <div class="form-type">
     <div><label>Type:</label></div>
     <div>
-      <input
-        type="radio"
-        name="expenseType"
-        value="expense"
-        [(ngModel)]="editingExpense.type"
-      />
+      <input type="radio" name="expenseType" value="expense" [(ngModel)]="editingExpense.type" />
       Expense
-      <input
-        type="radio"
-        name="expenseType"
-        value="income"
-        [(ngModel)]="editingExpense.type"
-      />
+      <input type="radio" name="expenseType" value="income" [(ngModel)]="editingExpense.type" />
       Income
     </div>
   </div>
