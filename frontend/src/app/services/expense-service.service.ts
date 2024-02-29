@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TokenstorageService } from './tokenstorage.service';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -13,8 +14,11 @@ export class ExpenseService {
   apiUrl = environment.apiUrl;
   jwtToken: string | null = '';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
-    this.jwtToken = this.getToken();
+  constructor(
+    private http: HttpClient,
+    private tokenstorageService: TokenstorageService
+  ) {
+    this.jwtToken = this.tokenstorageService.get('jwt');
   }
 
   getExpenses() {
@@ -65,9 +69,5 @@ export class ExpenseService {
 
   updateExpense(updatedExpense: any): Observable<any> {
     return this.http.put(`${this.apiUrl}`, updatedExpense);
-  }
-
-  getToken() {
-    return this.route.snapshot.queryParamMap.get('token');
   }
 }

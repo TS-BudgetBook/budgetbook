@@ -12,7 +12,7 @@
         <span (click)="toggleForm()">add</span>
       </li>
       <li>
-        <a href="">logout</a>
+        <a href="/logout">logout</a>
       </li>
     </ul>
   </div>
@@ -51,19 +51,9 @@
     <div><label>Type:</label></div>
 
     <div>
-      <input
-        type="radio"
-        name="expenseType"
-        value="expense"
-        [(ngModel)]="expenseType"
-      />
+      <input type="radio" name="expenseType" value="expense" [(ngModel)]="expenseType" />
       Expense
-      <input
-        type="radio"
-        name="expenseType"
-        value="income"
-        [(ngModel)]="expenseType"
-      />
+      <input type="radio" name="expenseType" value="income" [(ngModel)]="expenseType" />
       Income
     </div>
   </div>
@@ -74,6 +64,7 @@
   <div class="form-category">
     <label for="expenseCategory">Category:</label><br />
     <select id="expenseCategory" [(ngModel)]="expenseCategory">
+      <option value="food">Food</option>
       <option value="gift">Gift</option>
       <option value="groceries">Groceries</option>
       <option value="rent">Rent</option>

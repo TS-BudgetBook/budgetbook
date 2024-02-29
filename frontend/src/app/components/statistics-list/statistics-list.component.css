@@ -1,0 +1,15 @@
+.container {
+  margin-top: 250px; /* Ändern Sie hier den gewünschten Abstand nach unten */
+}
+
+.category-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.category-item {
+  border: 1px solid #ccc; /* Fügt eine 1px dicke Umrandung mit grauer Farbe hinzu */
+  border-radius: 5px; /* Runde Ecken für die Kästchen */
+  padding: 10px; /* Innenabstand für den Inhalt */
+  margin-bottom: 10px; /* Abstand zwischen den Listenelementen */
+}
