@@ -21,7 +21,6 @@ export class PaymentService {
 
   async findAll(req: Request): Promise<Payment[]> {
     const token = req.headers.authorization?.split(' ')[1];
-    /* const token = jwtConstants.token; */
     const customer = this.jwtService.verify(token);
     const customerid = customer.sub;
 
