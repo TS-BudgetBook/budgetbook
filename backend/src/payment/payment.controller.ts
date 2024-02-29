@@ -49,4 +49,10 @@ export class PaymentController {
   remove(@Param('id') id: string) {
     return this.paymentService.remove(+id);
   }
+
+  @Get('statistics')
+  getStatistics(@Req() req: Request) {
+    return this.paymentService.getStatistics(req);
+  }
+
 }

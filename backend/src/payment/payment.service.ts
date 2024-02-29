@@ -10,6 +10,7 @@ import { Payment } from '../entity/payment.entity';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { jwtConstants } from 'src/auth/contanst';
+import { abort } from 'process';
 
 @Injectable()
 export class PaymentService {
@@ -67,5 +68,24 @@ export class PaymentService {
 
   async remove(id: number): Promise<void> {
     await this.paymentRepository.delete(id);
+  }
+
+
+
+  async getStatistics(req: Request): Promise<any> {
+    const token = req.headers.authorization?.split(' ')[1];
+    const customer = this.jwtService.verify(token);
+    const customerid = customer.sub;
+  
+    try {
+      const payments = await this.paymentRepository.find({
+        where: { customerid: customerid },
+      });
+  
+      return { payments };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }
