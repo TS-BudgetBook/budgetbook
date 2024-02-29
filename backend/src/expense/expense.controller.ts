@@ -12,7 +12,7 @@ import {
   Injectable,
   Req,
 } from '@nestjs/common';
-import { PaymentService } from './payment.service';
+import { PaymentService } from './expense.service';
 import { Request } from 'express';
 
 @Controller('payment')
@@ -49,10 +49,4 @@ export class PaymentController {
   remove(@Param('id') id: string) {
     return this.paymentService.remove(+id);
   }
-
-  @Get('statistics')
-  getStatistics(@Req() req: Request) {
-    return this.paymentService.getStatistics(req);
-  }
-
 }
