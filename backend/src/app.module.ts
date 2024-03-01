@@ -4,7 +4,6 @@ import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
 import { PaymentModule } from './expense/expense.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
 
 require('dotenv').config();
 

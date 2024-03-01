@@ -1,15 +1,8 @@
-import {
-  Injectable,
-  ExecutionContext,
-  NotFoundException,
-  Req,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Expense } from '../entity/expense.entity';
 import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
-import { jwtConstants } from 'src/auth/contanst';
 
 @Injectable()
 export class PaymentService {
@@ -17,7 +10,6 @@ export class PaymentService {
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
     private jwtService: JwtService,
   ) {}
-  // constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
   async findAll(req: any): Promise<Expense[]> {
     const customerid = req.customer.sub;

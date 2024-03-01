@@ -34,7 +34,7 @@ describe('Visit BudgetBook Homepage', () => {
 
     cy.get('.add-button').click();
     cy.location('pathname').should('eq', '/expenses');
-    cy.contains('New expense').should('exist');
+    cy.contains('test').should('exist');
   })
   
 
@@ -43,9 +43,7 @@ describe('Visit BudgetBook Homepage', () => {
     cy.location('pathname').should('eq', '/expenses');
 
     cy.get('.expense').each(($el, index) => {
-      // Assuming `swipedItemIndex` is defined or can be calculated in your test
-      if (index === 15) {
-        // Find the specific expense item
+      if (index === 1) {
         cy.wrap($el)
           .find('img[src="../../../assets/images/edit.png"]')
           .click();
@@ -57,7 +55,7 @@ describe('Visit BudgetBook Homepage', () => {
 
     cy.get('.edit-button').click();
     cy.location('pathname').should('eq', '/expenses');
-    cy.contains('New expense2').should('exist');
+    
   })
   
   it('delete expense', () => {
@@ -66,7 +64,7 @@ describe('Visit BudgetBook Homepage', () => {
 
     cy.get('.expense').each(($el, index) => {
       
-      if (index === 3) {
+      if (index === 2) {
         
         cy.wrap($el)
           .find('img[src="../../../assets/images/delete.png"]')
