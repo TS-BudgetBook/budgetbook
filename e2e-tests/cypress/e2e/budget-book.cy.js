@@ -22,21 +22,22 @@ describe('Visit BudgetBook Homepage', () => {
   })
 
   it('add expense', () => {
-    cy.visit('http://localhost:4200/expenses');
+    cy.visit('http://localhost:4200/login?token=' + Cypress.env('jwt'))
     cy.location('pathname').should('eq', '/expenses');
 
     cy.get('img[alt=Menu]').click();
     cy.get('span').contains('add').click();
 
-    cy.get('input[name="Name"]').type('New expense');
-    cy.get('input[name="Amount"]').type('100');
-    cy.get('select[name="category"]').select('Food');
+    cy.get('#expenseName').type('New expense');
+    cy.get('#expenseAmount').type('100');
+    cy.get('#expenseCategory').select('Food');
 
     cy.get('.add-button').click();
     cy.location('pathname').should('eq', '/expenses');
-    cy.contains('.expense-list', 'New expense').should('exist');
+    cy.contains('New expense').should('exist');
   })
 
+  
 
 })
 
