@@ -9,9 +9,18 @@ describe('Visit BudgetBook Homepage', () => {
   })
 
   it('redirect to expenses with token', () => {
-    cy.visit('http://localhost:4200/login?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibWFyY29AdGVjaHN0YXJ0ZXIuZGUiLCJpYXQiOjE3MDkyOTAyODMsImV4cCI6MTcwOTU0OTQ4M30.VvaUvTcTggG8S1Vn1GuEyDd4wFENhLbzxsbHfgqSxAw')
+    cy.visit('http://localhost:4200/login?token=' + Cypress.env('jwt'))
     cy.location('pathname').should('eq', '/expenses')
   })
+
+  it('user logout', () => {
+    cy.visit('http://localhost:4200/login?token=' + Cypress.env('jwt'))
+    cy.location('pathname').should('eq', '/expenses')
+    cy.get('img[alt=Menu]').click();
+    cy.get('a[href="/logout"]').click();
+    cy.location('pathname').should('eq', '/')
+  })
+
 
 })
 
