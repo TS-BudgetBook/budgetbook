@@ -19,11 +19,8 @@ export class PaymentService {
   ) {}
   // constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
-  async findAll(req: Request): Promise<Expense[]> {
-    const token = req.headers.authorization?.split(' ')[1];
-    /* const token = jwtConstants.token; */
-    const customer = this.jwtService.verify(token);
-    const customerid = customer.sub;
+  async findAll(req: any): Promise<Expense[]> {
+    const customerid = req.customer.sub;
 
     try {
       const payments = await this.expenseRepository.find({
@@ -46,16 +43,8 @@ export class PaymentService {
     return payment;
   }
 
-  async create(req: Request, body: any): Promise<Expense[]> {
-    const token = req.headers.authorization?.split(' ')[1];
-    console.log('token', req.headers);
-    //const token = req.cookies.jwt;
-
-    // JWT TOKEN VERYFICATION //
-    //const token = jwtConstants.token;
-    const customer = this.jwtService.verify(token);
-    body.customerid = customer.sub;
-    // body.customerid = 1;
+  async create(req: any, body: any): Promise<Expense[]> {
+    body.customerid = req.customer.sub;
     const payment = this.expenseRepository.create(body);
     return this.expenseRepository.save(payment);
   }

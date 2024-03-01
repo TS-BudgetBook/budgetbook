@@ -17,7 +17,7 @@ describe('AppController (e2e)', () => {
   });
 
   // it('/auth/google/redirect (GET)', async () => {
-    
+
   //   const token = '1234';
 
   //   return request(app.getHttpServer())

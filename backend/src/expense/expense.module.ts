@@ -5,8 +5,8 @@ import { PaymentService } from './expense.service';
 import { PaymentController } from './expense.controller';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Expense])],
+  imports: [TypeOrmModule.forFeature([Expense])],
   controllers: [PaymentController],
-  providers: [PaymentService ]
+  providers: [PaymentService],
 })
 export class PaymentModule {}
