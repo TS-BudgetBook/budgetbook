@@ -35,7 +35,7 @@ export class ExpenseService {
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    this.http.put(`${this.apiUrl}`, expense, { headers }).subscribe(
+    this.http.put(this.apiUrl + 'expense', expense, { headers }).subscribe(
       (response) => {
         console.log('PUT request successful:', response);
         console.log('headers', headers);
@@ -52,7 +52,7 @@ export class ExpenseService {
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    this.http.delete(`${this.apiUrl}/${id}`, { headers }).subscribe(
+    this.http.delete(this.apiUrl + 'expense/'+ id, { headers }).subscribe(
       (response) => {
         console.log('DELETE request successful:', response);
 
@@ -68,6 +68,10 @@ export class ExpenseService {
   }
 
   updateExpense(updatedExpense: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}`, updatedExpense);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.jwtToken}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.put(this.apiUrl + 'expense', updatedExpense, { headers })
   }
 }
