@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private customerService: CustomerService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   /*   async validateCustomerByEmail(email: string): Promise<Customer> { 
     const customer = await this.customerService.findByEmail(email); 
@@ -57,5 +57,4 @@ export class AuthService {
     const payload = { sub: customer.id, email: customer.email };
     return this.jwtService.sign(payload);
   }
-
 }

@@ -3,12 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from '../entity/customer.entity';
 
-
 @Injectable()
 export class CustomerService {
   constructor(
     @InjectRepository(Customer)
-    private readonly customerRepository: Repository<Customer>, 
+    private readonly customerRepository: Repository<Customer>,
   ) {}
 
   async createCustomer(customerData: Partial<Customer>): Promise<Customer> {
@@ -19,5 +18,4 @@ export class CustomerService {
   async findByEmail(email: string): Promise<Customer | null> {
     return await this.customerRepository.findOne({ where: { email } });
   }
-  
 }

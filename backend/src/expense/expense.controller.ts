@@ -1,29 +1,28 @@
 import {
   Controller,
-  ExecutionContext,
-  Post,
   Get,
   Body,
-  Res,
-  HttpStatus,
   Delete,
   Put,
   Param,
   Injectable,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { PaymentService } from './expense.service';
-import { Request } from 'express';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtService } from '@nestjs/jwt';
+import { AuthGuard } from 'src/auth/auth.guard';
 
-@Controller('payment')
+@ApiBearerAuth()
+@Controller('expense')
 @Injectable()
+@UseGuards(AuthGuard)
 export class PaymentController {
-  constructor(private readonly paymentService: PaymentService) {}
-
-  /*   @Post()
-  create(@Body() body: any,@Req() req: Request) {
-    return this.paymentService.create(body,req);
-  } */
+  constructor(
+    private readonly paymentService: PaymentService,
+    private jwtService: JwtService,
+  ) {}
 
   @Get()
   findAll(@Req() req) {
@@ -37,7 +36,6 @@ export class PaymentController {
 
   @Put()
   update(@Req() req, @Body() body: any) {
-    console.log('body.id', body.id);
     if (body.id) {
       return this.paymentService.update(body.id, body);
     } else {

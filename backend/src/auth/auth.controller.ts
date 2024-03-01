@@ -1,9 +1,7 @@
 import { Controller, Get, Req, UseGuards, Res, Request } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { Response } from 'express';
-import { GoogleOAuthGuard } from './auth-utils/google-oauth.guard'
-import { Customer } from "../entity/customer.entity";
+import { GoogleOAuthGuard } from './auth-utils/google-oauth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -12,35 +10,29 @@ export class AuthController {
   @UseGuards(GoogleOAuthGuard)
   async googleAuth() {}
 
-
   @Get('google/redirect')
   @UseGuards(GoogleOAuthGuard)
   googleAuthRedirect(@Req() req, @Res() res) {
-      return this.authService.googleLogin(req,res);
+    return this.authService.googleLogin(req, res);
   }
-  
+
   @Get('logout')
   logout(@Req() req, @Res() res: Response) {
-      return this.authService.logout(req, res);
-    }
+    return this.authService.logout(req, res);
   }
+}
 
+// @Get()
+// @UseGuards(GoogleOAuthGuard)
+// async googleAuth(@Req() req) {
 
+// }
+// @Get('redirect')
+// @UseGuards(AuthGuard('google'))
+// googleAuthRedirect(@Req() req) {
+//   return this.authService.googleLogin(req)
 
-
-
-
-  // @Get()
-  // @UseGuards(GoogleOAuthGuard)
-  // async googleAuth(@Req() req) {
-  
-  // }
-  // @Get('redirect')
-  // @UseGuards(AuthGuard('google'))
-  // googleAuthRedirect(@Req() req) {
-  //   return this.authService.googleLogin(req)
-
-  // }
+// }
 
 /*  @Get('google/redirect')
   @UseGuards(GoogleOAuthGuard)
@@ -60,14 +52,6 @@ async callback(@Req() req, @Res() res) {
   res.json(req.user);
 }
  */
-  
-  
-  
-  
-  
-  
-  
-  
 
 /* 
   @Get('/google/redirect')
@@ -76,12 +60,9 @@ async callback(@Req() req, @Res() res) {
    
     const jwtToken = this.authService.generateToken(req.user);
      */
-    
-    //const redirectUrl = `http://localhost:3000=${jwtToken}`;
-    //res.redirect(redirectUrl);
-  
- 
 
+//const redirectUrl = `http://localhost:3000=${jwtToken}`;
+//res.redirect(redirectUrl);
 
 /*   @UseGuards(AuthGuard('jwt')) 
   @Get('profile')
@@ -92,7 +73,6 @@ async callback(@Req() req, @Res() res) {
 
 }
  */
-
 
 /*   @Get('google')
   @UseGuards(AuthGuard('google'))
@@ -112,4 +92,3 @@ async callback(@Req() req, @Res() res) {
     res.json({ success: true });
   }
 } */
-
