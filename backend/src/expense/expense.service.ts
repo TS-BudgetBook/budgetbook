@@ -19,15 +19,16 @@ export class PaymentService {
   ) {}
   // constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
-  async findAll(req: any): Promise<Expense[]> {
+  async findAll(req: any, page: number = 1, limit: number = 10): Promise<{ expense: Expense[], totalItems: number }> {
     const customerid = req.customer.sub;
-
-    try {
-      const payments = await this.expenseRepository.find({
+      try {
+      const [expense, totalItems] = await this.expenseRepository.findAndCount({
         where: { customerid: customerid },
+        take: limit,
+        skip: (page - 1) * limit,
       });
-      console.log(payments);
-      return payments;
+
+      return { expense, totalItems };
     } catch (error) {
       console.error(error);
       throw error;
