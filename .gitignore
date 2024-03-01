@@ -5,9 +5,11 @@
 frontend/.angular
 /backend/node_modules
 /frontend/node_modules
+/e2e-tests/node_modules
 /build
 /backend/dist/
 /proxy/cert
+videos
 
 
 # Logs

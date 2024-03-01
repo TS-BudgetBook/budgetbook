@@ -22,7 +22,7 @@ export class PaymentController {
   constructor(
     private readonly paymentService: PaymentService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   @Get()
   findAll(@Req() req) {
