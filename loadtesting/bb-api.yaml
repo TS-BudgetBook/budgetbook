@@ -8,11 +8,19 @@ config:
     faker:
       locale: en
   variables:
-    firstName: "$faker.name.firstName"
+    name: "$faker.word.words(5)"
+    amount: "$faker.finance.amount"
+    date: "$faker.date.amount"
 
 scenarios:
   - flow:
       - log: "Making request to get expenses"
+      - get:
+          url: "/expense"
+          headers:
+            accept: "*/*"
+          beforeRequest: generateJWT
+      - log: "Making request to put a new expenses"
       - get:
           url: "/expense"
           headers:

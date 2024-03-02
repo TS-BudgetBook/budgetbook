@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 // in this example comes from an HTTP call to another
 // API
 function generateJWT(req, userContext, ee, next) {
-    console.log('RAW Request', req);
     let secret = '1234';
     let payload = {
         "sub": 1,
@@ -13,9 +12,7 @@ function generateJWT(req, userContext, ee, next) {
         "exp": 1709634695
     };
     let token = jwt.sign(payload, secret);
-    console.log('Token', token);
     req.headers['Authorization'] = `Bearer ${token}`
-    console.log('AUTH Request', req);
     return next();
 }
 
