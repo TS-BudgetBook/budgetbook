@@ -52,7 +52,7 @@ export class ExpenseService {
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    this.http.delete(this.apiUrl + 'expense/'+ id, { headers }).subscribe(
+    this.http.delete(this.apiUrl + 'expense/' + id, { headers }).subscribe(
       (response) => {
         console.log('DELETE request successful:', response);
 
