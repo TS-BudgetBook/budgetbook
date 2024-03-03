@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 
-const real_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibWFyY29AdGVjaHN0YXJ0ZXIuZGUiLCJpYXQiOjE3MDkzNzU0OTUsImV4cCI6MTcwOTYzNDY5NX0.bBBAru6EeC7HGxNytf6ZcsKGee6yrCijfjWORODxgoU";
-
 const payload = {
     "sub": 1,
     "email": "marco@techstarter.de",
