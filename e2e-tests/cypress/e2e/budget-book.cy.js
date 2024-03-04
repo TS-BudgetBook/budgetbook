@@ -49,7 +49,8 @@ describe('Visit BudgetBook Homepage', () => {
           .click();
       }
     });
-    cy.get('#expenseName').type('New expense2');
+    
+    cy.get('#expenseName').clear().type('New expense2');
     cy.get('#expenseAmount').type('150');
     cy.get('#expenseCategory').select('Gift');
 
@@ -64,7 +65,7 @@ describe('Visit BudgetBook Homepage', () => {
 
     cy.get('.expense').each(($el, index) => {
       
-      if (index === 2) {
+      if (index === 0) {
         
         cy.wrap($el)
           .find('img[src="../../../assets/images/delete.png"]')
