@@ -19,9 +19,13 @@ export class PaymentService {
   ) {}
   // constructor(@InjectRepository(Payment)private paymentRepository: Repository<Payment>,private readonly authService: AuthService){}
 
-  async findAll(req: any, page: number = 1, limit: number = 10): Promise<{ expense: Expense[], totalItems: number }> {
+  async findAll(
+    req: any,
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{ expense: Expense[]; totalItems: number }> {
     const customerid = req.customer.sub;
-      try {
+    try {
       const [expense, totalItems] = await this.expenseRepository.findAndCount({
         where: { customerid: customerid },
         take: limit,
@@ -33,6 +37,10 @@ export class PaymentService {
       console.error(error);
       throw error;
     }
+  }
+
+  async findAllElements(req: any): Promise<Expense[]> {
+    const customerid = req.customer.sub;
   }
 
   findOne(id: number): Promise<Expense> {

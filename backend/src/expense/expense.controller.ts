@@ -1,10 +1,21 @@
-import { Controller, Get, Body,Delete,Put,Param,Injectable,Req,UseGuards,Query} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Delete,
+  Put,
+  Param,
+  Injectable,
+  Req,
+  UseGuards,
+  Query,
+} from '@nestjs/common';
 import { PaymentService } from './expense.service';
-import { ApiBearerAuth } from '@nestjs/swagger'; 
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from 'src/auth/auth.guard';
 
-@ApiBearerAuth() 
+@ApiBearerAuth()
 @Controller('expense')
 @Injectable()
 @UseGuards(AuthGuard)
@@ -12,11 +23,20 @@ export class PaymentController {
   constructor(
     private readonly paymentService: PaymentService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   @Get()
-  findAll(@Req() req: Request, @Query('page') page: number = 1, @Query('limit') limit: number = 10) {
+  findAll(
+    @Req() req: Request,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ) {
     return this.paymentService.findAll(req, page, limit);
+  }
+
+  @Get()
+  findAllElements(@Req() req) {
+    return this.paymentService.findAll(req);
   }
 
   @Get(':id')
@@ -29,7 +49,7 @@ export class PaymentController {
     if (body.id) {
       return this.paymentService.update(body.id, body);
     } else {
-      return this.paymentService.create(req, body);   
+      return this.paymentService.create(req, body);
     }
   }
 
