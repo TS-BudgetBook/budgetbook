@@ -41,6 +41,15 @@ export class PaymentService {
 
   async findAllElements(req: any): Promise<Expense[]> {
     const customerid = req.customer.sub;
+    try {
+      const expenses: Expense[] = await this.expenseRepository.find({
+        where: { customerid: customerid },
+      });
+      return expenses;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   findOne(id: number): Promise<Expense> {

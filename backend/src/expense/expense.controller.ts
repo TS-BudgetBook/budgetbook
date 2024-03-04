@@ -35,9 +35,10 @@ export class PaymentController {
   }
 
   @Get()
-  findAllElements(@Req() req) {
-    return this.paymentService.findAll(req);
+  async findAllElements(@Req() req: Request) {
+    return await this.paymentService.findAllElements(req);
   }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
