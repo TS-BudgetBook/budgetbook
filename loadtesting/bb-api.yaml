@@ -1,0 +1,28 @@
+config:
+  target: "http://localhost:3000/api"
+  phases:
+    - duration: 2
+      arrivalRate: 5
+  processor: "./jwt-generator.js"
+  plugins:
+    faker:
+      locale: en
+  variables:
+    name: "$faker.word.words(5)"
+    amount: "$faker.finance.amount"
+    date: "$faker.date.amount"
+
+scenarios:
+  - flow:
+      - log: "Making request to get expenses"
+      - get:
+          url: "/expense"
+          headers:
+            accept: "*/*"
+          beforeRequest: generateJWT
+      - log: "Making request to put a new expenses"
+      - get:
+          url: "/expense"
+          headers:
+            accept: "*/*"
+          beforeRequest: generateJWT
