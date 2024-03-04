@@ -43,7 +43,7 @@ describe('Visit BudgetBook Homepage', () => {
     cy.location('pathname').should('eq', '/expenses');
 
     cy.get('.expense').each(($el, index) => {
-      if (index === 1) {
+      if (index === 3) {
         cy.wrap($el)
           .find('img[src="../../../assets/images/edit.png"]')
           .click();
@@ -65,7 +65,7 @@ describe('Visit BudgetBook Homepage', () => {
 
     cy.get('.expense').each(($el, index) => {
       
-      if (index === 0) {
+      if (index === 2) {
         
         cy.wrap($el)
           .find('img[src="../../../assets/images/delete.png"]')
