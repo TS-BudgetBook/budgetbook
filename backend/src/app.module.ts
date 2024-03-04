@@ -5,10 +5,11 @@ import { Module } from '@nestjs/common';
 import { PaymentModule } from './expense/expense.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-require('dotenv').config();
-
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env.' + process.env.NODE_ENV,
+    }),
     PaymentModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -25,4 +26,4 @@ require('dotenv').config();
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

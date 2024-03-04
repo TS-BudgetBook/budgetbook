@@ -5,13 +5,15 @@ import { Customer } from '../entity/customer.entity';
 import { CustomerService } from '../customer/customer.service';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './contanst';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private customerService: CustomerService,
     private jwtService: JwtService,
-  ) {}
+    private configService: ConfigService
+  ) { }
 
   async googleLogin(req: Request, res: Response): Promise<void> {
     const customer = req.user as Customer;
@@ -27,7 +29,7 @@ export class AuthService {
       res.cookie('jwt', token);
       jwtConstants.token = token;
 
-      res.redirect('http://localhost:4200/login?token=' + token);
+      res.redirect(this.configService.get<string>('REDIRECT_HOST') + 'login?token=' + token);
       return;
     } else {
       const newCustomer = await this.customerService.createCustomer({
@@ -40,7 +42,7 @@ export class AuthService {
       res.cookie('jwt', token);
       jwtConstants.token = token;
 
-      res.redirect('http://localhost:4200/login?token=' + token);
+      res.redirect(this.configService.get<string>('REDIRECT_HOST') + 'login?token=' + token);
     }
   }
   async logout(req: Request, res: Response): Promise<void> {
