@@ -1,4 +1,4 @@
 export const jwtConstants = {
-  secret: '1234',
+  secret: 'It3n4FJ2uO8VJhMXLQobzIyqKvWMnI',
   token: '',
 };

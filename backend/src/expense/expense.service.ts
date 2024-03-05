@@ -2,14 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Expense } from '../entity/expense.entity';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class PaymentService {
+export class ExpenseService {
   constructor(
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
-    private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async findAll(
     req: any,
@@ -31,7 +29,7 @@ export class PaymentService {
     }
   }
 
-  /*  async findAllElements(req: any): Promise<Expense[]> {
+  async findAllElements(req: any): Promise<Expense[]> {
     const customerid = req.customer.sub;
     try {
       const expenses: Expense[] = await this.expenseRepository.find({
@@ -42,10 +40,6 @@ export class PaymentService {
       console.error(error);
       throw error;
     }
-  } */
-
-  findAllElements(): Promise<Expense[]> {
-    return this.expenseRepository.find();
   }
 
   findOne(id: number): Promise<Expense> {

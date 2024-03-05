@@ -10,20 +10,21 @@ import {
   UseGuards,
   Query,
 } from '@nestjs/common';
-import { PaymentService } from './expense.service';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ExpenseService } from './expense.service';
+import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { Expense } from 'src/entity/expense.entity';
 
 @ApiBearerAuth()
 @Controller('expense')
 @Injectable()
 @UseGuards(AuthGuard)
-export class PaymentController {
+export class ExpenseController {
   constructor(
-    private readonly paymentService: PaymentService,
+    private readonly expenseService: ExpenseService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   @Get()
   findAll(
@@ -31,35 +32,45 @@ export class PaymentController {
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 7,
   ) {
-    return this.paymentService.findAll(req, page, limit);
+    return this.expenseService.findAll(req, page, limit);
   }
 
   /*   @Get('all')
   async findAllElements(@Req() req: Request) {
-    return await this.paymentService.findAllElements(req);
+    return await this.expenseService.findAllElements(req);
   } */
 
   @Get('all')
-  findAllElements() {
-    return this.paymentService.findAllElements();
+  findAllElements(@Req() req: Request) {
+    return this.expenseService.findAllElements(req);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.paymentService.findOne(+id);
+    return this.expenseService.findOne(+id);
   }
 
   @Put()
+  @ApiOperation({ summary: 'update or add expense' })
+  @ApiBody({ 
+    description: 'expense',
+    type: Expense,
+  
+  })
+  @ApiOkResponse({ 
+    description: 'expense added/updated sucessfully',
+    type: Expense,
+  })
   update(@Req() req, @Body() body: any) {
     if (body.id) {
-      return this.paymentService.update(body.id, body);
+      return this.expenseService.update(body.id, body);
     } else {
-      return this.paymentService.create(req, body);
+      return this.expenseService.create(req, body);
     }
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.paymentService.remove(+id);
+    return this.expenseService.remove(+id);
   }
 }
