@@ -26,7 +26,8 @@ describe('Visit BudgetBook Homepage', () => {
     cy.location('pathname').should('eq', '/expenses');
 
     cy.get('img[alt=Menu]').click();
-    cy.get('span').contains('add').click();
+    cy.get('span').contains('Add Item').click();
+  
 
     cy.get('#expenseName').type('test');
     cy.get('#expenseAmount').type('100');
@@ -43,7 +44,7 @@ describe('Visit BudgetBook Homepage', () => {
     cy.location('pathname').should('eq', '/expenses');
 
     cy.get('.expense').each(($el, index) => {
-      if (index === 3) {
+      if (index === 2) {
         cy.wrap($el)
           .find('img[src="../../../assets/images/edit.png"]')
           .click();
@@ -65,7 +66,7 @@ describe('Visit BudgetBook Homepage', () => {
 
     cy.get('.expense').each(($el, index) => {
       
-      if (index === 2) {
+      if (index === 0) {
         
         cy.wrap($el)
           .find('img[src="../../../assets/images/delete.png"]')
