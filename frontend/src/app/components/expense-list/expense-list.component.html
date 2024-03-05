@@ -1,6 +1,4 @@
 <div>
-  <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-  <button (click)="nextPage()">Next</button>
   <ul class="list">
     <li
       *ngFor="let expense of expensesList; let i = index"
@@ -67,6 +65,11 @@
       </div>
     </li>
   </ul>
+
+  <div class="page-container">
+    <img src="../../../assets/images/back.png" alt="" (click)="prevPage()" />
+    <img src="../../../assets/images/forward.png" alt="" (click)="nextPage()" />
+  </div>
 </div>
 
 <div class="form" *ngIf="isVisibleForm">

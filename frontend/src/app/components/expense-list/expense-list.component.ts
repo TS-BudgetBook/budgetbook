@@ -21,7 +21,7 @@ export class ExpenseListComponent implements OnInit {
   editingExpense: any;
   isVisibleForm: boolean = false;
   currentPage = 1;
-  pageSize = 10;
+  pageSize = 7;
 
   expenseId: string = '';
   expenseName: string = '';
