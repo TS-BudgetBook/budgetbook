@@ -1,0 +1,29 @@
+config:
+  target: "http://localhost:3000/api"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+  processor: "./jwt-generator.js"
+  payload:
+    path: "expense_data.csv"
+    fields:
+      - "date"
+      - "category"
+      - "name"
+      - "type"
+      - "amount"
+
+scenarios:
+  - flow:
+      - log: "Making request to put a new expenses"
+      - put:
+          url: "/expense"
+          json:
+            date: "{{ date }}"
+            category: "{{ category }}"
+            name: "{{ name }}"
+            type: "{{ type }}"
+            amount: "{{ amount }}"
+          headers:
+            accept: "*/*"
+          beforeRequest: generateJWT

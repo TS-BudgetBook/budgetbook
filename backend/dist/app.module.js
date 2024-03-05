@@ -13,13 +13,16 @@ const auth_module_1 = require("./auth/auth.module");
 const common_1 = require("@nestjs/common");
 const expense_module_1 = require("./expense/expense.module");
 const typeorm_1 = require("@nestjs/typeorm");
-require('dotenv').config();
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot({
+                envFilePath: '.env.' + process.env.NODE_ENV,
+            }),
             expense_module_1.PaymentModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
