@@ -20,16 +20,20 @@ export class HeaderComponent {
 
   editingExpense: any;
 
-  constructor(private expenseService: ExpenseService) {
-    this.expenseDate = new Date();
-    this.expenseService.getExpenses().subscribe(
+  constructor(private expenseService: ExpenseService) {}
+
+  ngOnInit(): void {
+    this.expenseService.getAllExpenses().subscribe(
       (expensesList: any[]) => {
         this.expensesList = expensesList;
+        console.log('this.expensesList', this.expensesList);
+        console.log('this.expensesList', typeof this.expensesList);
       },
       (error) => {
         console.error('Error fetching expenses:', error);
       }
     );
+    this.calcTotalAmount(this.expensesList);
   }
 
   toggleForm() {
@@ -41,6 +45,10 @@ export class HeaderComponent {
     this.isShow = !this.isShow;
   }
 
+  getTotalExpense(): number {
+    return this.calcTotalExpense(this.expensesList);
+  }
+
   calcTotalAmount(expensesList: any[]): number {
     let totalIncome = 0;
     let totalExpense = 0;
@@ -48,17 +56,15 @@ export class HeaderComponent {
 
     for (const expense of expensesList) {
       if (expense.type === 'income') {
-        expense.amount = Number(expense.amount);
-        totalIncome += expense.amount;
+        totalIncome += Number(expense.amount);
       }
 
       if (expense.type === 'expense') {
-        expense.amount = Number(expense.amount);
-        totalExpense += expense.amount;
+        totalExpense += Number(expense.amount);
       }
-
       totalAmount = totalIncome - totalExpense;
     }
+    console.log('totalAmount', totalAmount);
     return totalAmount;
   }
 
@@ -77,12 +83,17 @@ export class HeaderComponent {
   calcTotalExpense(expensesList: any[]): number {
     let totalExpense = 0;
 
-    for (const expense of expensesList) {
-      if (expense.type === 'expense') {
-        expense.amount = Number(expense.amount);
-        totalExpense += expense.amount;
+    if (Array.isArray(expensesList)) {
+      for (let expense of expensesList) {
+        if (expense.type === 'expense') {
+          expense.amount = Number(expense.amount);
+          totalExpense += expense.amount;
+        }
       }
+    } else {
+      console.error('expensesList is not an array');
     }
+
     return totalExpense;
   }
 
@@ -91,7 +102,7 @@ export class HeaderComponent {
   expenseAmount: number = 0;
   expenseType: string = '';
   expenseCategory: string = '';
-  expenseDate: Date;
+  expenseDate: Date = new Date();
 
   addExpense() {
     const date = new Date(this.expenseDate);

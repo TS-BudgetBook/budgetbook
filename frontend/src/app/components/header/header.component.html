@@ -8,12 +8,13 @@
   </div>
   <div class="menu" *ngIf="isShow">
     <ul>
-      <li>
-        <span (click)="toggleForm()">add</span>
-      </li>
-      <li>
-        <a href="/logout">logout</a>
-      </li>
+      <a href="/">
+        <li>Home</li>
+      </a>
+      <span (click)="toggleForm()"><li>Add Item</li></span>
+      <a href="/logout">
+        <li>Logout</li>
+      </a>
     </ul>
   </div>
   <div class="amount">
@@ -37,33 +38,50 @@
   <h2>New Expense</h2>
   <div class="form-id" style="display: none">
     <label for="expenseId">ID:</label><br />
-    <input type="text" id="expenseId" [(ngModel)]="expenseId" />
+    <input type="text" id="expenseId" [(ngModel)]="expenseId" required />
   </div>
   <div class="form-name">
     <label for="expenseName">Name:</label><br />
-    <input type="text" id="expenseName" [(ngModel)]="expenseName" />
+    <input type="text" id="expenseName" [(ngModel)]="expenseName" required />
   </div>
   <div class="form-amount">
     <label for="expenseAmount">Amount:</label><br />
-    <input type="number" id="expenseAmount" [(ngModel)]="expenseAmount" />
+    <input
+      type="number"
+      id="expenseAmount"
+      [(ngModel)]="expenseAmount"
+      required
+    />
   </div>
   <div class="form-type">
     <div><label>Type:</label></div>
 
     <div>
-      <input type="radio" name="expenseType" value="expense" [(ngModel)]="expenseType" />
+      <input
+        type="radio"
+        name="expenseType"
+        value="expense"
+        [(ngModel)]="expenseType"
+        required
+      />
       Expense
-      <input type="radio" name="expenseType" value="income" [(ngModel)]="expenseType" />
+      <input
+        type="radio"
+        name="expenseType"
+        value="income"
+        [(ngModel)]="expenseType"
+        required
+      />
       Income
     </div>
   </div>
   <div class="form-date">
     <label for="expenseDate">Date:</label><br />
-    <input type="date" id="expenseDate" [(ngModel)]="expenseDate" />
+    <input type="date" id="expenseDate" [(ngModel)]="expenseDate" required />
   </div>
   <div class="form-category">
     <label for="expenseCategory">Category:</label><br />
-    <select id="expenseCategory" [(ngModel)]="expenseCategory">
+    <select id="expenseCategory" [(ngModel)]="expenseCategory" required>
       <option value="food">Food</option>
       <option value="gift">Gift</option>
       <option value="groceries">Groceries</option>

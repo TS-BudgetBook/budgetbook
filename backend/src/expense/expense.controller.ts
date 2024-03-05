@@ -8,6 +8,7 @@ import {
   Injectable,
   Req,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { PaymentService } from './expense.service';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -25,8 +26,22 @@ export class PaymentController {
   ) {}
 
   @Get()
-  findAll(@Req() req) {
-    return this.paymentService.findAll(req);
+  findAll(
+    @Req() req: Request,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 7,
+  ) {
+    return this.paymentService.findAll(req, page, limit);
+  }
+
+  /*   @Get('all')
+  async findAllElements(@Req() req: Request) {
+    return await this.paymentService.findAllElements(req);
+  } */
+
+  @Get('all')
+  findAllElements() {
+    return this.paymentService.findAllElements();
   }
 
   @Get(':id')

@@ -37,8 +37,21 @@ li {
   padding-bottom: 1em;
 }
 
+li:last-child {
+  border: none;
+}
+
 li img {
   padding-left: 16px;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.page-container img {
+  margin: 2em;
 }
 
 .container {

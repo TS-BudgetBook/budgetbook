@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { ExpenseService } from '../../services/expense-service.service';
+import { StatisticsService } from '../../services/statistics.service';
 
 @Component({
   standalone: true,
@@ -15,17 +16,10 @@ export class StatisticsListComponent implements OnInit {
   @Input() chartData: any = {};
   expensesList: any[] = [];
 
-  // expensesList: { name: string; percentage: number }[] = [
-  //   { name: 'Category 1', expense: 25 },
-  //   { name: 'Category 2', percentage: 25 },
-  //   { name: 'Category 3', percentage: 25 },
-  //   { name: 'Category 3', percentage: 25 },
-  // ];
-
-  constructor(private expenseService: ExpenseService) {}
+  constructor(private statisticsServce: StatisticsService) {}
 
   ngOnInit(): void {
-    this.expenseService.getExpenses().subscribe((expenses) => {
+    this.statisticsServce.getStatistics().subscribe((expenses) => {
       this.expensesList = expenses;
       this.prepareChartData();
       console.log('expensesList', this.expensesList);

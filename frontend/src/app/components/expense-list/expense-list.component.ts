@@ -20,6 +20,8 @@ export class ExpenseListComponent implements OnInit {
   isVisible: boolean = false;
   editingExpense: any;
   isVisibleForm: boolean = false;
+  currentPage = 1;
+  pageSize = 7;
 
   expenseId: string = '';
   expenseName: string = '';
@@ -58,14 +60,27 @@ export class ExpenseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.expensesList = this.expenseService.getExpenses().subscribe(
-      (expensesList: any[]) => {
-        this.expensesList = expensesList;
-      },
-      (error) => {
-        console.error('Error fetching expenses:', error);
-      }
-    );
+    this.loadExpenses();
+  }
+
+  loadExpenses(): void {
+    this.expenseService
+      .getExpenses(this.currentPage, this.pageSize)
+      .subscribe((data) => {
+        this.expensesList = data.expense;
+      });
+  }
+
+  nextPage(): void {
+    this.currentPage++;
+    this.loadExpenses();
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadExpenses();
+    }
   }
 
   submitEditForm(): void {
