@@ -11,9 +11,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { ExpenseService } from './expense.service';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { Expense } from 'src/entity/expense.entity';
 
 @ApiBearerAuth()
 @Controller('expense')
@@ -50,6 +51,16 @@ export class ExpenseController {
   }
 
   @Put()
+  @ApiOperation({ summary: 'update or add expense' })
+  @ApiBody({ 
+    description: 'expense',
+    type: Expense,
+  
+  })
+  @ApiOkResponse({ 
+    description: 'expense added/updated sucessfully',
+    type: Expense,
+  })
   update(@Req() req, @Body() body: any) {
     if (body.id) {
       return this.expenseService.update(body.id, body);
