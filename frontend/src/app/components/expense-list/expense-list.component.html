@@ -43,9 +43,22 @@
           <p>{{ expense.name }}</p>
           <span>{{ expense.date | date : "mediumDate" }}</span>
         </div>
+        <div class="hidden-button">
+          <img
+            src="../../../assets/images/edit.png"
+            alt=""
+            (click)="updateExpense(expense)"
+          />
+          <img
+            src="../../../assets/images/delete.png"
+            alt=""
+            (click)="deleteExpense(expense.id)"
+          />
+        </div>
         <div [style.color]="expense.type === 'expense' ? 'red' : 'green'">
           ${{ expense.amount }}
         </div>
+
         <div
           class="additional-content"
           [class.show]="swipedItemIndex === i"
