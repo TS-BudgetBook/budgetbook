@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -20,16 +20,19 @@ export class ExpenseService {
     this.jwtToken = this.tokenstorageService.get('jwt');
   }
 
-  getExpenses() {
+  getExpenses(page: number, pageSize: number): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(this.apiUrl + 'expense', {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+    return this.http.get<any>(`${this.apiUrl}expense`, {
+      params,
       headers,
       responseType: 'json',
     });
-    // return this.http.get<any[]>(this.apiUrl, { responseType: 'json' });
   }
 
   getAllExpenses() {
