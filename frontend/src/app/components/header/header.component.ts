@@ -20,16 +20,20 @@ export class HeaderComponent {
 
   editingExpense: any;
 
-  constructor(private expenseService: ExpenseService) {
-    this.expenseDate = new Date();
-    this.expenseService.getExpenses().subscribe(
+  constructor(private expenseService: ExpenseService) {}
+
+  ngOnInit(): void {
+    this.expenseService.getAllExpenses().subscribe(
       (expensesList: any[]) => {
         this.expensesList = expensesList;
+        console.log('this.expensesList', this.expensesList);
+        console.log('this.expensesList', typeof this.expensesList);
       },
       (error) => {
         console.error('Error fetching expenses:', error);
       }
     );
+    this.calcTotalAmount(this.expensesList);
   }
 
   toggleForm() {
@@ -74,15 +78,25 @@ export class HeaderComponent {
     return totalIncome;
   }
 
+  getTotalExpense(): number {
+    return this.calcTotalExpense(this.expensesList);
+  }
+
   calcTotalExpense(expensesList: any[]): number {
     let totalExpense = 0;
 
-    for (const expense of expensesList) {
-      if (expense.type === 'expense') {
-        expense.amount = Number(expense.amount);
-        totalExpense += expense.amount;
+    // Check if expensesList is an array
+    if (Array.isArray(expensesList)) {
+      for (let expense of expensesList) {
+        if (expense.type === 'expense') {
+          expense.amount = Number(expense.amount);
+          totalExpense += expense.amount;
+        }
       }
+    } else {
+      console.error('expensesList is not an array');
     }
+
     return totalExpense;
   }
 
@@ -91,7 +105,7 @@ export class HeaderComponent {
   expenseAmount: number = 0;
   expenseType: string = '';
   expenseCategory: string = '';
-  expenseDate: Date;
+  expenseDate: Date = new Date();
 
   addExpense() {
     const date = new Date(this.expenseDate);

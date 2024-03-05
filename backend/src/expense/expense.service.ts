@@ -39,7 +39,7 @@ export class PaymentService {
     }
   }
 
-  async findAllElements(req: any): Promise<Expense[]> {
+  /*  async findAllElements(req: any): Promise<Expense[]> {
     const customerid = req.customer.sub;
     try {
       const expenses: Expense[] = await this.expenseRepository.find({
@@ -50,6 +50,10 @@ export class PaymentService {
       console.error(error);
       throw error;
     }
+  } */
+
+  findAllElements(): Promise<Expense[]> {
+    return this.expenseRepository.find();
   }
 
   findOne(id: number): Promise<Expense> {

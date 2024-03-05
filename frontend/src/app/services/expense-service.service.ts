@@ -26,7 +26,22 @@ export class ExpenseService {
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(this.apiUrl + 'expense', { headers, responseType: 'json' });
+    return this.http.get<any[]>(this.apiUrl + 'expense', {
+      headers,
+      responseType: 'json',
+    });
+    // return this.http.get<any[]>(this.apiUrl, { responseType: 'json' });
+  }
+
+  getAllExpenses() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.jwtToken}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.get<any[]>(this.apiUrl + 'expense/all', {
+      headers,
+      responseType: 'json',
+    });
     // return this.http.get<any[]>(this.apiUrl, { responseType: 'json' });
   }
 
@@ -52,7 +67,7 @@ export class ExpenseService {
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    this.http.delete(this.apiUrl + 'expense/'+ id, { headers }).subscribe(
+    this.http.delete(this.apiUrl + 'expense/' + id, { headers }).subscribe(
       (response) => {
         console.log('DELETE request successful:', response);
 
@@ -72,6 +87,6 @@ export class ExpenseService {
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    return this.http.put(this.apiUrl + 'expense', updatedExpense, { headers })
+    return this.http.put(this.apiUrl + 'expense', updatedExpense, { headers });
   }
 }

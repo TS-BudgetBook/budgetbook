@@ -34,11 +34,15 @@ export class PaymentController {
     return this.paymentService.findAll(req, page, limit);
   }
 
-  @Get()
+  /*   @Get('all')
   async findAllElements(@Req() req: Request) {
     return await this.paymentService.findAllElements(req);
-  }
+  } */
 
+  @Get('all')
+  findAllElements() {
+    return this.paymentService.findAllElements();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
