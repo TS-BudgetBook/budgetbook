@@ -45,6 +45,10 @@ export class HeaderComponent {
     this.isShow = !this.isShow;
   }
 
+  getTotalExpense(): number {
+    return this.calcTotalExpense(this.expensesList);
+  }
+
   calcTotalAmount(expensesList: any[]): number {
     let totalIncome = 0;
     let totalExpense = 0;
@@ -52,17 +56,15 @@ export class HeaderComponent {
 
     for (const expense of expensesList) {
       if (expense.type === 'income') {
-        expense.amount = Number(expense.amount);
-        totalIncome += expense.amount;
+        totalIncome += Number(expense.amount);
       }
 
       if (expense.type === 'expense') {
-        expense.amount = Number(expense.amount);
-        totalExpense += expense.amount;
+        totalExpense += Number(expense.amount);
       }
-
       totalAmount = totalIncome - totalExpense;
     }
+    console.log('totalAmount', totalAmount);
     return totalAmount;
   }
 
@@ -78,14 +80,9 @@ export class HeaderComponent {
     return totalIncome;
   }
 
-  getTotalExpense(): number {
-    return this.calcTotalExpense(this.expensesList);
-  }
-
   calcTotalExpense(expensesList: any[]): number {
     let totalExpense = 0;
 
-    // Check if expensesList is an array
     if (Array.isArray(expensesList)) {
       for (let expense of expensesList) {
         if (expense.type === 'expense') {

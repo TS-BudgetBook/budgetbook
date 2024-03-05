@@ -59,8 +59,9 @@ export class ExpenseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.expensesList = this.expenseService.getExpenses().subscribe(
-      (expensesList: any[]) => {
-        this.expensesList = expensesList;
+      (expensesList: any) => {
+        this.expensesList = expensesList.expense;
+        console.log('expensesList######', expensesList);
       },
       (error) => {
         console.error('Error fetching expenses:', error);

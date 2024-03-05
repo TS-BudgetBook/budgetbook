@@ -8,12 +8,13 @@
   </div>
   <div class="menu" *ngIf="isShow">
     <ul>
-      <li>
-        <span (click)="toggleForm()">add</span>
-      </li>
-      <li>
-        <a href="/logout">logout</a>
-      </li>
+      <a href="/">
+        <li>home</li>
+      </a>
+      <span (click)="toggleForm()"><li>add</li></span>
+      <a href="/logout">
+        <li>logout</li>
+      </a>
     </ul>
   </div>
   <div class="amount">
@@ -51,9 +52,19 @@
     <div><label>Type:</label></div>
 
     <div>
-      <input type="radio" name="expenseType" value="expense" [(ngModel)]="expenseType" />
+      <input
+        type="radio"
+        name="expenseType"
+        value="expense"
+        [(ngModel)]="expenseType"
+      />
       Expense
-      <input type="radio" name="expenseType" value="income" [(ngModel)]="expenseType" />
+      <input
+        type="radio"
+        name="expenseType"
+        value="income"
+        [(ngModel)]="expenseType"
+      />
       Income
     </div>
   </div>
