@@ -9,6 +9,11 @@
       <div class="expense" [class.swiped]="swipedItemIndex === i">
         <div>
           <img
+            *ngIf="expense.category === 'food'"
+            src="../../../assets/images/food.png"
+            alt=""
+          />
+          <img
             *ngIf="expense.category === 'gift'"
             src="../../../assets/images/gift.png"
             alt=""
@@ -81,7 +86,13 @@
 
   <div class="page-container">
     <img src="../../../assets/images/back.png" alt="" (click)="prevPage()" />
-    <img src="../../../assets/images/forward.png" alt="" (click)="nextPage()" />
+    <ng-container *ngIf="expensesList.length >= 7">
+      <img
+        src="../../../assets/images/forward.png"
+        alt=""
+        (click)="nextPage()"
+      />
+    </ng-container>
   </div>
 </div>
 
@@ -143,6 +154,7 @@
   <div class="form-category">
     <label for="expenseCategory">Category:</label><br />
     <select id="expenseCategory" [(ngModel)]="editingExpense.category" required>
+      <option value="food">Food</option>
       <option value="gift">Gift</option>
       <option value="groceries">Groceries</option>
       <option value="rent">Rent</option>
