@@ -24,6 +24,20 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
 
+  auth:
+    build: ./auth
+    env_file: .env
+    ports:
+      - "4000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+
   db:
     env_file: .env
     build: ./mysql-database
