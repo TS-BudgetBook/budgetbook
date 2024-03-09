@@ -8,8 +8,8 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.enableCors();
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('Budget Book API Documentation')
-        .setDescription('Budget Book API description')
+        .setTitle('Budget Book Expense API Documentation')
+        .setDescription('Budget Book Expense API description')
         .setVersion('1.0')
         .addTag('budget-book')
         .addBearerAuth()

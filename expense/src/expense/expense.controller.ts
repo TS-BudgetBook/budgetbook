@@ -22,8 +22,7 @@ import { Expense } from 'src/entity/expense.entity';
 @UseGuards(AuthGuard)
 export class ExpenseController {
   constructor(
-    private readonly expenseService: ExpenseService,
-    private jwtService: JwtService,
+    private readonly expenseService: ExpenseService
   ) { }
 
   @Get()
@@ -34,11 +33,6 @@ export class ExpenseController {
   ) {
     return this.expenseService.findAll(req, page, limit);
   }
-
-  /*   @Get('all')
-  async findAllElements(@Req() req: Request) {
-    return await this.expenseService.findAllElements(req);
-  } */
 
   @Get('all')
   findAllElements(@Req() req: Request) {
@@ -52,12 +46,12 @@ export class ExpenseController {
 
   @Put()
   @ApiOperation({ summary: 'update or add expense' })
-  @ApiBody({ 
+  @ApiBody({
     description: 'expense',
     type: Expense,
-  
+
   })
-  @ApiOkResponse({ 
+  @ApiOkResponse({
     description: 'expense added/updated sucessfully',
     type: Expense,
   })

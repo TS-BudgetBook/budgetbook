@@ -14,12 +14,12 @@ export class AuthService {
     private configService: ConfigService
   ) { }
 
-  async googleLogin(req: Request, res: Response): Promise<void> {
+  async googleLogin(req: any, res: Response): Promise<void> {
     const user = req.user as User;
     const email = user.email;
     const firstName = user.firstName;
     const lastName = user.lastName;
-    const googleid = user.googleid;
+    const googleid = user.id;
 
     const existingUserByEmail =
       await this.userService.findByEmail(email);
@@ -33,7 +33,7 @@ export class AuthService {
     } else {
       const newUser = await this.userService.createUser({
         email: email,
-        googleid: googleid,
+        googleid: googleid.toString(),
         firstName: firstName,
         lastName: lastName,
       });

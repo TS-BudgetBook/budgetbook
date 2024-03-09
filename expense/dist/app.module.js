@@ -20,7 +20,7 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 envFilePath: '.env.' + process.env.NODE_ENV,
             }),
-            expense_module_1.PaymentModule,
+            expense_module_1.ExpenseModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
                 host: process.env.DB_HOST,

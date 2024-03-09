@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://docker.compose.local/api/',
+  apiUrl: 'https://docker.compose.local/api/',
 };

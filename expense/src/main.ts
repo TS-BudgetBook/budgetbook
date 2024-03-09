@@ -10,8 +10,8 @@ async function bootstrap() {
   app.enableCors();
   /*  app.use(cookieParser()); */
   const config = new DocumentBuilder()
-    .setTitle('Budget Book API Documentation')
-    .setDescription('Budget Book API description')
+    .setTitle('Budget Book Expense API Documentation')
+    .setDescription('Budget Book Expense API description')
     .setVersion('1.0')
     .addTag('budget-book')
     .addBearerAuth()

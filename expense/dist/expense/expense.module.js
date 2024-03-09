@@ -6,20 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentModule = void 0;
+exports.ExpenseModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const expense_entity_1 = require("../entity/expense.entity");
 const expense_service_1 = require("./expense.service");
 const expense_controller_1 = require("./expense.controller");
-let PaymentModule = class PaymentModule {
+const jwt_1 = require("@nestjs/jwt");
+const config_1 = require("@nestjs/config");
+let ExpenseModule = class ExpenseModule {
 };
-exports.PaymentModule = PaymentModule;
-exports.PaymentModule = PaymentModule = __decorate([
+exports.ExpenseModule = ExpenseModule;
+exports.ExpenseModule = ExpenseModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([expense_entity_1.Expense])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([expense_entity_1.Expense]),
+            jwt_1.JwtModule.register({
+                global: true,
+                secret: 'It3n4FJ2uO8VJhMXLQobzIyqKvWMnI',
+                signOptions: { expiresIn: '3d' },
+            }),],
         controllers: [expense_controller_1.ExpenseController],
-        providers: [expense_service_1.ExpenseService],
+        providers: [expense_service_1.ExpenseService, jwt_1.JwtService, config_1.ConfigService, common_1.Logger],
     })
-], PaymentModule);
+], ExpenseModule);
 //# sourceMappingURL=expense.module.js.map

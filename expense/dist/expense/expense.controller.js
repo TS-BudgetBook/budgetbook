@@ -16,13 +16,11 @@ exports.ExpenseController = void 0;
 const common_1 = require("@nestjs/common");
 const expense_service_1 = require("./expense.service");
 const swagger_1 = require("@nestjs/swagger");
-const jwt_1 = require("@nestjs/jwt");
-const auth_guard_1 = require("src/auth/auth.guard");
+const auth_guard_1 = require("../auth/auth.guard");
 const expense_entity_1 = require("../entity/expense.entity");
 let ExpenseController = class ExpenseController {
-    constructor(expenseService, jwtService) {
+    constructor(expenseService) {
         this.expenseService = expenseService;
-        this.jwtService = jwtService;
     }
     findAll(req, page = 1, limit = 7) {
         return this.expenseService.findAll(req, page, limit);
@@ -98,7 +96,6 @@ exports.ExpenseController = ExpenseController = __decorate([
     (0, common_1.Controller)('expense'),
     (0, common_1.Injectable)(),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    __metadata("design:paramtypes", [expense_service_1.ExpenseService,
-        jwt_1.JwtService])
+    __metadata("design:paramtypes", [expense_service_1.ExpenseService])
 ], ExpenseController);
 //# sourceMappingURL=expense.controller.js.map
