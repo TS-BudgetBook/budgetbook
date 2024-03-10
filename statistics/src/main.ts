@@ -11,8 +11,8 @@ async function bootstrap() {
   app.enableCors();
   /*  app.use(cookieParser()); */
   const config = new DocumentBuilder()
-    .setTitle('Budget Book Expense API Documentation')
-    .setDescription('Budget Book Expense API description')
+    .setTitle('Budget Book Statistics API Documentation')
+    .setDescription('Budget Book Statistics API description')
     .setVersion('1.0')
     .addTag('budget-book')
     .addBearerAuth()
@@ -20,5 +20,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
   await app.listen(port);
+  console.log(`Application running at ${await app.getUrl()}`)
+
 }
 bootstrap();

@@ -25,6 +25,7 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
+      PORT: ${EXPENSE_PORT}
 
   auth:
     build: ./auth
@@ -40,6 +41,23 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
+      PORT: ${AUTH_PORT}
+
+  statistics:
+    build: ./statistics
+    env_file: .env
+    # ports:
+    #   - 5000:3000
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      PORT: ${STATISTICS_PORT}
 
   database:
     env_file: .env
