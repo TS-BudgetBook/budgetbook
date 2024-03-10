@@ -8,23 +8,58 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - backend
+      - expense
+      - auth
 
-  backend:
-    build: ./backend
+  expense:
+    build: ./expense
     env_file: .env
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
-      - db
+      database:
+        condition: service_healthy
     environment:
-      DB_HOST: db
-      DB_PORT: ${DB_PORT}
+      DB_HOST: database
+      DB_PORT: 3306
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
+      PORT: ${EXPENSE_PORT}
 
-  db:
+  auth:
+    build: ./auth
+    env_file: .env
+    ports:
+      - 4000:3000
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      PORT: ${AUTH_PORT}
+
+  statistics:
+    build: ./statistics
+    env_file: .env
+    # ports:
+    #   - 5000:3000
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      PORT: ${STATISTICS_PORT}
+
+  database:
     env_file: .env
     build: ./mysql-database
     command: --default-authentication-plugin=mysql_native_password
@@ -34,12 +69,15 @@ services:
       - MYSQL_DATABASE=${DB_NAME}
     ports:
       - ${DB_PORT}:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10      
  
-
   proxy:
     image: nginx:alpine
     ports:
-      - 8080:80
+      - 80:80
       - 443:443
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf

@@ -23,6 +23,6 @@ export class StatisticsService {
       Authorization: `Bearer ${this.jwtToken}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(this.apiUrl, { headers, responseType: 'json' });
+    return this.http.get<any[]>(this.apiUrl + 'statistics', { headers, responseType: 'json' });
   }
 }

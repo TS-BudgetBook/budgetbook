@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { ExpenseService } from '../../services/expense-service.service';
 import { StatisticsService } from '../../services/statistics.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class StatisticsListComponent implements OnInit {
   @Input() chartData: any = {};
   expensesList: any[] = [];
 
-  constructor(private statisticsServce: StatisticsService) {}
+  constructor(private statisticsServce: StatisticsService) { }
 
   ngOnInit(): void {
     this.statisticsServce.getStatistics().subscribe((expenses) => {
