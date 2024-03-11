@@ -17,6 +17,8 @@ jobs:
           ref: feature/github_workflow 
         
       - name: install dependencies
+        run: npm install
+      - name: ci
         run:  npm ci
       - name: lint 
         run: npm run lint
