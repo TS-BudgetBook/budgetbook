@@ -17,9 +17,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
         with:
-          ref: feature/github_workflow 
+          ref: feature/github_workflow
+           
       - name: change directory
-        run: cd auth
+        run: pwd; ls; cd auth
       - name: ci
         run:  npm ci
       - name: lint 
