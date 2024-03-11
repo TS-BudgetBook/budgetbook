@@ -5,7 +5,7 @@ on:
     branches:
       - 'feature/**'
     paths:
-      - auth
+      - 'auth/**'
   workflow_dispatch:
   pull_request:
     
