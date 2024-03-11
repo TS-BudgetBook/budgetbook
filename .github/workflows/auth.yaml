@@ -12,6 +12,9 @@ on:
 jobs:
   deployment-of-b-book-compose:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./auth
 
     steps:
       - name: checkout
@@ -19,8 +22,6 @@ jobs:
         with:
           ref: feature/github_workflow
            
-      - name: change directory
-        run: pwd; ls; cd auth
       - name: ci
         run:  npm ci
       - name: lint 
