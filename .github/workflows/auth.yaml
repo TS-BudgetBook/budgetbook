@@ -10,7 +10,7 @@ on:
   pull_request:
     
 jobs:
-  deployment-of-b-book-compose:
+  build-and-test:
     runs-on: ubuntu-latest
     defaults:
       run:
