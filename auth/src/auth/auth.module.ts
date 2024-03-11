@@ -4,7 +4,6 @@ import { GoogleStrategy } from './auth-utils/GoogleStrategy';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
-import { jwtConstants } from './contanst';
 import { ConfigModule } from '@nestjs/config';
 import { UserService } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
