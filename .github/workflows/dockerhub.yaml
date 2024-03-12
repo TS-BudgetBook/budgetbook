@@ -19,22 +19,11 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-    - name: Set up Git
-      run: |
-        git config --global user.email "benedict@docc.techstarter.com"
-        git config --global user.name "BenTechstarter"
-
-    - name: Create Tag
-      run: |
-        TAG="v$(date +'%Y%m%d%H%M%S')"
-        git tag $TAG
-        git push origin $TAG 
-
     - name: Build and push Docker image frontend
       run: |
         cd frontend
         docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:0.0.1
-        docker push aws2307/budgetbook-frontend:$TAG
+        docker push aws2307/budgetbook-frontend:0.0.1
 
     - name: Build and push Docker image auth
       run: |
@@ -56,8 +45,3 @@ jobs:
           docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:0.0.1
           docker push aws2307/budgetbook-statistics:0.0.1
     
-    - name: Create Tag
-      run: |
-        TAG="v$(date +'%Y%m%d%H%M%S')"
-        git tag $TAG
-        git push origin $TAG 
