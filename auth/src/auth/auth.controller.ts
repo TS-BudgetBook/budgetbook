@@ -1,13 +1,12 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { GoogleOAuthGuard } from './auth-utils/google-oauth.guard';
 import { AuthService } from './auth.service';
-import { MetricsService } from '../../../services/metrics';
+
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private authService: AuthService,
-    private readonly metricsService: MetricsService,
   ) {}
 
   @Get('google')
@@ -25,9 +24,9 @@ export class AuthController {
     return this.authService.logout(res);
   }
 
-  @Get('metrics')
-  getHello(): string {
-    this.metricsService.incrementRequestCounter();
-    return 'Hello, Prometheus!';
-  }
+  // @Get('metrics')
+  // getHello(): string {
+  //   this.metricsService.incrementRequestCounter();
+  //   return 'Hello, Prometheus!';
+  // }
 }

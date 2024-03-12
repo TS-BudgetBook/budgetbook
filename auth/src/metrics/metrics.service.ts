@@ -6,12 +6,12 @@ export class MetricsService {
     private readonly newUserCounter: Counter;
     private readonly existingUserCounter: Counter;
     constructor() {
-        const newUserCounter = new Counter({
+        this.newUserCounter = new Counter({
             name: 'nestjs_newuser_total',
             help: 'Total number of users to the NestJS app',
         });
 
-        const existingUserCounter = new Counter({
+        this.existingUserCounter = new Counter({
             name: 'nestjs_existingUser_total',
             help: 'Total number of existing users to the NestJS app',
         });
@@ -19,9 +19,10 @@ export class MetricsService {
         register.setDefaultLabels({
             app: 'nestjs-prometheus-demo',
         });
-        register.registerMetric(newUserCounter);
-        register.registerMetric(existingUserCounter );
+        register.registerMetric(this.newUserCounter);
+        register.registerMetric(this.existingUserCounter );
     }
+
     incrementRequestCounter(): void {
         this.newUserCounter.inc();
         this.existingUserCounter.inc();
