@@ -6,7 +6,7 @@ COPY . .
 RUN npm run build:prod
 
 FROM nginx:latest AS productionstage
-COPY --from=buildstage /app/dist/frontend/browser /etc/nginx/html
+COPY --from=buildstage /app/dist/frontend/browser /usr/share/nginx/html
 
 EXPOSE 8080
 CMD ["nginx","-g","daemon off;"]
