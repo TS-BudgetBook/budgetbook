@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   push:
     branches:
-      - feature/github_workflow
+      - main
 
 jobs:
   build:
@@ -19,29 +19,30 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
+    - name: Generate unique tag
+      id: generate_tag
+      run: echo "TAG=${GITHUB_SHA::8}" >> $GITHUB_ENV
+
     - name: Build and push Docker image frontend
       run: |
         cd frontend
-        docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:0.0.1
-        docker push aws2307/budgetbook-frontend:0.0.1
+        docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:${{ env.TAG }}
+        docker push aws2307/budgetbook-frontend:${{ env.TAG }}
 
     - name: Build and push Docker image auth
       run: |
         cd auth
-        docker build . --file Dockerfile --tag aws2307/budgetbook-auth:0.0.1
-        docker push aws2307/budgetbook-auth:0.0.1
+        docker build . --file Dockerfile --tag aws2307/budgetbook-auth:${{ env.TAG }}
+        docker push aws2307/budgetbook-auth:${{ env.TAG }}
 
-        
     - name: Build and push Docker image expense
       run: |
         cd expense
-          docker build . --file Dockerfile --tag aws2307/budgetbook-expense:0.0.1
-          docker push aws2307/budgetbook-expense:0.0.1
-    
-           
+        docker build . --file Dockerfile --tag aws2307/budgetbook-expense:${{ env.TAG }}
+        docker push aws2307/budgetbook-expense:${{ env.TAG }}
+
     - name: Build and push Docker image statistics
       run: |
         cd statistics
-          docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:0.0.1
-          docker push aws2307/budgetbook-statistics:0.0.1
-    
+        docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:${{ env.TAG }}
+        docker push aws2307/budgetbook-statistics:${{ env.TAG }}
