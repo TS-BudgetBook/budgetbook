@@ -23,13 +23,13 @@ jobs:
       run: |
         cd frontend
         docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:0.0.1
-        docker push aws2307/budgetbook-frontend:0.0.1
+        docker push aws2307/budgetbook-frontend: {{ $TAG }}
 
     - name: Build and push Docker image auth
       run: |
         cd auth
         docker build . --file Dockerfile --tag aws2307/budgetbook-auth:0.0.1
-        docker push aws2307/budgetbook-auth:0.0.1
+        docker push aws2307/budgetbook-auth:v$
 
         
     - name: Build and push Docker image expense
@@ -45,3 +45,8 @@ jobs:
           docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:0.0.1
           docker push aws2307/budgetbook-statistics:0.0.1
     
+    - name: Create Tag
+      run: |
+        TAG="v$(date +'%Y%m%d%H%M%S')"
+        git tag $TAG
+        git push origin $TAG 
