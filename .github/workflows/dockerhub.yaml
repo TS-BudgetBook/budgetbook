@@ -23,7 +23,7 @@ jobs:
       run: |
         cd frontend
         docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:0.0.1
-        docker push aws2307/budgetbook-frontend: {{ $TAG }}
+        docker push aws2307/budgetbook-frontend:$TAG
 
     - name: Build and push Docker image auth
       run: |
