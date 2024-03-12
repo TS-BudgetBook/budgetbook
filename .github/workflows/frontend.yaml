@@ -1,4 +1,4 @@
-name: 'Frondend'
+name: 'Frontend'
 
 on:
   push:
