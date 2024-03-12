@@ -12,7 +12,7 @@ describe('ExpenseService', () => {
     service = module.get<ExpenseService>(ExpenseService);
   });
 
-  // it('should be defined', () => {
-  //   expect(service).toBeDefined();
-  // });
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
 });

@@ -11,7 +11,12 @@ import {
   Query,
 } from '@nestjs/common';
 import { ExpenseService } from './expense.service';
-import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+} from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Expense } from 'src/entity/expense.entity';
 
@@ -20,9 +25,7 @@ import { Expense } from 'src/entity/expense.entity';
 @Injectable()
 @UseGuards(AuthGuard)
 export class ExpenseController {
-  constructor(
-    private readonly expenseService: ExpenseService
-  ) { }
+  constructor(private readonly expenseService: ExpenseService) {}
 
   @Get()
   findAll(
@@ -48,7 +51,6 @@ export class ExpenseController {
   @ApiBody({
     description: 'expense',
     type: Expense,
-
   })
   @ApiOkResponse({
     description: 'expense added/updated sucessfully',
