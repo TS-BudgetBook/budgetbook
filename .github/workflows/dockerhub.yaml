@@ -21,6 +21,8 @@ jobs:
 
     - name: Generate unique tag
       id: generate_tag
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: echo "TAG=${GITHUB_SHA::8}" >> $GITHUB_ENV
 
     - name: Build and push Docker image frontend
