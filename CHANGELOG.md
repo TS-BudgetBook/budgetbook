@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/TS-BudgetBook/budgetbook/compare/v1.0.1...v1.1.0) (2024-03-12)
+
+
+### Features
+
+* **changelog:** test for changelo 2 ([5cd2a21](https://github.com/TS-BudgetBook/budgetbook/commit/5cd2a215e9420aaf6c5437f8f76e0acead19eef4))
+
 ### [1.0.1](https://github.com/TS-BudgetBook/budgetbook/compare/v1.0.0...v1.0.1) (2024-03-12)
 
 ## 1.0.0 (2024-03-12)
