@@ -7,10 +7,10 @@ export class MetricsController {
   constructor(private readonly metricsService: MetricsService) {}
 
   @Get()
-  getHello(): any {
-    let metrics = this.metricsService.incrementNewUserCounter();
-    this.metricsService.incrementExistingUserCounter();
-    console.log('metrics', metrics);
+  getMetrics(): string {
+    /* this.metricsService.incrementNewUserCounter();
+    this.metricsService.incrementExistingUserCounter(); */
+    return this.metricsService.getMetrics();
   }
 
   /*  @Get()

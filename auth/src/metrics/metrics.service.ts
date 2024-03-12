@@ -29,11 +29,12 @@ export class MetricsService {
     this.existingUserCounter.inc();
   } */
 
-  incrementNewUserCounter(): any {
-    this.newUserCounter.inc();
+  getMetrics(): any {
+    /* this.newUserCounter.inc(); */
+    return register.metrics();
   }
 
-  incrementExistingUserCounter(): any {
+  /*   incrementExistingUserCounter(): any {
     this.existingUserCounter.inc();
-  }
+  } */
 }
