@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: auth
-  name: auth
+    app: statistics
+  name: statistics
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: statistics
   template:
     metadata:
       labels:
-        app: auth
+        app: statistics
     spec:
       containers:
-        - image: auth:latest
+        - image: statistics:latest
           imagePullPolicy: Never
           resources:
             requests:
@@ -43,7 +43,7 @@ spec:
               value: "http://budgetbook.me/api/auth/google/redirect"
             - name: REDIRECT_HOST
               value: "http://budgetbook.me"
-          name: auth
+          name: statistics
           ports:
             - containerPort: 3000
               protocol: TCP

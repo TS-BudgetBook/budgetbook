@@ -28,7 +28,7 @@ export class AuthService {
       const token = this.generateToken(existingUserByEmail);
       jwtConstants.token = token;
 
-      res.redirect(this.configService.get<string>('REDIRECT_HOST') + 'login?token=' + token);
+      res.redirect(this.configService.get<string>('REDIRECT_HOST') + '/login?token=' + token);
       return;
     } else {
       const newUser = await this.userService.createUser({
@@ -41,7 +41,7 @@ export class AuthService {
 
       jwtConstants.token = token;
 
-      res.redirect(this.configService.get<string>('REDIRECT_HOST') + 'login?token=' + token);
+      res.redirect(this.configService.get<string>('REDIRECT_HOST') + '/login?token=' + token);
     }
   }
   async logout(res: Response): Promise<void> {

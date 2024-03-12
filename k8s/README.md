@@ -6,7 +6,7 @@ helm upgrade --install ingress-nginx ingress-nginx \
 
 ## MYSQL Datenbank im Cluster installieren
 
-helm upgrade --install mysql oci://registry-1.docker.io/bitnamicharts/mysql
+helm upgrade --install mysql --set auth.database=budgetbook,auth.username=budgetbook,auth.password=BuDg3tB00k oci://registry-1.docker.io/bitnamicharts/mysql
 
 Setzen von Parametern:
 --set auth.database=budgetbook,auth.user=app_database,auth.password=BuDg3tB00k

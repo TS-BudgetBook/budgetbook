@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth
+  name: statistics
 spec:
   selector:
-    app: auth
+    app: statistics
   ports:
     - name: "http"
       port: 3000

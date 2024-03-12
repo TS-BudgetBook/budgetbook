@@ -24,3 +24,17 @@ spec:
                 name: auth
                 port:
                   number: 3000
+          - path: /api/expense
+            pathType: Prefix
+            backend:
+              service:
+                name: auth
+                port:
+                  number: 3000
+          - path: /api/statistics
+            pathType: Prefix
+            backend:
+              service:
+                name: auth
+                port:
+                  number: 3000

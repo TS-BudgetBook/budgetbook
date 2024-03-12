@@ -1,17 +1,11 @@
-# https://kubernetes.io/docs/concepts/services-networking/service/
 apiVersion: v1
 kind: Service
 metadata:
-  name: myjob
-  namespace: default
+  name: expense
 spec:
   selector:
-    app: myjob
-  type: ClusterIP
+    app: expense
   ports:
-  - name: myjob
-    protocol: TCP
-    port: 80
-    targetPort: 5000
-    nodePort: 30001
----
+    - name: "http"
+      port: 3000
+      targetPort: 3000
