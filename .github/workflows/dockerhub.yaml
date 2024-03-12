@@ -38,3 +38,10 @@ jobs:
           docker build . --file Dockerfile --tag aws2307/budgetbook-expense:0.0.1
           docker push aws2307/budgetbook-expense:0.0.1
     
+           
+    - name: Build and push Docker image statistics
+      run: |
+        cd statistics
+          docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:0.0.1
+          docker push aws2307/budgetbook-statistics:0.0.1
+    
