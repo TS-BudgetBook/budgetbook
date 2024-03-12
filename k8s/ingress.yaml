@@ -28,13 +28,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: auth
+                name: expense
                 port:
                   number: 3000
           - path: /api/statistics
             pathType: Prefix
             backend:
               service:
-                name: auth
+                name: statistics
                 port:
                   number: 3000

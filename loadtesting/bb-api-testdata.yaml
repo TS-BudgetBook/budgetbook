@@ -1,5 +1,5 @@
 config:
-  target: "http://localhost:3000/api"
+  target: "http://budgetbook.me/api"
   phases:
     - duration: 60
       arrivalRate: 10

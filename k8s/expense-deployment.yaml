@@ -43,6 +43,8 @@ spec:
               value: "http://budgetbook.me/api/auth/google/redirect"
             - name: REDIRECT_HOST
               value: "http://budgetbook.me"
+            - name: JWT_SECRET
+              value: "It3n4FJ2uO8VJhMXLQobzIyqKvWMnI"
           name: expense
           ports:
             - containerPort: 3000

@@ -8,8 +8,8 @@ function generateJWT(req, userContext, ee, next) {
     let payload = {
         "sub": 1,
         "email": "marco@techstarter.de",
-        "iat": 1710081021,
-        "exp": 1710340221
+        "iat": 1710264360,
+        "exp": 1710523560
     };
     let token = jwt.sign(payload, secret);
     req.headers['Authorization'] = `Bearer ${token}`

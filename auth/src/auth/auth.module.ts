@@ -16,7 +16,7 @@ import { User } from './entity/user.entity';
         PassportModule.register({ defaultStrategy: 'google' }),
         JwtModule.register({
             global: true,
-            secret: 'It3n4FJ2uO8VJhMXLQobzIyqKvWMnI',
+            secret: jwtConstants.secret,
             signOptions: { expiresIn: '3d' },
         }),
         TypeOrmModule.forFeature([User]),
