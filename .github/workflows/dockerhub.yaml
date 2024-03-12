@@ -20,11 +20,11 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-    - name: Generate unique tag
+    - name: tag
       id: generate_tag
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: echo "TAG=${GITHUB_SHA::8}" >> $GITHUB_ENV
+      run: |
+        TAG="v0.0.1-$(date)"
+        echo "TAG=$TAG" >> $GITHUB_ENV
 
     - name: Build and push Docker image frontend
       run: |
