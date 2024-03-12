@@ -19,6 +19,11 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
+    - name: Set up Git
+      run: |
+        git config --global user.email "benedict@docc.techstarter.com"
+        git config --global user.name "BenTechstarter"
+
     - name: Create Tag
       run: |
         TAG="v$(date +'%Y%m%d%H%M%S')"
