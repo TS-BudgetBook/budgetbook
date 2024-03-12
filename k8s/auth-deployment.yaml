@@ -1,80 +1,50 @@
-# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myjob
-  namespace: default
   labels:
-    app: myjob
+    app: auth
+  name: auth
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: myjob
-  replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+      app: auth
   template:
     metadata:
       labels:
-        app: myjob
+        app: auth
     spec:
-      # initContainers:
-        # Init containers are exactly like regular containers, except:
-          # - Init containers always run to completion.
-          # - Each init container must complete successfully before the next one starts.
       containers:
-      - name: myjob
-        image: myjob:latest
-        imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-          limits:
-            cpu: 100m
-            memory: 100Mi
-        livenessProbe:
-          tcpSocket:
-            port: 80
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /_status/healthz
-            port: 80
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
-          successThreshold: 1
-          failureThreshold: 3
-          periodSeconds: 10
-        env:
-        - name: ACCEPT_EULA
-          value: "Y"
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: myjob
-              key: DB_HOST
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: myjob
-              key: MSSQL_SA_PASSWORD
-        ports:
-        - containerPort: 80
-          name: myjob
-        volumeMounts:
-        - name: localtime
-          mountPath: /etc/localtime
-      volumes:
-        - name: localtime
-          hostPath:
-            path: /usr/share/zoneinfo/Asia/Taipei
+        - image: auth:latest
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASSWORD
+              value: "t21hU9fMWX%"
+            - name: DB_NAME
+              value: "budgetbook"
+            - name: DB_PORT
+              value: "3306"
+            - name: GOOGLE_CLIENT_ID
+              value: "603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com"
+            - name: GOOGLE_CLIENT_SECRET
+              value: "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"
+            - name: GOOGLE_CALLBACK_URL
+              value: "http://budgetbook.me/api/auth/google/redirect"
+            - name: REDIRECT_HOST
+              value: "http://budgetbook.me"
+          name: auth
+          ports:
+            - containerPort: 3000
+              protocol: TCP
       restartPolicy: Always
----
