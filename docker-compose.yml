@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   frontend:
@@ -70,8 +70,10 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
-      retries: 10      
- 
+      retries: 10
+    ports:
+      - ${DB_PORT}:3306
+
   proxy:
     image: nginx:alpine
     ports:
