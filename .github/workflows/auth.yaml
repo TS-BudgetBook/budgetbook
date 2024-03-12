@@ -30,3 +30,9 @@ jobs:
       #   run: npm run test
       - name: build
         run: npm run build
+      
+      - name: Create Tag
+        run: |
+         TAG="v$(date +'%Y%m%d%H%M%S')"
+         git tag $TAG
+         git push origin $TAG 
