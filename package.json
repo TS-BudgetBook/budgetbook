@@ -13,5 +13,6 @@
     "release:minor": "bash .husky/release-script.sh",
     "release:patch": "bash .husky/release-script.sh",
     "release:major": "bash .husky/release-script.sh"
-  }
+  },
+  "version": "1.0.0"
 }
