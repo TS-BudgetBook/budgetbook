@@ -5,13 +5,15 @@ import { UserService } from './user.service'
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './contanst';
 import { ConfigService } from '@nestjs/config';
+import { MetricsService } from 'src/metrics/metrics.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private metricsService: MetricsService
   ) { }
 
   async googleLogin(req: any, res: Response): Promise<void> {
@@ -27,6 +29,7 @@ export class AuthService {
     if (existingUserByEmail) {
       const token = this.generateToken(existingUserByEmail);
       jwtConstants.token = token;
+      this.metricsService.incrementExistingUserCounter();
 
       res.redirect(this.configService.get<string>('REDIRECT_HOST') + 'login?token=' + token);
       return;
@@ -40,8 +43,10 @@ export class AuthService {
       const token = this.generateToken(newUser);
 
       jwtConstants.token = token;
+      this.metricsService.incrementNewUserCounter();
 
       res.redirect(this.configService.get<string>('REDIRECT_HOST') + 'login?token=' + token);
+      
     }
   }
   async logout(res: Response): Promise<void> {

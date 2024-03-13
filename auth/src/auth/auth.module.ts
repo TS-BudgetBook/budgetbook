@@ -4,13 +4,12 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { GoogleStrategy } from './auth-utils/GoogleStrategy';
-/* import { MetricsService } from 'src/metrics/metrics.service'; */
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { UserService } from './user.service';
-import { jwtConstants } from './contanst';
+import { MetricsService } from 'src/metrics/metrics.service';
 
 @Module({
   imports: [
@@ -25,7 +24,7 @@ import { jwtConstants } from './contanst';
   ],
   providers: [
     AuthService,
-    /* MetricsService, */
+    MetricsService,
     GoogleStrategy,
     JwtService,
     UserService,

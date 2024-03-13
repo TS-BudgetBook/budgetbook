@@ -20,7 +20,7 @@ export class MetricsService {
             name: 'existingUser_total',
             help: 'Total number of existing users to the BudgetBOOK app',
         });
-        // register.clear();
+        register.clear();
         // register.setDefaultLabels({
         //   app: 'nestjs-prometheus-demo',
         // });
@@ -46,30 +46,4 @@ export class MetricsService {
         };
     }
 
-    // getMetrics(): any {
-    //     const newUsersCount = this.newUserCounter.get();
-    //     const existingUsersCount = this.existingUserCounter.get();
-
-    //     return {
-    //         service: 'auth',
-    //         newUsers: newUsersCount,
-    //         existingUsers: existingUsersCount,
-    //     };
-    // }
-
-
-
-    /*   incrementRequestCounter(): void {
-        this.newUserCounter.inc();
-        this.existingUserCounter.inc();
-    } */
-
-    //   getMetrics(): any {
-    //     /* this.newUserCounter.inc(); */
-    //     return register.metrics();
-    //   }
-
-    /*   incrementExistingUserCounter(): any {
-        this.existingUserCounter.inc();
-    } */
 }
