@@ -6,9 +6,9 @@ import { Injectable } from '@nestjs/common';
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor() {
     super({
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+      clientID: process.env.GOOGLE_CLIENT_ID.trim(),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET.trim(),
+      callbackURL: process.env.GOOGLE_CALLBACK_URL.trim(),
       scope: ['email', 'profile'],
     });
   }

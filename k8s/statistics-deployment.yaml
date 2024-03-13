@@ -28,9 +28,12 @@ spec:
             - name: DB_HOST
               value: "mysql.default.svc.cluster.local"
             - name: DB_USER
-              value: "root"
+              value: "budgetbook"
             - name: DB_PASSWORD
-              value: "Xt7g21lbHX"
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-password
             - name: DB_NAME
               value: "budgetbook"
             - name: DB_PORT

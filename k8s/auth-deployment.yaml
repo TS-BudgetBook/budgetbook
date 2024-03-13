@@ -28,23 +28,36 @@ spec:
             - name: DB_HOST
               value: "mysql.default.svc.cluster.local"
             - name: DB_USER
-              value: "root"
+              value: "budgetbook"
             - name: DB_PASSWORD
-              value: "Xt7g21lbHX"
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-password
             - name: DB_NAME
               value: "budgetbook"
             - name: DB_PORT
               value: "3306"
             - name: GOOGLE_CLIENT_ID
-              value: "603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com"
+              valueFrom:
+                secretKeyRef:
+                  name: budgetbook
+                  key: GOOGLE_CLIENT_ID
             - name: GOOGLE_CLIENT_SECRET
-              value: "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"
+              valueFrom:
+                secretKeyRef:
+                  name: budgetbook
+                  key: GOOGLE_CLIENT_SECRET
             - name: GOOGLE_CALLBACK_URL
               value: "https://budgetbook.me/api/auth/google/redirect"
             - name: REDIRECT_HOST
               value: "https://budgetbook.me"
             - name: JWT_SECRET
-              value: "It3n4FJ2uO8VJhMXLQobzIyqKvWMnI"
+              valueFrom:
+                secretKeyRef:
+                  name: budgetbook
+                  key: JWT_SECRET
+
           name: auth
           ports:
             - containerPort: 3000
