@@ -59,5 +59,3 @@ jobs:
         file: Dockerfile
         push: true
         tags: aws2307/budgetbook-statistics:${{ steps.meta.outputs.tags }}
-
-
