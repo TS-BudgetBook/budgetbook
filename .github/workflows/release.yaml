@@ -3,7 +3,7 @@ name: Release Workflow
 on:
   push:
     tags:
-      - v[0-9]+.[0-9]+.[0-9]+
+      - 'v*'
 
 jobs:
   release:
@@ -28,7 +28,7 @@ jobs:
           allowUpdates: true
           draft: false
           makeLatest: true
-          name: ${{ github.ref_name }}
+          tag: ${{ github.ref_name }}
           body: ${{ steps.changelog.outputs.changes }}
           token: ${{ secrets.TOKEN }}  
 
