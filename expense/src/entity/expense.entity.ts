@@ -21,5 +21,5 @@ export class Expense {
   category: string;
 
   @Column()
-  customerid: number;
+  userid: number;
 }

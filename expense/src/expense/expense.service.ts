@@ -14,10 +14,10 @@ export class ExpenseService {
     page: number = 1,
     limit: number = 10,
   ): Promise<{ expense: Expense[]; totalItems: number }> {
-    const customerid = req.customer.sub;
+    const userid = req.user.sub;
     try {
       const [expense, totalItems] = await this.expenseRepository.findAndCount({
-        where: { customerid: customerid },
+        where: { userid: userid },
         take: limit,
         skip: (page - 1) * limit,
       });
@@ -30,10 +30,10 @@ export class ExpenseService {
   }
 
   async findAllElements(req: any): Promise<Expense[]> {
-    const customerid = req.customer.sub;
+    const userid = req.user.sub;
     try {
       const expenses: Expense[] = await this.expenseRepository.find({
-        where: { customerid: customerid },
+        where: { userid: userid },
       });
       return expenses;
     } catch (error) {
@@ -52,7 +52,7 @@ export class ExpenseService {
   }
 
   async create(req: any, body: any): Promise<Expense[]> {
-    body.customerid = req.customer.sub;
+    body.userid = req.user.sub;
     const payment = this.expenseRepository.create(body);
     return this.expenseRepository.save(payment);
   }

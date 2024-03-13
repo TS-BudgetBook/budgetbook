@@ -2,6 +2,7 @@
 .angular/
 /backend/dist
 /frontend/dist
+/expense/dist
 frontend/.angular
 node_modules
 /build
