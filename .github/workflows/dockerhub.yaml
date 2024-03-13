@@ -1,16 +1,15 @@
-name: Docker Image CI
+name: Docker Build and Push
 
 on:
   push:
-    branches:
-      - feature/**
+    tags:
+      - 'v*'
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Login Dockerhub
@@ -19,32 +18,19 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-    - name: tag
-      id: generate_tag
-      run: |
-        TAG="v0.0.1"
-        echo "TAG=$TAG" >> $GITHUB_ENV
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: aws2307/budgetbook-auth
+        tags: |
+          type=semver,pattern={{version}}
 
-    - name: Build and push Docker image frontend
-      run: |
-        cd frontend
-        docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:${{ env.TAG }}
-        docker push aws2307/budgetbook-frontend:${{ env.TAG }}
-
-    - name: Build and push Docker image auth
-      run: |
-        cd auth
-        docker build . --file Dockerfile --tag aws2307/budgetbook-auth:${{ env.TAG }}
-        docker push aws2307/budgetbook-auth:${{ env.TAG }}
-
-    - name: Build and push Docker image expense
-      run: |
-        cd expense
-        docker build . --file Dockerfile --tag aws2307/budgetbook-expense:${{ env.TAG }}
-        docker push aws2307/budgetbook-expense:${{ env.TAG }}
-
-    - name: Build and push Docker image statistics
-      run: |
-        cd statistics
-        docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:${{ env.TAG }}
-        docker push aws2307/budgetbook-statistics:${{ env.TAG }}
+    - name: Build and push Docker image Auth
+      uses: docker/build-push-action@v5
+      with:
+        context: frontend
+        file: ./frontend/Dockerfile
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
