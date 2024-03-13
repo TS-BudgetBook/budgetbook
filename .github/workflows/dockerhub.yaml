@@ -29,8 +29,64 @@ jobs:
     - name: Build and push Docker image Auth
       uses: docker/build-push-action@v5
       with:
+        context: auth
+        file: ./auth/Dockerfile
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+
+
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: aws2307/budgetbook-frontend
+        tags: |
+          type=semver,pattern={{version}}
+
+    - name: Build and push Docker image frontend
+      uses: docker/build-push-action@v5
+      with:
         context: frontend
         file: ./frontend/Dockerfile
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: aws2307/budgetbook-expense
+        tags: |
+          type=semver,pattern={{version}}
+
+    - name: Build and push Docker image expense
+      uses: docker/build-push-action@v5
+      with:
+        context: expense
+        file: ./expense/Dockerfile
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+
+
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: aws2307/budgetbook-statistics
+        tags: |
+          type=semver,pattern={{version}}
+
+    - name: Build and push Docker image statistics
+      uses: docker/build-push-action@v5
+      with:
+        context: statistics
+        file: ./statistics/Dockerfile
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}        
