@@ -5,6 +5,10 @@ kind: Ingress
 metadata:
   name: ingress
 spec:
+  tls:
+    - hosts:
+        - budgetbook.me
+      secretName: budgetbook.me
   ingressClassName: nginx
   rules:
     - host: budgetbook.me

@@ -35,14 +35,6 @@ spec:
               value: "budgetbook"
             - name: DB_PORT
               value: "3306"
-            - name: GOOGLE_CLIENT_ID
-              value: "603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com"
-            - name: GOOGLE_CLIENT_SECRET
-              value: "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"
-            - name: GOOGLE_CALLBACK_URL
-              value: "http://budgetbook.me/api/auth/google/redirect"
-            - name: REDIRECT_HOST
-              value: "http://budgetbook.me"
             - name: JWT_SECRET
               value: "It3n4FJ2uO8VJhMXLQobzIyqKvWMnI"
           name: statistics

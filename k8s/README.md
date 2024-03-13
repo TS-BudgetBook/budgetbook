@@ -14,3 +14,14 @@ Setzen von Parametern:
 ## Mysql Root Password aus Secret extrahieren
 
 kubectl get secret --namespace default mysql -o jsonpath="{.data.mysql-root-password}" | base64 -d
+
+## TLS Zertifikate generieren
+mkcert budgetbook.me localhost 127.0.0.1 ::1
+
+K8s Secret erstellen:
+
+Anzeigen lassen mit --dry-run
+kubectl create secret tls budgetbook.me --cert=./budgetbook.me+3.pem --key=./budgetbook.me+3-key.pem --dry-run=client --output=yaml
+
+Apply im Cluster
+kubectl create secret tls budgetbook.me --cert=./budgetbook.me+3.pem --key=./budgetbook.me+3-key.pem
