@@ -1,3 +1,20 @@
+## Docker Desktop Kubernetes aktivieren
+Prüfen ob das loale Cluster läuft:
+kubectl get pods
+
+## Neuen Hosteintrag hinzufügen
+Editor als Admin starten und folgenden Eintrag in der hosts Datei (c:\Windows\System32\Drivers\etc\hosts) hinzufügen:
+
+127.0.0.1 budgetbook.me
+
+## Docker images bauen
+
+Jeweils in auth, expense, frontend und statistics das Image bauen:
+
+docker build -t <SERVICENAME>:latest .
+
+Den Platzhalter <SERVICENAME> ersetzen durch den Service der gebaut werden soll.
+
 ## NGINX-INGRESS im Cluster installieren
 
 helm upgrade --install ingress-nginx ingress-nginx \
@@ -25,3 +42,14 @@ kubectl create secret tls budgetbook.me --cert=./budgetbook.me+3.pem --key=./bud
 
 Apply im Cluster
 kubectl create secret tls budgetbook.me --cert=./budgetbook.me+3.pem --key=./budgetbook.me+3-key.pem
+
+## Anwendung im Cluster deployen
+cd k8s/
+kubectl apply -f .
+
+Danach prüfen ob die Pods laufen:
+kubectl get pods
+
+## Anwendung im Browser starten
+
+https://budgetbook.me 
