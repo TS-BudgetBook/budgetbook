@@ -26,4 +26,5 @@ jobs:
         file: Dockerfile
         push: true
         tags: |
-          ${{ github.repository }}:${{ github.ref_name.split('refs/tags/')[1] }}
+          "${{ github.repository }}:latest"
+          "${{ github.repository }}:${{ github.ref_name }}"
