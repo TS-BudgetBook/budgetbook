@@ -25,8 +25,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        tags: |
-          type=semver,pattern={{version}}
+        tags: ${{ github.ref }}
 
     - name: Bump Version
       id: bump
@@ -64,4 +63,4 @@ jobs:
         context: statistics
         file: Dockerfile
         push: true
-        tags: aws2307/budgetbook-statistics:${{ steps.bump.outputs.new_tag }}
+        tags: aws2307/budgetbook-statistics:${{ steps.meta.outputs.tags }}
