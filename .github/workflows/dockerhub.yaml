@@ -3,14 +3,13 @@ name: Docker Image CI
 on:
   push:
     branches:
-      - "**"
+      - '**'
     tags:
-      - "v*"
+      - '*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
 
     steps:
     - name: Checkout repository
@@ -22,32 +21,40 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-    - name: tag
-      id: generate_tag
-      run: |
-        TAG="v0.0.1"
-        echo "TAG=$TAG" >> $GITHUB_ENV
+    - name: Extract metadata (tags) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        tags: ${{ github.ref }}
 
     - name: Build and push Docker image frontend
-      run: |
-        cd frontend
-        docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:${{ env.TAG }}
-        docker push aws2307/budgetbook-frontend:${{ env.TAG }}
+      uses: docker/build-push-action@v2
+      with:
+        context: frontend
+        file: Dockerfile
+        push: true
+        tags: aws2307/budgetbook-frontend:${{ steps.meta.outputs.tags }}
 
     - name: Build and push Docker image auth
-      run: |
-        cd auth
-        docker build . --file Dockerfile --tag aws2307/budgetbook-auth:${{ env.TAG }}
-        docker push aws2307/budgetbook-auth:${{ env.TAG }}
+      uses: docker/build-push-action@v2
+      with:
+        context: auth
+        file: Dockerfile
+        push: true
+        tags: aws2307/budgetbook-auth:${{ steps.meta.outputs.tags }}
 
     - name: Build and push Docker image expense
-      run: |
-        cd expense
-        docker build . --file Dockerfile --tag aws2307/budgetbook-expense:${{ env.TAG }}
-        docker push aws2307/budgetbook-expense:${{ env.TAG }}
+      uses: docker/build-push-action@v2
+      with:
+        context: expense
+        file: Dockerfile
+        push: true
+        tags: aws2307/budgetbook-expense:${{ steps.meta.outputs.tags }}
 
     - name: Build and push Docker image statistics
-      run: |
-        cd statistics
-        docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:${{ env.TAG }}
-        docker push aws2307/budgetbook-statistics:${{ env.TAG }}
+      uses: docker/build-push-action@v2
+      with:
+        context: statistics
+        file: Dockerfile
+        push: true
+        tags: aws2307/budgetbook-statistics:${{ steps.meta.outputs.tags }}
