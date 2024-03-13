@@ -26,13 +26,4 @@ jobs:
         file: Dockerfile
         push: true
         tags: |
-          - name: Build and push image tags
-        uses: docker/build-push-action@v5
-  with:
-    context: frondend
-    file: Dockerfile
-    push: true
-    tags: |
-      ${{ github.repository }}:${{ github.ref_name.split('refs/tags/')[1] }}
-
-
+          ${{ github.repository }}:${{ github.ref_name.split('refs/tags/')[1] }}
