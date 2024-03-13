@@ -1,16 +1,16 @@
+name: Docker Image CI
+
 on:
   push:
     branches:
-      - '**'
-    tags:
-      - 'v*'  
+      - feature/**
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: "Checkout"
+    - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Login Dockerhub
@@ -19,12 +19,32 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-    - name: Build and push image tags
-      uses: docker/build-push-action@v5
-      with:
-        context: frontend
-        file: Dockerfile
-        push: true
-        tags: |
-          "${{ github.repository }}:latest"
-          
+    - name: tag
+      id: generate_tag
+      run: |
+        TAG="v0.0.1"
+        echo "TAG=$TAG" >> $GITHUB_ENV
+
+    - name: Build and push Docker image frontend
+      run: |
+        cd frontend
+        docker build . --file Dockerfile --tag aws2307/budgetbook-frontend:${{ env.TAG }}
+        docker push aws2307/budgetbook-frontend:${{ env.TAG }}
+
+    - name: Build and push Docker image auth
+      run: |
+        cd auth
+        docker build . --file Dockerfile --tag aws2307/budgetbook-auth:${{ env.TAG }}
+        docker push aws2307/budgetbook-auth:${{ env.TAG }}
+
+    - name: Build and push Docker image expense
+      run: |
+        cd expense
+        docker build . --file Dockerfile --tag aws2307/budgetbook-expense:${{ env.TAG }}
+        docker push aws2307/budgetbook-expense:${{ env.TAG }}
+
+    - name: Build and push Docker image statistics
+      run: |
+        cd statistics
+        docker build . --file Dockerfile --tag aws2307/budgetbook-statistics:${{ env.TAG }}
+        docker push aws2307/budgetbook-statistics:${{ env.TAG }}
