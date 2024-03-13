@@ -5,7 +5,7 @@ on:
     branches:
       - '**'
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   build:
@@ -28,13 +28,19 @@ jobs:
         tags: |
           type=semver,pattern={{version}}
 
+    - name: Bump Version
+      id: bump
+      uses: docker/bump-action@v1
+      with:
+        tag: ${{ steps.meta.outputs.tags }}
+
     - name: Build and push Docker image frontend
       uses: docker/build-push-action@v2
       with:
         context: frontend
         file: Dockerfile
         push: true
-        tags: aws2307/budgetbook-frontend:${{ steps.meta.outputs.tags }}
+        tags: aws2307/budgetbook-frontend:${{ steps.bump.outputs.new_tag }}
 
     - name: Build and push Docker image auth
       uses: docker/build-push-action@v2
@@ -42,7 +48,7 @@ jobs:
         context: auth
         file: Dockerfile
         push: true
-        tags: aws2307/budgetbook-auth:${{ steps.meta.outputs.tags }}
+        tags: aws2307/budgetbook-auth:${{ steps.bump.outputs.new_tag }}
 
     - name: Build and push Docker image expense
       uses: docker/build-push-action@v2
@@ -50,7 +56,7 @@ jobs:
         context: expense
         file: Dockerfile
         push: true
-        tags: aws2307/budgetbook-expense:${{ steps.meta.outputs.tags }}
+        tags: aws2307/budgetbook-expense:${{ steps.bump.outputs.new_tag }}
 
     - name: Build and push Docker image statistics
       uses: docker/build-push-action@v2
@@ -58,4 +64,4 @@ jobs:
         context: statistics
         file: Dockerfile
         push: true
-        tags: aws2307/budgetbook-statistics:${{ steps.meta.outputs.tags }}
+        tags: aws2307/budgetbook-statistics:${{ steps.bump.outputs.new_tag }}
