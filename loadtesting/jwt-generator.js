@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 // in this example comes from an HTTP call to another
 // API
 function generateJWT(req, userContext, ee, next) {
-    let secret = 'It3n4FJ2uO8VJhMXLQobzIyqKvWMnI';
+    let secret = '829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2';
     let payload = {
         "sub": 1,
         "email": "marco@techstarter.de",

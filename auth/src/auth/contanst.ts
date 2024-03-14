@@ -1,4 +1,4 @@
 export const jwtConstants = {
-  secret: process.env.JWT_SECRET,
+  secret: process.env.JWT_SECRET.trim(),
   token: '',
 };

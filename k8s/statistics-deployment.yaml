@@ -39,7 +39,10 @@ spec:
             - name: DB_PORT
               value: "3306"
             - name: JWT_SECRET
-              value: "It3n4FJ2uO8VJhMXLQobzIyqKvWMnI"
+              valueFrom:
+                secretKeyRef:
+                  name: budgetbook
+                  key: JWT_SECRET
           name: statistics
           ports:
             - containerPort: 3000

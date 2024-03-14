@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { User } from './entity/user.entity'
 import { UserService } from './user.service'
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { jwtConstants } from './contanst';
 import { ConfigService } from '@nestjs/config';
 
@@ -11,7 +11,8 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private logger: Logger
   ) { }
 
   async googleLogin(req: any, res: Response): Promise<void> {
@@ -49,7 +50,11 @@ export class AuthService {
   }
 
   generateToken(user: User): string {
+    this.logger.log('Generate Token with Secret: ' + jwtConstants.secret, 'AUTH');
     const payload = { sub: user.id, email: user.email };
-    return this.jwtService.sign(payload);
+    const options: JwtSignOptions = {
+      secret: jwtConstants.secret
+    }
+    return this.jwtService.sign(payload, options);
   }
 }

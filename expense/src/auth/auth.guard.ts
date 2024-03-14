@@ -24,13 +24,14 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     try {
+      this.logger.log('Verify Token with Secret: ' + process.env.JWT_SECRET.trim(), 'EXPENSE-AUTH-GUARD');
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: this.configService.get<string | Buffer>('JWT_SECRET'),
+        secret: process.env.JWT_SECRET.trim(),
       });
 
       request['customer'] = payload;
-    } catch {
-      this.logger.log('Unauthorizied', 'Token invalid');
+    } catch (err) {
+      this.logger.log('Token Validation Error' + err, 'EXPENSE-AUTH-GUARD');
       throw new UnauthorizedException();
     }
     return true;

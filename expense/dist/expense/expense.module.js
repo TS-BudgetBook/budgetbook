@@ -20,11 +20,11 @@ exports.ExpenseModule = ExpenseModule;
 exports.ExpenseModule = ExpenseModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([expense_entity_1.Expense]),
-            jwt_1.JwtModule.register({
-                global: true,
-                secret: 'It3n4FJ2uO8VJhMXLQobzIyqKvWMnI',
-                signOptions: { expiresIn: '3d' },
-            }),],
+        jwt_1.JwtModule.register({
+            global: true,
+            secret: '829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2',
+            signOptions: { expiresIn: '3d' },
+        }),],
         controllers: [expense_controller_1.ExpenseController],
         providers: [expense_service_1.ExpenseService, jwt_1.JwtService, config_1.ConfigService, common_1.Logger],
     })
