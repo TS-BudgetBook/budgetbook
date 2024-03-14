@@ -1,7 +1,13 @@
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { ExpenseModule } from './expense/expense.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ExpenseController } from './expense/expense.controller';
+import { MetricsController } from './metrics/metrics/metrics.controller';
+import { ExpenseService } from './expense/expense.service';
+import { MetricsService } from './metrics/metrics/metrics.service';
+import { Expense } from './entity/expense.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -16,11 +22,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USER ,
       password: process.env.DB_PASSWORD ,
       database: process.env.DB_NAME ,
-      autoLoadEntities: true,
+      entities: [Expense],
       synchronize: true, // wird auf false gesetzt, wenn wird das deployen werden
     }),
+    TypeOrmModule.forFeature([Expense]),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [MetricsController],
+  providers: [MetricsService],
 })
 export class AppModule { }
