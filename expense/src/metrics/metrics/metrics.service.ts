@@ -4,20 +4,21 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MetricsService {
-  private readonly newExpenseCounter: Counter;
+  private newExpenseCounter: Counter;
   private newExpenseCount: number = 0;
 
   constructor() {
     this.newExpenseCounter = new Counter({
-      name: 'newExpense_total',
+      name: 'newExpense_total_budget',
       help: 'Total number of expenses to the BudgetBOOK app',
     });
-
+    
+    register.registerMetric(this.newExpenseCounter);
     register.clear();
   }
 
   incrementnewExpenseCounter(): void {
-    this.newExpenseCounter.inc();
+    this.newExpenseCounter.inc(1);
     this.newExpenseCount++;
   }
 
