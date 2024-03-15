@@ -6,3 +6,10 @@ helm repo update
 Installieren von Prometheus in einem metrics Namesapce
 
 helm install prometheus prometheus-community/prometheus --namespace=metrics --create-namespace
+
+Port Forward zum Prometheus Server via kubectl
+Prometheus Pod ID anzeigen lassen
+
+kubectl get pods -n metrics
+
+kubectl port-forward prometheus-server<POD-ID> 9090:9090 -n metrics
