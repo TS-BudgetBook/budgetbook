@@ -10,7 +10,7 @@ import { StatisticsController } from './statistics.controller';
     imports: [TypeOrmModule.forFeature([Expense]),
     JwtModule.register({
         global: true,
-        secret: 'It3n4FJ2uO8VJhMXLQobzIyqKvWMnI',
+        secret: '829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2',
         signOptions: { expiresIn: '3d' },
     }),],
     controllers: [StatisticsController],

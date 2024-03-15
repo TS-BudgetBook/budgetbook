@@ -2,11 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Expense } from '../entity/expense.entity';
+import { MetricsService } from 'src/metrics/metrics/metrics.service';
 
 @Injectable()
 export class ExpenseService {
   constructor(
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
+    private metricsService: MetricsService
   ) { }
 
   async findAll(
@@ -43,22 +45,24 @@ export class ExpenseService {
   }
 
   findOne(id: number): Promise<Expense> {
-    const payment = this.expenseRepository.findOneBy({ id: id });
+    const expense = this.expenseRepository.findOneBy({ id: id });
 
-    if (!payment) {
+    if (!expense) {
       throw new NotFoundException(`Payment with ID ${id} not found`);
     }
-    return payment;
+    return expense;
   }
 
   async create(req: any, body: any): Promise<Expense[]> {
     body.userid = req.user.sub;
-    const payment = this.expenseRepository.create(body);
-    return this.expenseRepository.save(payment);
+    const expense = this.expenseRepository.create(body);
+    this.metricsService.incrementnewExpenseCounter();
+    return this.expenseRepository.save(expense);
   }
 
   async update(id: number, body: any): Promise<Expense> {
     await this.expenseRepository.update(id, body);
+    this.metricsService.incrementnewExpenseCounter();
     return this.findOne(id);
   }
 

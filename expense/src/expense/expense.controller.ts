@@ -22,7 +22,7 @@ import { Expense } from 'src/entity/expense.entity';
 @UseGuards(AuthGuard)
 export class ExpenseController {
   constructor(
-    private readonly expenseService: ExpenseService
+    private readonly expenseService: ExpenseService,
   ) { }
 
   @Get()
@@ -60,7 +60,9 @@ export class ExpenseController {
       return this.expenseService.update(body.id, body);
     } else {
       return this.expenseService.create(req, body);
+      
     }
+    
   }
 
   @Delete(':id')

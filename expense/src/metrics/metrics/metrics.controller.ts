@@ -10,4 +10,10 @@ export class MetricsController {
   getMetrics(): string {
     return this.metricsService.getMetrics();
   }
+   //simulate increment expensecounters
+    // @Get('simulate')
+    // simulateAction(): string {
+    //     this.metricsService.incrementnewExpenseCounter()
+    //     return 'Simulated action and incremented counters';
+    // }
 }
