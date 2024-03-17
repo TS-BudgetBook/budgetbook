@@ -1,0 +1,25 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-metrics
+  namespace: metrics
+spec:
+  tls:
+    - hosts:
+        - metrics.me
+      secretName: metrics.me
+  ingressClassName: nginx
+  rules:
+    - host: metrics.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-grafana
+                port:
+                  number: 80
+
