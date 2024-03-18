@@ -15,7 +15,7 @@ config:
 
 scenarios:
   - flow:
-      - log: "Making request to put a new expenses"
+      - log: "PUT /expense"
       - put:
           url: "/expense"
           json:
@@ -24,6 +24,13 @@ scenarios:
             name: "{{ name }}"
             type: "{{ type }}"
             amount: "{{ amount }}"
+          headers:
+            accept: "*/*"
+          beforeRequest: generateJWT
+  - flow:
+      - log: "GET /statistics"
+      - get:
+          url: "/statictics"
           headers:
             accept: "*/*"
           beforeRequest: generateJWT
