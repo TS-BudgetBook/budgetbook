@@ -1,0 +1,13 @@
+{
+  "name": "budgetbook",
+  "version": "1.0.0",
+  "description": "Gehe in den proxy Ordner und erstelle einen neuen Ordner mit dem Namen \"cert\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./auth"
+  },
+  "author": "",
+  "license": "ISC"
+}
+

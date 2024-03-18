@@ -42,3 +42,27 @@ spec:
                 name: statistics
                 port:
                   number: 3000
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-grafana
+  namespace: metrics
+spec:
+  tls:
+    - hosts:
+        - grafana.budgetbook.me
+      secretName: wildcard.budgetbook.me
+  ingressClassName: nginx
+  rules:
+    - host: grafana.budgetbook.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-prometheus-grafana
+                port:
+                  number: 80
