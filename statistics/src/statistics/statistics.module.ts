@@ -25,7 +25,7 @@ import { PrometheusModule, makeCounterProvider } from '@willsoto/nestjs-promethe
         ConfigService,
         Logger,
         makeCounterProvider({
-            name: "bb_auth_aufrufe_statistics_count",
+            name: "bb_aufrufe_statistics_count",
             help: "Count all aufrufe_statistics",
         }),
     ],

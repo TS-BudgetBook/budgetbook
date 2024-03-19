@@ -10,7 +10,7 @@ export class StatisticsService {
   constructor(
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
     private jwtService: JwtService,
-    @InjectMetric("bb_auth_aufrufe_statistics_count") public StatisticsCounter: Counter<string>,
+    @InjectMetric("bb_aufrufe_statistics_count") public StatisticsCounter: Counter<string>,
   ) {}
   async getStatistics(customerId: number): Promise<any> {
     try {
