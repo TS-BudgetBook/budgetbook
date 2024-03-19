@@ -6,6 +6,9 @@
 
 Here are some examples of commands similar to `git commit -m "RELEASE_TYPE: major - Updating major feature"` that specify the release type in the commit message:
 
+$ git commit -m "feat: add commit message examples"
+
+
 - **Performing a Minor Release:**  
   ```bash
   git commit -m "RELEASE_TYPE: minor - Adding new functionality"
