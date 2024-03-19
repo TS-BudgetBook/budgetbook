@@ -7,13 +7,13 @@ export class MetricsController {
   constructor(private readonly metricsService: MetricsService) {}
 
   @Get()
-  getMetrics(): string {
+  getMetrics(): any {
     return this.metricsService.getMetrics();
   }
    //simulate increment expensecounters
-    // @Get('simulate')
-    // simulateAction(): string {
-    //     this.metricsService.incrementnewExpenseCounter()
-    //     return 'Simulated action and incremented counters';
-    // }
+  @Get('simulate')
+  simulateAction(): string {
+      this.metricsService.incrementnewExpenseCounter()
+      return 'Simulated action and incremented counters';
+  }
 }

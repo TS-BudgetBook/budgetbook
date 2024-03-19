@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Expense } from '../entity/expense.entity';
-import { MetricsService } from 'src/metrics/metrics/metrics.service';
+import { MetricsService } from 'src/metrics/metrics.service';
 
 @Injectable()
 export class ExpenseService {
@@ -37,6 +37,7 @@ export class ExpenseService {
       const expenses: Expense[] = await this.expenseRepository.find({
         where: { userid: userid },
       });
+
       return expenses;
     } catch (error) {
       console.error(error);
@@ -48,7 +49,7 @@ export class ExpenseService {
     const expense = this.expenseRepository.findOneBy({ id: id });
 
     if (!expense) {
-      throw new NotFoundException(`Payment with ID ${id} not found`);
+      throw new NotFoundException(`Expense with ID ${id} not found`);
     }
     return expense;
   }
@@ -58,13 +59,33 @@ export class ExpenseService {
     const expense = this.expenseRepository.create(body);
     this.metricsService.incrementnewExpenseCounter();
     return this.expenseRepository.save(expense);
+
   }
+  // async create(req: any, body: any): Promise<Expense[]> {
+  //   body.userid = req.user.sub;
+  //   const expense = this.expenseRepository.create(body);
+  //   await this.expenseRepository.save(expense);
+  //   this.metricsService.incrementnewExpenseCounter();
+  //   // this.metricsService.incrementTotalExpenseCounter();
+  //   return expense;
+  // }
+
+  
+
 
   async update(id: number, body: any): Promise<Expense> {
     await this.expenseRepository.update(id, body);
-    this.metricsService.incrementnewExpenseCounter();
     return this.findOne(id);
   }
+  // async update(id: number, body: any): Promise<Expense> {
+  //   const result = await this.expenseRepository.update(id, body);
+  //   if (result.affected > 0) {
+  //     this.metricsService.incrementTotalExpenseCounter();
+  //   }
+  //   return this.findOne(id);
+  // }
+
+  
 
   async remove(id: number): Promise<void> {
     await this.expenseRepository.delete(id);

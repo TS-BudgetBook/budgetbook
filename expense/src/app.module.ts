@@ -3,9 +3,9 @@ import { Module } from '@nestjs/common';
 import { ExpenseModule } from './expense/expense.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExpenseController } from './expense/expense.controller';
-import { MetricsController } from './metrics/metrics/metrics.controller';
+import { MetricsController } from './metrics/metrics.controller';
 import { ExpenseService } from './expense/expense.service';
-import { MetricsService } from './metrics/metrics/metrics.service';
+import { MetricsService } from './metrics/metrics.service';
 import { Expense } from './entity/expense.entity';
 import { JwtService } from '@nestjs/jwt';
 
@@ -17,11 +17,11 @@ import { JwtService } from '@nestjs/jwt';
     ExpenseModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST ,
+      host: process.env.DB_HOST,
       port: process.env.DB_PORT as unknown as number,
-      username: process.env.DB_USER ,
-      password: process.env.DB_PASSWORD ,
-      database: process.env.DB_NAME ,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [Expense],
       synchronize: true, // wird auf false gesetzt, wenn wird das deployen werden
     }),

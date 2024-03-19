@@ -5,14 +5,14 @@ import { ExpenseService } from './expense.service';
 import { ExpenseController } from './expense.controller';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { MetricsService } from 'src/metrics/metrics/metrics.service';
-import { MetricsController } from 'src/metrics/metrics/metrics.controller';
+import { MetricsService } from 'src/metrics/metrics.service';
+import { MetricsController } from 'src/metrics/metrics.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Expense]),
   JwtModule.register({
     global: true,
-    secret: '829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2',
+    secret: '58e75a3e1aeb0820452c346aec8469e0cdc61f80d519e1fc24ae0d1e514c5835',
     signOptions: { expiresIn: '3d' },
   }),],
   controllers: [ExpenseController, MetricsController],

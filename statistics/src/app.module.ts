@@ -3,6 +3,8 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StatisticsModule } from './statistics/statistics.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { MetricsController } from './metrics/metrics.controller';
+import { MetricsService } from './metrics/metrics.service';
 
 @Module({
   imports: [
@@ -21,8 +23,8 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
     }),
     StatisticsModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [MetricsController],
+  providers: [MetricsService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
