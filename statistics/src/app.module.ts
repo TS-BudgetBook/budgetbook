@@ -3,9 +3,15 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StatisticsModule } from './statistics/statistics.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus'
 
 @Module({
   imports: [
+    PrometheusModule.register({
+      defaultMetrics: {
+        enabled: false,
+      }
+    }),
     ConfigModule.forRoot({
       envFilePath: '.env.' + process.env.NODE_ENV,
     }),
