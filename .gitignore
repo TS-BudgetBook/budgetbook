@@ -1,7 +1,6 @@
 # compiled output
 .angular/
-/backend/dist
-/frontend/dist
+*/dist/
 frontend/.angular
 node_modules
 /build

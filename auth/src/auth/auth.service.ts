@@ -5,6 +5,9 @@ import { UserService } from './user.service'
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { jwtConstants } from './contanst';
 import { ConfigService } from '@nestjs/config';
+import { InjectMetric } from "@willsoto/nestjs-prometheus";
+import { Counter } from "prom-client";
+
 
 @Injectable()
 export class AuthService {
@@ -12,7 +15,9 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService,
     private configService: ConfigService,
-    private logger: Logger
+    private logger: Logger,
+    @InjectMetric("bb_auth_new_user_count") public newUserCounter: Counter<string>,
+    @InjectMetric("bb_auth_existing_user_count") public existingUserCounter: Counter<string>,
   ) { }
 
   async googleLogin(req: any, res: Response): Promise<void> {
@@ -26,6 +31,7 @@ export class AuthService {
       await this.userService.findByEmail(email);
 
     if (existingUserByEmail) {
+      this.existingUserCounter.inc();
       const token = this.generateToken(existingUserByEmail);
       jwtConstants.token = token;
 
@@ -39,6 +45,7 @@ export class AuthService {
         lastName: lastName,
       });
       const token = this.generateToken(newUser);
+      this.newUserCounter.inc();
 
       jwtConstants.token = token;
 
