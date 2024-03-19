@@ -3,12 +3,14 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Expense } from '../entity/expense.entity'
 import { Repository } from 'typeorm';
-
+import { InjectMetric } from '@willsoto/nestjs-prometheus';
+import { Counter } from "prom-client";
 @Injectable()
 export class StatisticsService {
   constructor(
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
     private jwtService: JwtService,
+    @InjectMetric("bb_auth_aufrufe_statistics_count") public StatisticsCounter: Counter<string>,
   ) {}
   async getStatistics(customerId: number): Promise<any> {
     try {
@@ -58,7 +60,7 @@ export class StatisticsService {
       });
 
       const balance = totals.totalIncome - totals.totalExpenses;
-
+      this.StatisticsCounter.inc();
       return {
         totalExpenses: totals.totalExpenses,
         totalIncome: totals.totalIncome,
