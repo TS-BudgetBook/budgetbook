@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Expense } from '../entity/expense.entity'
@@ -10,9 +10,12 @@ export class StatisticsService {
   constructor(
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
     private jwtService: JwtService,
-    @InjectMetric("bb_aufrufe_statistics_count") public StatisticsCounter: Counter<string>,
-  ) {}
+    @InjectMetric("bb_aufrufe_statistics_count") public statisticsCounter: Counter<string>,
+    private logger: Logger,
+  ) { }
   async getStatistics(customerId: number): Promise<any> {
+    this.logger.log('STATISTICS', 'Statistics Counter')
+    this.statisticsCounter.inc();
     try {
       const totalsQuery = `
                 SELECT
@@ -60,7 +63,6 @@ export class StatisticsService {
       });
 
       const balance = totals.totalIncome - totals.totalExpenses;
-      this.StatisticsCounter.inc();
       return {
         totalExpenses: totals.totalExpenses,
         totalIncome: totals.totalIncome,

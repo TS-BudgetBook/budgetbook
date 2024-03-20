@@ -1,5 +1,5 @@
 config:
-  target: "http://budgetbook.me/api"
+  target: "https://budgetbook.me/api"
   phases:
     - duration: 60
       arrivalRate: 10
@@ -30,7 +30,7 @@ scenarios:
   - flow:
       - log: "GET /statistics"
       - get:
-          url: "/statictics"
+          url: "/statistics"
           headers:
             accept: "*/*"
           beforeRequest: generateJWT
