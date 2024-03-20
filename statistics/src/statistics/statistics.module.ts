@@ -3,9 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Expense } from '../entity/expense.entity';
 import { StatisticsService } from './statistics.service';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
 import { StatisticsController } from './statistics.controller';
 import { PrometheusModule, makeCounterProvider } from '@willsoto/nestjs-prometheus'
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Expense]),
@@ -22,7 +22,6 @@ import { PrometheusModule, makeCounterProvider } from '@willsoto/nestjs-promethe
     controllers: [StatisticsController],
     providers: [StatisticsService,
         JwtService,
-        ConfigService,
         Logger,
         makeCounterProvider({
             name: "bb_aufrufe_statistics_count",

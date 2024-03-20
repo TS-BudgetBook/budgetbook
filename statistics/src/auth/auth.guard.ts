@@ -7,18 +7,19 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService, private configService: ConfigService, private logger: Logger) { }
+  constructor(
+    private jwtService: JwtService,
+    private logger: Logger = new Logger(`AUTH_GUARD`)
+  ) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    this.logger
+    this.logger.log('Can Activate Method');
     const request = context.switchToHttp().getRequest();
     const { ip, method, path: url } = request;
     const token = this.extractTokenFromHeader(request);
-    this.logger.log(ip, method, url, 'Request');
     if (!token) {
       this.logger.log('Unauthorizied', 'No Token provided');
       throw new UnauthorizedException();
@@ -28,9 +29,10 @@ export class AuthGuard implements CanActivate {
         secret: process.env.JWT_SECRET.trim()
       });
 
+      this.logger.log('Authorizied', 'Token valid');
       request['customer'] = payload;
-    } catch {
-      this.logger.log('Unauthorizied', 'Token invalid');
+    } catch (err) {
+      this.logger.log('Unauthorizied', 'Token invalid', err);
       throw new UnauthorizedException();
     }
     return true;

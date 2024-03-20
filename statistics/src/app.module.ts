@@ -30,9 +30,8 @@ import { PrometheusModule } from '@willsoto/nestjs-prometheus'
   controllers: [],
   providers: [],
 })
-export class AppModule { }
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer.apply(LoggerMiddleware).forRoutes('*');
-//   }
-// }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
