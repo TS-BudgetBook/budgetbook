@@ -6,8 +6,8 @@ einmal das Repo updaten
 
 helm repo update
 
-helm upgrade -install loki grafana/loki -n metrics --values logging.yaml
+helm upgrade --install loki grafana/loki -n metrics --values logging.yaml
 
-helm upgrade -install promtail -n metrics grafana/promtail
+helm upgrade --install promtail -n metrics grafana/promtail
 
 Dann in Grafana Loki als Datenquelle hinzufügen. In gleichen Namespace mit http://loki:3100

@@ -9,7 +9,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
   { path: 'expenses', component: ExpensesComponent, canActivate: [TokenGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
@@ -18,6 +17,7 @@ export const routes: Routes = [
     component: StatisticsComponent,
     canActivate: [TokenGuard],
   },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({
