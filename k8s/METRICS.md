@@ -22,4 +22,4 @@ Hostnamen nicht vergessen in der hosts einzutragen
 127.0.0.1 grafana.budgetbook.me
 
 
-kubectl create secret tls grafana.budgetbook.me --cert=./grafana.budgetbook.me+3.pem --key=./grafana.budgetbook.me+3-key.pem -n metrics
+kubectl create secret tls grafana-budgetbook-tls --cert=./grafana.budgetbook.me+3.pem --key=./grafana.budgetbook.me+3-key.pem -n metrics
