@@ -1010,7 +1010,7 @@ grafana:
     ## Secret must be manually created in the namespace
     ##
     tls:
-      - secretName: grafana-budgetbook-tls
+      - secretName: grafana.budgetbook.me
         hosts:
           - grafana.budgetbook.me
 

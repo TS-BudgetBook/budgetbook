@@ -4,8 +4,7 @@ kubectl get pods
 
 ## Neuen Hosteintrag hinzufügen
 Editor als Admin starten und folgenden Eintrag in der hosts Datei (c:\Windows\System32\Drivers\etc\hosts) hinzufügen:
-
-127.0.0.1 budgetbook.me
+cd 127.0.0.1 budgetbook.me
 
 ## Docker images bauen
 
