@@ -25,9 +25,9 @@ spec:
               cpu: 100m
               memory: 100Mi
           env: 
-            {{- range .Values.auth.env }}
-          name: {{ .name }}
-          value: {{ .value |  b64enc | quote }}
+          {{- range .Values.auth.env }}
+          - name: {{ .name }}
+            value: {{ .value | b64enc | quote }}
           {{- end }}
 
           name: auth
