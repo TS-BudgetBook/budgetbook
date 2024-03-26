@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common';
 import { ExpenseService } from './expense.service';
 import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Expense } from 'src/entity/expense.entity';
 
