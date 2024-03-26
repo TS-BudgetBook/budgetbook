@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: expense
+  name: expense
+spec:
+  replicas: {{ .Values.expense.replicas}}
+  selector:
+    matchLabels:
+      app: expense
+  template:
+    metadata:
+      labels:
+        app: expense
+    spec:
+      containers:
+        - image: {{ .Values.expense.image}}
+          imagePullPolicy: {{ .Values.expense.imagePullPolicy}}
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env: 
+            {{- range .Values.expense.env }}
+          name: {{ .name }}
+          value: {{ .value |  b64enc | quote }}
+          {{- end }}
+          name: expense
+          ports:
+            - containerPort: {{ .Values.expense.port}}
+              protocol: TCP
+      restartPolicy: {{ .Values.expense.restartPolicy}}
