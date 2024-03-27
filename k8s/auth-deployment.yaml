@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth
+  name: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - image: auth:latest
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: DB_HOST
+              value: "mysql.default.svc.cluster.local"
+            - name: DB_USER
+              value: "budgetbook"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-password
+            - name: DB_NAME
+              value: "budgetbook"
+            - name: DB_PORT
+              value: "3306"
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: budgetbook
+                  key: GOOGLE_CLIENT_ID
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: budgetbook
+                  key: GOOGLE_CLIENT_SECRET
+            - name: GOOGLE_CALLBACK_URL
+              value: "https://budgetbook.me/api/auth/google/redirect"
+            - name: REDIRECT_HOST
+              value: "https://budgetbook.me"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: budgetbook
+                  key: JWT_SECRET
+
+          name: auth
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+      restartPolicy: Always
