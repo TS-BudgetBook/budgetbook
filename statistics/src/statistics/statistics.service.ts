@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Expense } from '../entity/expense.entity'
+import { Expense } from '../entity/expense.entity';
 import { Repository } from 'typeorm';
 import { InjectMetric } from '@willsoto/nestjs-prometheus';
 import { Counter } from "prom-client";

@@ -29,4 +29,4 @@ import { AuthGuard } from 'src/auth/auth.guard';
         }),
     ],
 })
-export class StatisticsModule { }
+export class StatisticsModule {}
