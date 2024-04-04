@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
   templateUrl: './googleLogin.component.html',
   styleUrl: './googleLogin.component.css',
 })
-export class googleLoginComponent { }
+export class googleLoginComponent {
+  apiUrl = environment.apiUrl;
+}

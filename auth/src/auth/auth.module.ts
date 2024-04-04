@@ -2,7 +2,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { GoogleStrategy } from './auth-utils/GoogleStrategy';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule } from '@nestjs/config';
 import { UserService } from './user.service';
@@ -15,13 +15,17 @@ import { User } from './entity/user.entity';
         PassportModule.register({ defaultStrategy: 'google' }),
         JwtModule.register({
             global: true,
-            secret: 'It3n4FJ2uO8VJhMXLQobzIyqKvWMnI',
+            secret: jwtConstants.secret,
             signOptions: { expiresIn: '3d' },
         }),
         TypeOrmModule.forFeature([User]),
     ],
-    providers: [AuthService, GoogleStrategy, JwtService, UserService],
+    providers: [AuthService, GoogleStrategy, JwtService, UserService, Logger],
     controllers: [AuthController],
     exports: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {
+    constructor(private logger: Logger) {
+        logger.log("Google Client Id: " + process.env.GOOGLE_CLIENT_ID.trim());
+    }
+}
