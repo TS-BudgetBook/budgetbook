@@ -6,9 +6,15 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './auth/entity/user.entity';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus'
 
 @Module({
   imports: [
+    PrometheusModule.register({
+      defaultMetrics: {
+        enabled: false,
+      }
+    }),
     AuthModule,
     ConfigModule.forRoot({
       envFilePath: '.env.' + process.env.NODE_ENV,
@@ -24,8 +30,6 @@ import { User } from './auth/entity/user.entity';
       synchronize: true, // wird auf false gesetzt, wenn wird das deployen werden
     }),
     TypeOrmModule.forFeature([User]),
-  ],
-  controllers: [AuthController],
-  providers: [AuthService, UserService, Logger],
+  ]
 })
 export class AppModule { }
