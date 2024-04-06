@@ -27,7 +27,7 @@ spec:
           env: 
           {{- range .Values.statistics.env }}
           - name: {{ .name }}
-            value: {{ .value | b64enc | quote }}
+            value: {{ .value | quote }}
           {{- end }}
           name: statistics
           ports:

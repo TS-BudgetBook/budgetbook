@@ -1,85 +1,85 @@
 auth:
-  image: auth:latest
-  imagePullPolicy: Never
+  image: docker.io/helenhaveloh/auth:latest
+  imagePullPolicy: Always
   replicas: 1
   port: 3000
   targetPort: 3000
   restartPolicy: Always
   env:
     - name: DB_HOST
-      value: ImxvY2FsaG9zdCI=
+      value: "mysql"
     - name: DB_NAME
-      value: ImJ1ZGdldGJvb2si
+      value: budgetbook
     - name: DB_PASSWORD
-      value: ImFkbWluIg==
+      value: dbpassword1
     - name: DB_PORT
-      value: IjMzMDYi
+      value: 3306
     - name: DB_USER
-      value: InJvb3Qi
+      value: dbadmin
     - name: GOOGLE_CALLBACK_URL
-      value: aHR0cHM6Ly9idWRnZXRib29rLm1lL2FwaS9hdXRoL2dvb2dsZS9yZWRpcmVjdAo=
+      value: k8s-kubesyst-bbingres-b684900de7-253727050.eu-central-1.elb.amazonaws.com/api/auth/google/redirect
     - name: GOOGLE_CLIENT_ID
-      value: NjAzNjgxNTI4NjQyLTA1ZnE4YWZyMmZnbGJkYWJtODUzMmpqZzFxYmY5MXJhLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tCg==
+      value: 603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com
     - name: GOOGLE_CLIENT_SECRET
-      value: R09DU1BYLWFUNG9Od1FmMXRLaUlxM1NKUC1YQUV3S1hTeGEK
+      value: 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
     - name: JWT_SECRET
-      value: ODI5YzRkYjdlNDYxNTM2NGIwZDMxNDIyYzVhYjUzNmVjNWQzNTQyY2ViMjZhMjVmMmI2OGRhNTI3Y2ZhOGJhMgo=
+      value: 829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2
 expense:
-  image: expense:latest
+  image: docker.io/helenhaveloh/expense:latest
   restartPolicy: Always
   port: 3000
   targetPort: 3000
-  imagePullPolicy: Never
+  imagePullPolicy: Always
   replicas: 1
   env:
     - name: DB_HOST
-      value: ImxvY2FsaG9zdCI=
+      value: "mysql"
     - name: DB_NAME
-      value: ImJ1ZGdldGJvb2si
+      value: budgetbook
     - name: DB_PASSWORD
-      value: ImFkbWluIg==
+      value: dbpassword1
     - name: DB_PORT
-      value: IjMzMDYi
+      value: 3306
     - name: DB_USER
-      value: InJvb3Qi
+      value: dbadmin
     - name: GOOGLE_CALLBACK_URL
-      value: aHR0cHM6Ly9idWRnZXRib29rLm1lL2FwaS9hdXRoL2dvb2dsZS9yZWRpcmVjdAo=
+      value: k8s-kubesyst-bbingres-b684900de7-253727050.eu-central-1.elb.amazonaws.com/api/auth/google/redirect
     - name: GOOGLE_CLIENT_ID
-      value: NjAzNjgxNTI4NjQyLTA1ZnE4YWZyMmZnbGJkYWJtODUzMmpqZzFxYmY5MXJhLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tCg==
+      value: 603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com
     - name: GOOGLE_CLIENT_SECRET
-      value: R09DU1BYLWFUNG9Od1FmMXRLaUlxM1NKUC1YQUV3S1hTeGEK
+      value: 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
     - name: JWT_SECRET
-      value: ODI5YzRkYjdlNDYxNTM2NGIwZDMxNDIyYzVhYjUzNmVjNWQzNTQyY2ViMjZhMjVmMmI2OGRhNTI3Y2ZhOGJhMgo=
+      value: 829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2
 statistics:
-  image: statistics:latest
+  image: docker.io/helenhaveloh/statistics:latest
   restartPolicy: Always
   port: 3000
   targetPort: 3000
-  imagePullPolicy: Never
+  imagePullPolicy: Always
   replicas: 1
   env:
     - name: DB_HOST
-      value: ImxvY2FsaG9zdCI=
+      value: "mysql"
     - name: DB_NAME
-      value: ImJ1ZGdldGJvb2si
+      value: budgetbook
     - name: DB_PASSWORD
-      value: ImFkbWluIg==
+      value: dbpassword1
     - name: DB_PORT
-      value: IjMzMDYi
+      value: 3306
     - name: DB_USER
-      value: InJvb3Qi
+      value: dbadmin
     - name: GOOGLE_CALLBACK_URL
-      value: aHR0cHM6Ly9idWRnZXRib29rLm1lL2FwaS9hdXRoL2dvb2dsZS9yZWRpcmVjdAo=
+      value: k8s-kubesyst-bbingres-b684900de7-253727050.eu-central-1.elb.amazonaws.com/api/auth/google/redirect
     - name: GOOGLE_CLIENT_ID
-      value: NjAzNjgxNTI4NjQyLTA1ZnE4YWZyMmZnbGJkYWJtODUzMmpqZzFxYmY5MXJhLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tCg==
+      value: 603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com
     - name: GOOGLE_CLIENT_SECRET
-      value: R09DU1BYLWFUNG9Od1FmMXRLaUlxM1NKUC1YQUV3S1hTeGEK
+      value: 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
     - name: JWT_SECRET
-      value: ODI5YzRkYjdlNDYxNTM2NGIwZDMxNDIyYzVhYjUzNmVjNWQzNTQyY2ViMjZhMjVmMmI2OGRhNTI3Y2ZhOGJhMgo=
+      value: 829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2
 frontend:
-  image: frontend:latest
+  image: docker.io/helenhaveloh/frontend:latest
   restartPolicy: Always
   port: 80
   targetPort: 80
-  imagePullPolicy: Never
+  imagePullPolicy: Always
   replicas: 1

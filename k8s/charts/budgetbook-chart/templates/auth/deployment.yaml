@@ -27,7 +27,7 @@ spec:
           env: 
           {{- range .Values.auth.env }}
           - name: {{ .name }}
-            value: {{ .value | b64enc | quote }}
+            value: {{ .value | quote }}
           {{- end }}
 
           name: auth
