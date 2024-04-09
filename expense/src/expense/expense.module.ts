@@ -8,8 +8,6 @@ import { ConfigService } from '@nestjs/config';
 import {
   PrometheusModule,
   makeCounterProvider,
-  makeGaugeProvider,
-  makeHistogramProvider
 } from "@willsoto/nestjs-prometheus";
 
 @Module({
@@ -27,19 +25,12 @@ import {
   controllers: [ExpenseController],
   providers: [ExpenseService, JwtService, ConfigService, Logger,
     makeCounterProvider({
-      name: "expenses_count",
+      name: "bb_expenses_put_count",
       help: "Count all Request against PUT /expanses",
     }),
-    makeGaugeProvider({
-      name: "expenses_gauge",
-      help: "Gauge Request against PUT /expanses",
-      labelNames: ['route'],
-    }),
-    makeHistogramProvider({
-      name: "expenses_histogram",
-      help: "Histogram Request against PUT /expanses",
-      labelNames: ['route'],
-      buckets: [0.1, 0.3, 0.5, 0.7, 1, 3, 5, 7, 10]
+    makeCounterProvider({
+      name: "bb_expenses_get_all_count",
+      help: "Gauge Request against GET /expanses/all",
     })
   ],
 })

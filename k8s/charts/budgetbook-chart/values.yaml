@@ -1,0 +1,85 @@
+auth:
+  image: docker.io/helenhaveloh/auth:latest
+  imagePullPolicy: Always
+  replicas: 1
+  port: 3000
+  targetPort: 3000
+  restartPolicy: Always
+  env:
+    - name: DB_HOST
+      value: "mysql"
+    - name: DB_NAME
+      value: budgetbook
+    - name: DB_PASSWORD
+      value: dbpassword1
+    - name: DB_PORT
+      value: 3306
+    - name: DB_USER
+      value: dbadmin
+    - name: GOOGLE_CALLBACK_URL
+      value: k8s-kubesyst-bbingres-b684900de7-253727050.eu-central-1.elb.amazonaws.com/api/auth/google/redirect
+    - name: GOOGLE_CLIENT_ID
+      value: 603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com
+    - name: GOOGLE_CLIENT_SECRET
+      value: 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
+    - name: JWT_SECRET
+      value: 829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2
+expense:
+  image: docker.io/helenhaveloh/expense:latest
+  restartPolicy: Always
+  port: 3000
+  targetPort: 3000
+  imagePullPolicy: Always
+  replicas: 1
+  env:
+    - name: DB_HOST
+      value: "mysql"
+    - name: DB_NAME
+      value: budgetbook
+    - name: DB_PASSWORD
+      value: dbpassword1
+    - name: DB_PORT
+      value: 3306
+    - name: DB_USER
+      value: dbadmin
+    - name: GOOGLE_CALLBACK_URL
+      value: k8s-kubesyst-bbingres-b684900de7-253727050.eu-central-1.elb.amazonaws.com/api/auth/google/redirect
+    - name: GOOGLE_CLIENT_ID
+      value: 603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com
+    - name: GOOGLE_CLIENT_SECRET
+      value: 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
+    - name: JWT_SECRET
+      value: 829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2
+statistics:
+  image: docker.io/helenhaveloh/statistics:latest
+  restartPolicy: Always
+  port: 3000
+  targetPort: 3000
+  imagePullPolicy: Always
+  replicas: 1
+  env:
+    - name: DB_HOST
+      value: "mysql"
+    - name: DB_NAME
+      value: budgetbook
+    - name: DB_PASSWORD
+      value: dbpassword1
+    - name: DB_PORT
+      value: 3306
+    - name: DB_USER
+      value: dbadmin
+    - name: GOOGLE_CALLBACK_URL
+      value: k8s-kubesyst-bbingres-b684900de7-253727050.eu-central-1.elb.amazonaws.com/api/auth/google/redirect
+    - name: GOOGLE_CLIENT_ID
+      value: 603681528642-05fq8afr2fglbdabm8532jjg1qbf91ra.apps.googleusercontent.com
+    - name: GOOGLE_CLIENT_SECRET
+      value: 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
+    - name: JWT_SECRET
+      value: 829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2
+frontend:
+  image: docker.io/helenhaveloh/frontend:latest
+  restartPolicy: Always
+  port: 80
+  targetPort: 80
+  imagePullPolicy: Always
+  replicas: 1

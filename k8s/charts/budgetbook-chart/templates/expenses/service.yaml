@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: expense
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/scheme: "http"
+    prometheus.io/path: "/api/metrics"
+    prometheus.io/port: "3000"
+spec:
+  selector:
+    app: expense
+  ports:
+    - name: "http"
+      port: {{ .Values.expense.port}}
+      targetPort: {{ .Values.expense.targetPort}}

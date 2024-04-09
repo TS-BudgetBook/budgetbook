@@ -1,8 +1,16 @@
 config:
   target: "https://budgetbook.me/api"
   phases:
-    - duration: 60
+    - duration: 120
+      arrivalRate: 5
+      name: "Warm-up Phase"
+    - duration: 300
       arrivalRate: 10
+      rampTo: 50
+      name: "Lasttest Phase"
+    - duration: 120
+      arrivalRate: 5
+      name: "Cooldown Phase"
   processor: "./jwt-generator.js"
   payload:
     path: "expense_data.csv"
@@ -31,6 +39,13 @@ scenarios:
       - log: "GET /statistics"
       - get:
           url: "/statistics"
+          headers:
+            accept: "*/*"
+          beforeRequest: generateJWT
+  - flow:
+      - log: "GET /expenses/all"
+      - get:
+          url: "/expenses/all"
           headers:
             accept: "*/*"
           beforeRequest: generateJWT

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: statistics
+  name: statistics
+spec:
+  replicas: {{ .Values.statistics.replicas }}
+  selector:
+    matchLabels:
+      app: statistics
+  template:
+    metadata:
+      labels:
+        app: statistics
+    spec:
+      containers:
+        - image: {{ .Values.statistics.image }}
+          imagePullPolicy: {{ .Values.statistics.imagePullPolicy }}
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env: 
+          {{- range .Values.statistics.env }}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+          {{- end }}
+          name: statistics
+          ports:
+            - containerPort: {{ .Values.statistics.port }}
+              protocol: TCP
+      restartPolicy: Always

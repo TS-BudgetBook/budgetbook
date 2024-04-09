@@ -9,6 +9,7 @@ import { UserService } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entity/user.entity';
 import { PrometheusModule, makeCounterProvider } from '@willsoto/nestjs-prometheus'
+import { jwtConstants } from './constants';
 
 @Module({
     imports: [
@@ -22,9 +23,9 @@ import { PrometheusModule, makeCounterProvider } from '@willsoto/nestjs-promethe
         TypeOrmModule.forFeature([User]),
         PrometheusModule.register({
             defaultMetrics: {
-              enabled: false,
+                enabled: false,
             }
-          }),        
+        }),
     ],
     providers: [
         AuthService,

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: statistics
+spec:
+  selector:
+    app: statistics
+  ports:
+    - name: "http"
+      port: {{ .Values.statistics.port}}
+      targetPort: {{ .Values.statistics.targetPort}}

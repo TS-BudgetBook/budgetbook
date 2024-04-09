@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth
+  name: auth
+spec:
+  replicas: {{ .Values.auth.replicas }}
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - image: {{ .Values.auth.image }}
+          imagePullPolicy: {{ .Values.auth.imagePullPolicy }}
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env: 
+          {{- range .Values.auth.env }}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+          {{- end }}
+
+          name: auth
+          ports:
+            - containerPort: {{ .Values.auth.port}}
+              protocol: TCP
+      restartPolicy: {{.Values.auth.restartPolicy}}

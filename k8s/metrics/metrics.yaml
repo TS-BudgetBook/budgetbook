@@ -3726,6 +3726,10 @@ prometheus:
         metrics_path: "/api/metrics"
         static_configs:
           - targets: ["auth.default.svc.cluster.local:3000"]
+      - job_name: statistics
+        metrics_path: "/api/metrics"
+        static_configs:
+          - targets: ["statistics.default.svc.cluster.local:3000"]
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
