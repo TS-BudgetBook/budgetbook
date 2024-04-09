@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { User } from './entity/user.entity'
 import { UserService } from './user.service'
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
-import { jwtConstants } from './contanst';
+import { jwtConstants } from './constants';
 import { ConfigService } from '@nestjs/config';
 import { InjectMetric } from "@willsoto/nestjs-prometheus";
 import { Counter } from "prom-client";
