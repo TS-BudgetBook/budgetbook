@@ -3,14 +3,24 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Expense } from '../entity/expense.entity';
 import { InjectMetric } from "@willsoto/nestjs-prometheus";
+<<<<<<< HEAD
 import { Counter } from "prom-client";
+=======
+import { Counter, Gauge, Histogram } from "prom-client";
+>>>>>>> main
 
 @Injectable()
 export class ExpenseService {
   constructor(
     @InjectRepository(Expense) private expenseRepository: Repository<Expense>,
+<<<<<<< HEAD
     @InjectMetric("bb_expenses_put_count") public counterPut: Counter<string>,
     @InjectMetric("bb_expenses_get_all_count") public counterGet: Counter<string>,
+=======
+    @InjectMetric("expenses_count") public counter: Counter<string>,
+    @InjectMetric("expenses_gauge") public gauge: Gauge<string>,
+    @InjectMetric("expenses_histogram") public histogram: Histogram<string>
+>>>>>>> main
   ) { }
 
   async findAll(
@@ -57,10 +67,20 @@ export class ExpenseService {
   }
 
   async create(req: any, body: any): Promise<Expense[]> {
+<<<<<<< HEAD
     const route = req.route.path;
     body.customerid = req.customer.sub;
     const payment = this.expenseRepository.create(body);
     this.counterPut.inc();
+=======
+    let end = this.gauge.startTimer()
+    const route = req.route.path;
+    body.customerid = req.customer.sub;
+    const payment = this.expenseRepository.create(body);
+    this.counter.inc();
+    this.histogram.observe(req.customer.sub);
+    end({ route })
+>>>>>>> main
     return this.expenseRepository.save(payment);
   }
 

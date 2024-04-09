@@ -1010,7 +1010,7 @@ grafana:
     ## Secret must be manually created in the namespace
     ##
     tls:
-      - secretName: grafana.budgetbook.me
+      - secretName: grafana-budgetbook-tls
         hosts:
           - grafana.budgetbook.me
 
@@ -3726,7 +3726,7 @@ prometheus:
         metrics_path: "/api/metrics"
         static_configs:
           - targets: ["auth.default.svc.cluster.local:3000"]
-      - job_name: statisticsd
+      - job_name: statistics
         metrics_path: "/api/metrics"
         static_configs:
           - targets: ["statistics.default.svc.cluster.local:3000"]

@@ -7,7 +7,9 @@ function generateJWT(req, userContext, ee, next) {
     let secret = '829c4db7e4615364b0d31422c5ab536ec5d3542ceb26a25f2b68da527cfa8ba2';
     let date = new Date();
     let iat = date.valueOf() / 1000;
+    console.log('IAT', iat);
     let exp = date.setDate(date.getDate() + 3) / 1000;
+    console.log('EXP', exp);
     let payload = {
         "sub": 1,
         "email": "marco@techstarter.de",

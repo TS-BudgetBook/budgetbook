@@ -3,7 +3,10 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ExpenseModule } from './expense/expense.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus'
+<<<<<<< HEAD
 import { LoggerMiddleware } from './middleware/logger.middleware';
+=======
+>>>>>>> main
 
 
 @Module({
