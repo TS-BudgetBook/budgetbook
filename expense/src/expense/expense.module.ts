@@ -8,8 +8,6 @@ import { ConfigService } from '@nestjs/config';
 import {
   PrometheusModule,
   makeCounterProvider,
-  makeGaugeProvider,
-  makeHistogramProvider
 } from "@willsoto/nestjs-prometheus";
 
 @Module({

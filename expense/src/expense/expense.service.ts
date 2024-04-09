@@ -57,7 +57,6 @@ export class ExpenseService {
   }
 
   async create(req: any, body: any): Promise<Expense[]> {
-    const route = req.route.path;
     body.customerid = req.customer.sub;
     const payment = this.expenseRepository.create(body);
     this.counterPut.inc();
