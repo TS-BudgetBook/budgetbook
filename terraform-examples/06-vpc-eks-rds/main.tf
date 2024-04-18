@@ -10,13 +10,19 @@ data "aws_availability_zones" "availibility_zones" {
 }
 
 locals {
-  cluster_name = var.cluster_name
+  cluster_name = "budgetbook-eks-${random_string.suffix.result}"
+}
+
+resource "random_string" "suffix" {
+  length  = 8
+  special = false
+  lower   = true
 }
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "${local.cluster_name}-vpc"
+  name = "budgetbook-vpc"
 
   cidr = "10.0.0.0/16"
 
@@ -69,36 +75,42 @@ module "eks" {
   }
 }
 
-data "aws_iam_policy" "ebs_csi_policy" {
-  arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+resource "aws_security_group" "db-sg-group" {
+  name        = "db-ingress-sg"
+  description = "SG for RDS"
+  vpc_id      = module.vpc.vpc_id
 }
 
-module "iam-assumable-role-with-oidc" {
-  source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  create_role                   = true
-  role_name                     = "AmazonEKSTFEBSCSIRole-${module.eks.cluster_name}"
-  provider_url                  = module.eks.oidc_provider
-  role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
+resource "aws_security_group_rule" "ingress" {
+  from_port                = "3306"
+  to_port                  = "3306"
+  type                     = "ingress"
+  protocol                 = "TCP"
+  security_group_id        = aws_security_group.db-sg-group.id
+  source_security_group_id = module.eks.node_security_group_id
 }
 
-resource "aws_eks_addon" "ebs-csi" {
-  cluster_name             = module.eks.cluster_name
-  addon_name               = "aws-ebs-csi-driver"
-  addon_version            = "v1.29.1-eksbuild.1"
-  service_account_role_arn = module.iam-assumable-role-with-oidc.iam_role_arn
-  tags = {
-    "eks_addon" = "ebs-csi"
-    "terraform" = "true"
-  }
-}
 
-resource "null_resource" "kubectl" {
-  # triggers = {
-  #   value = module.eks.cluster_endpoint
-  # }
-  depends_on = [module.eks]
-  provisioner "local-exec" {
-    command = "aws eks --region ${var.region} update-kubeconfig --name ${local.cluster_name}"
-  }
+module "rds" {
+  source     = "terraform-aws-modules/rds/aws"
+  identifier = "budgetbook-rds"
+
+  engine            = "mysql"
+  engine_version    = "8.0.35"
+  instance_class    = "db.t3.micro"
+  allocated_storage = 8
+
+  db_name  = "budgetbook"
+  username = "budgetbook"
+  password = "BuDg3tB00k!"
+
+  create_db_subnet_group = true
+  subnet_ids             = module.vpc.private_subnets
+
+  vpc_security_group_ids = [aws_security_group.db-sg-group.id]
+
+  family = "mysql8.0"
+  major_engine_version = "8.0"
+
+
 }
