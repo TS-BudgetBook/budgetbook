@@ -6,10 +6,6 @@ import { AuthService } from './auth.service';
 export class AuthController {
     constructor(private authService: AuthService) { }
 
-    @Get('google')
-    @UseGuards(GoogleOAuthGuard)
-    getGoogle() { }
-
     @Get('google/redirect')
     @UseGuards(GoogleOAuthGuard)
     googleAuthRedirect(@Req() req, @Res() res) {

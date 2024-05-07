@@ -9,6 +9,6 @@ import { environment } from '../../../environments/environment';
   templateUrl: './googleLogin.component.html',
   styleUrl: './googleLogin.component.css',
 })
-export class googleLoginComponent {
+export class GoogleLoginComponent {
   apiUrl = environment.apiUrl;
 }

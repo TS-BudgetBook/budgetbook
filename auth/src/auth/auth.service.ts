@@ -36,7 +36,6 @@ export class AuthService {
       jwtConstants.token = token;
 
       res.redirect(this.configService.get<string>('REDIRECT_HOST') + '/login?token=' + token);
-      return;
     } else {
       const newUser = await this.userService.createUser({
         email: email,
