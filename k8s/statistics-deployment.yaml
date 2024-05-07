@@ -48,3 +48,4 @@ spec:
             - containerPort: 3000
               protocol: TCP
       restartPolicy: Always
+      automountServiceAccountToken: false
